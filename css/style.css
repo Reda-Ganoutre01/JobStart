@@ -1,0 +1,147 @@
+:root {
+    --primary-color: #1e90ff;
+    --success-color: #00e6bb;
+    --secondary-color: #66b3ff;
+    --font-color: #414756;
+    --background-color: #f5f9ff;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+/* Start Global Rules */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--font-color);
+    background: var(--background-color);
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/* End Global Rules */
+
+/* Start Header */
+header {
+    background-color: var(--white);
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    width: 120px;  
+    height: auto;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    align-items: center;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: var(--black);
+    transition: color 0.3s;
+}
+
+header ul li a:hover {
+    color: var(--primary-color);
+}
+
+.header-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.header-btns button {
+    padding: 8px 16px;
+    border: 2px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--primary-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.header-btns button:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.header-btns button:last-child {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.header-btns button:last-child:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+/* End Header */
+
+/* Footer */
+footer {
+    width: 100%;
+    background-color: var(--font-color);
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Media Queries */
+
+/* Small devices */
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+    }
+}
+
+/* Medium devices */
+@media (min-width: 992px) {
+    .container {
+        max-width: 970px;
+    }
+}
+
+/* Large devices */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1170px;
+    }
+}
