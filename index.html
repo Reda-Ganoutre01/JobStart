@@ -6,7 +6,7 @@
         <title>JobStar</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <!-- <link rel="stylesheet" href="css/scrollbar.css"> -->
+        <link rel="stylesheet" href="css/scrollbar.css">
         <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
@@ -24,14 +24,43 @@
                 
                     <img src="assets/logo/logo_jobstart.png" alt="JobStar" class="logo">
                 <nav>
+                    <!-- Hamburger menu button -->
+                    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                    
                     <ul id="nav-links">
                         <li><a href="#">Accueil</a></li>
                         <li><a href="#">Offers</a></li>
                         <li><a href="#">Conseils</a></li>
                         <li><a href="#">A propos</a></li>
                         <li><a href="#">Contact</a></li>
+                        <!-- Mobile-only action links -->
+                        <li class="mobile-theme-toggle">
+                            <input type="checkbox" id="mobile_toggle_checkbox">
+                            <label for="mobile_toggle_checkbox" class="mobile-theme-label">
+                                <div id="mobile_star">
+                                    <div class="star" id="mobile_star-1">★</div>
+                                    <div class="star" id="mobile_star-2">★</div>
+                                </div>
+                                <div id="mobile_moon"></div>
+                            </label>
+                            <span class="theme-text">Dark Mode</span>
+                        </li>
+                        <li class="mobile-action"><a href="#">Se Connecter</a></li>
+                        <li class="mobile-action"><a href="#">S'inscrire</a></li>
                     </ul>
                     <div class="header-btns">
+                        <input type="checkbox" id="toggle_checkbox">
+                        <label for="toggle_checkbox" class="theme-toggle-label">
+                            <div id="star">
+                                <div class="star" id="star-1">★</div>
+                                <div class="star" id="star-2">★</div>
+                            </div>
+                            <div id="moon"></div>
+                        </label>
                         <button type="button">Se Connecter</button>
                         <button type="button">S'inscrire</button>
                     </div>
