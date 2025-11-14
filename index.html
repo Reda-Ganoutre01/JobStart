@@ -6,7 +6,7 @@
         <title>JobStar</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <!-- <link rel="stylesheet" href="css/scrollbar.css"> -->
+        <link rel="stylesheet" href="css/scrollbar.css">
         <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
@@ -17,8 +17,15 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 
     </head>
-    <body>
-        <!-- Header -->
+        <body>
+                <!-- Page loader (inserted by assistant) -->
+                <div id="site-loader" aria-hidden="true">
+                    <svg viewBox="25 25 50 50" class="loader-svg">
+                        <circle r="20" cy="50" cx="50"></circle>
+                    </svg>
+                </div>
+
+                <!-- Header -->
         <header>
             <div class="container">
                 
@@ -66,7 +73,12 @@
                     rights reserved.</p>
                 </div>
                 
+
+
+
+                
             </footer>
-            <script src="js/script.js"></script>
-        </body>
-    </html>
+                        <script src="js/script.js"></script>
+                        <script src="js/reload.js"></script>
+                </body>
+        </html>
