@@ -12,18 +12,6 @@
     --shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables */
-[data-theme="dark"] {
-    --font-color: #e4e6ea;
-    --background-color: #1a1a1a;
-    --white: #2d2d2d;
-    --black: #ffffff;
-    --header-bg: #2d2d2d;
-    --card-bg: #2d2d2d;
-    --border-color: #404040;
-    --shadow: rgba(0, 0, 0, 0.3);
-}
-
 /* Start Global Rules */
 * {
     margin: 0;
@@ -149,151 +137,7 @@ header ul li a:hover {
     transform: translateY(-1px);
 }
 
-/* Animated Theme Toggle */
-#toggle_checkbox, #mobile_toggle_checkbox {
-    display: none;
-}
-
-.theme-toggle-label {
-    display: flex;
-    position: relative;
-    width: 58px;
-    height: 40px;
-    background-color: #77b5fe;
-    border-radius: 28px;
-    cursor: pointer;
-    transition: 0.3s ease background-color;
-    overflow: hidden;
-    align-items: center;
-    justify-content: center;
-}
-
-.mobile-theme-label {
-    display: block;
-    position: relative;
-    width: 58px;
-    height: 28px;
-    background-color: #77b5fe;
-    border-radius: 28px;
-    cursor: pointer;
-    transition: 0.3s ease background-color;
-    overflow: hidden;
-}
-
-#star {
-    position: absolute;
-    top: 12.5px;
-    left: 6.5px;
-    width: 15px;
-    height: 15px;
-    background-color: #fafd0f;
-    transform: scale(1);
-    border-radius: 50%;
-    transition: 0.3s ease top, 0.3s ease left, 0.3s ease transform, 0.3s ease background-color;
-    z-index: 1;
-}
-
-#mobile_star {
-    position: absolute;
-    top: 6.5px;
-    left: 6.5px;
-    width: 15px;
-    height: 15px;
-    background-color: #fafd0f;
-    transform: scale(1);
-    border-radius: 50%;
-    transition: 0.3s ease top, 0.3s ease left, 0.3s ease transform, 0.3s ease background-color;
-    z-index: 1;
-}
-
-#star-1, #mobile_star-1 {
-    position: relative;
-}
-
-#star-2, #mobile_star-2 {
-    position: absolute;
-    transform: rotateZ(36deg);
-}
-
-.star {
-    top: 0;
-    left: -3.5px;
-    font-size: 27px;
-    line-height: 14px;
-    color: #fafd0f;
-    transition: 0.3s ease color;
-}
-
-#moon {
-    position: absolute;
-    bottom: -32px;
-    right: 4px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: 0.3s ease bottom;
-}
-
-#mobile_moon {
-    position: absolute;
-    bottom: -26px;
-    right: 4px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: 0.3s ease bottom;
-}
-
-#moon:before, #mobile_moon:before {
-    content: "";
-    position: absolute;
-    top: -6px;
-    left: -8.5px;
-    width: 20px;
-    height: 20px;
-    background-color: #03a9f4;
-    border-radius: 50%;
-    transition: 0.3s ease background-color;
-}
-
-#toggle_checkbox:checked + .theme-toggle-label,
-#mobile_toggle_checkbox:checked + .mobile-theme-label {
-    background-color: #000;
-}
-
-#toggle_checkbox:checked + .theme-toggle-label #star {
-    top: 7.5px;
-    left: 32px;
-    transform: scale(0.3);
-    background-color: yellow;
-}
-
-#mobile_toggle_checkbox:checked + .mobile-theme-label #mobile_star {
-    top: 1.5px;
-    left: 32px;
-    transform: scale(0.3);
-    background-color: yellow;
-}
-
-#toggle_checkbox:checked + .theme-toggle-label .star,
-#mobile_toggle_checkbox:checked + .mobile-theme-label .star {
-    color: yellow;
-}
-
-#toggle_checkbox:checked + .theme-toggle-label #moon {
-    bottom: 10px;
-}
-
-#mobile_toggle_checkbox:checked + .mobile-theme-label #mobile_moon {
-    bottom: 4px;
-}
-
-#toggle_checkbox:checked + .theme-toggle-label #moon:before,
-#mobile_toggle_checkbox:checked + .mobile-theme-label #mobile_moon:before {
-    background-color: #000;
-}
+/* Theme toggle removed: styles intentionally deleted to simplify theme handling */
 /* End Header */
 
 /* Footer */
@@ -311,8 +155,8 @@ footer p {
     margin: 0;
 }
 
-/* Hamburger Menu Styles */
-.hamburger {
+/* Dropdown Menu Button Styles (renamed from .hamburger) */
+.dropdown-menu {
     display: none;
     background: transparent;
     border: none;
@@ -326,7 +170,7 @@ footer p {
     gap: 4px;
 }
 
-.hamburger .bar {
+.dropdown-menu .bar {
     width: 28px;
     height: 3px;
     background: var(--font-color);
@@ -334,17 +178,17 @@ footer p {
     transition: all 0.3s ease;
 }
 
-/* Hamburger animation when opened */
-.hamburger[aria-expanded="true"] .bar:nth-child(1) {
+/* Dropdown animation when opened */
+.dropdown-menu[aria-expanded="true"] .bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
     transition: all 0.4s;
 }
 
-.hamburger[aria-expanded="true"] .bar:nth-child(2) {
+.dropdown-menu[aria-expanded="true"] .bar:nth-child(2) {
     opacity: 0;
 }
 
-.hamburger[aria-expanded="true"] .bar:nth-child(3) {
+.dropdown-menu[aria-expanded="true"] .bar:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
 }
 
@@ -355,21 +199,14 @@ footer p {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
-    /* Show hamburger button */
-    .hamburger {
+    /* Show dropdown button */
+    .dropdown-menu {
         display: flex;
     }
     
-    /* Hide desktop header buttons except theme toggle */
+    /* Hide desktop header buttons on small screens */
     .header-btns {
         display: none;
-    }
-    
-    .header-btns .theme-toggle-label {
-        display: block !important;
-        position: absolute;
-        top: 16px;
-        right: 60px;
     }
     
     /* Mobile navigation menu */
@@ -476,36 +313,6 @@ footer p {
         border-color: var(--secondary-color);
     }
     
-    /* Mobile theme toggle styling */
-    .mobile-theme-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 0;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 10px;
-    }
-    
-    .mobile-theme-label {
-        margin-right: 10px;
-    }
-    
-    .mobile-theme-toggle .theme-text {
-        font-weight: 500;
-        color: var(--font-color);
-        font-size: 16px;
-    }
-    
-    [data-theme="dark"] .mobile-theme-toggle .theme-text {
-        color: var(--font-color);
-    }
-}
-
-/* Hide mobile theme toggle on desktop */
-@media (min-width: 769px) {
-    .mobile-theme-toggle {
-        display: none !important;
-    }
 }
 
 /* Media Queries */
