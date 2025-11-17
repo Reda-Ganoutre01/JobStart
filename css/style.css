@@ -2,11 +2,11 @@
     --primary-color: #1e90ff;
     --success-color: #00e6bb;
     --secondary-color: #66b3ff;
-    --font-color: #414756;
-    --background-color: #f5f9ff;
-    --white: #ffffff;
+    --font-color: #202124;
+    --background-color: rgb(228, 234, 245);
+    --white: rgb(255, 255, 255);
     --black: #000000;
-    --header-bg: #ffffff;
+    --header-bg: rgb(255, 255, 255);
     --card-bg: #ffffff;
     --border-color: #e0e0e0;
     --shadow: rgba(0, 0, 0, 0.1);
@@ -38,14 +38,14 @@ body {
 
 /* Start Header */
 header {
-    background-color: var(--header-bg);
+    background-color: var(--background-color);
     width: 100%;
-    box-shadow: 0 2px 5px var(--shadow);
+    /* box-shadow: 0 2px 5px var(--shadow); */
     position: sticky;
     top: 0;
     z-index: 1000;
     padding: 10px 0;
-    transition: background-color 0.3s ease;
+    /* transition: background-color 0.3s ease; */
 }
 
 header .container {
@@ -144,21 +144,6 @@ header ul li a:hover {
 /* Theme toggle removed: styles intentionally deleted to simplify theme handling */
 /* End Header */
 
-/* Footer */
-footer {
-    width: 100%;
-    background-color: var(--font-color);
-    color: var(--header-bg);
-    padding: 20px 0;
-    text-align: center;
-    margin-top: auto;
-    transition: all 0.3s ease;
-}
-
-footer p {
-    margin: 0;
-}
-
 /* Dropdown Menu Button Styles (renamed from .hamburger) */
 .dropdown-menu {
     display: none;
@@ -203,6 +188,14 @@ footer p {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
+    header {
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 5px var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
     /* Show dropdown button */
     .dropdown-menu {
         display: flex;
@@ -323,6 +316,7 @@ footer p {
 
 /* Small devices */
 @media (min-width: 768px) {
+     
     .container {
         max-width: 750px;
     }
@@ -399,6 +393,7 @@ footer p {
 /* start hero index */
 .hero{
     position: relative;
+    background-color: var(--background-hero);
     width: 100%;
     height: 450px;
     overflow: hidden;
@@ -409,7 +404,6 @@ footer p {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url('../assets/bg/bg-blue\ v2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -432,13 +426,13 @@ footer p {
 .hero .hero-content h2{
     font-size: 36px;
     margin-bottom: 20px;
-    color: var(--white);
+    color: var(--font-color);
     font-weight: bold;
 }
 .hero .hero-content p{
     font-size: 16px;
     margin-bottom: 8px;
-    color: var(--white);
+    color: var(--font-color);
 }
 
 .hero-btns{
@@ -475,8 +469,21 @@ footer p {
 
 
 /* start footer */
-footer{
+
+
+/* Footer */
+footer {
     width: 100%;
+    background-color: var(--font-color);
+    color: var(--header-bg);
+    padding: 20px 0;
+    text-align: center;
     margin-top: 40px;
+    transition: all 0.3s ease;
 }
+
+footer p {
+    margin: 0;
+}
+
 /* end footer */
