@@ -1,14 +1,62 @@
-import { loadComponent } from './LoadComponent.js';
-import { initNavigation } from './Navigation.js';
+// Navigation initializer to attach dropdown/menu behaviors after header is injected
+function initNavigation() {
+    // Try to initialize immediately. If header/nav elements are not
+    // present yet (injected later), observe the document and retry.
+    const attach = () => {
+        const dropdownMenu = document.querySelector('.dropdown-menu') || document.querySelector('.hamburger');
+        const nav = document.querySelector('nav');
+        const navLinks = document.querySelectorAll('#nav-links a');
 
-async function bootstrap() {
-	// Load header first so navigation elements exist
-	await loadComponent('header', 'components/header.html');
-	// Initialize navigation now that header is in the DOM
-	initNavigation();
+        if (!dropdownMenu || !nav) return false;
 
-	// Load footer (can be done after)
-	await loadComponent('footer', 'components/footer.html');
+        // Avoid double-initialization
+        if (nav.__navInitialized) return true;
+        nav.__navInitialized = true;
+
+        dropdownMenu.addEventListener('click', function() {
+            const isOpen = nav.classList.contains('open');
+
+            nav.classList.toggle('open');
+            dropdownMenu.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                nav.classList.remove('open');
+                dropdownMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!nav.contains(e.target) && nav.classList.contains('open')) {
+                nav.classList.remove('open');
+                dropdownMenu.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                nav.classList.remove('open');
+                dropdownMenu.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        return true;
+    };
+
+    if (attach()) return;
+
+    const observer = new MutationObserver((mutations, obs) => {
+        if (attach()) {
+            obs.disconnect();
+        }
+    });
+
+    // Observe additions to the body (or documentElement if body absent)
+    const root = document.body || document.documentElement;
+    observer.observe(root, { childList: true, subtree: true });
+
+    // Safety timeout: stop observing after 5s
+    setTimeout(() => observer.disconnect(), 5000);
 }
-
-bootstrap().catch(err => console.error('Bootstrap error:', err));
+initNavigation();
