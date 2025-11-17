@@ -121,6 +121,10 @@ header ul li a:hover {
     justify-content: center;
 }
 
+.header-btns button a{
+    text-decoration: none;
+    color: inherit;
+}
 .header-btns button:hover {
     background-color: rgb(213, 213, 213);
     transform: translateY(-1px);
