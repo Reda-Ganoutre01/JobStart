@@ -60,3 +60,6 @@ function initNavigation() {
     setTimeout(() => observer.disconnect(), 5000);
 }
 initNavigation();
+
+
+// for hero section recherches populaires

@@ -36,7 +36,7 @@
 
                 <!-- theme -->
 
-                <img src="assets/logo/logo_jobstart_dark.png" alt="JobStar"
+                <img src="assets/logo/logo-lightmode.png" alt="JobStar"
                     id="logo">
                 <!--Start  theme -->
                 <!-- <button id="theme-switch">
@@ -83,26 +83,33 @@
         <!-- End Header -->
 
         <!-- Start Section Hero -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>Trouvez votre premier <span id="highlight">emploi</span>
-                        ou <span id="highlight">stage</span>.</h2>
-                    <p>La plateforme qui connecte les jeunes diplômés avec les
-                        entreprises marocaines</p>
-                    <div class="hero-btns">
-                        <button type="button">Je cherche un stage</button>
-                        <button type="button">Je cherche un emploi</button>
-                    </div>
-                    <div class="hero-searches">
-                        <span>Popular Searches:</span>
-                    </div>
-                    <div class="hero-img">
-
-                    </div>
+       <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Trouvez votre premier <span class="highlight">emploi</span>
+                    ou <span class="highlight">stage</span>.</h2>
+                <p>La plateforme qui connecte les jeunes diplômés avec les
+                    entreprises marocaines</p>
+                
+                <div class="search-box">
+                    <select id="job-type">
+                        <option value="" disabled selected>Stage ou Emploi</option>
+                        <option value="stage">Stage</option>
+                        <option value="emploi">Emploi</option>
+                    </select>
+                    <input type="text" placeholder="Titre du poste, mots-clés...">
+                    <input type="text" placeholder="Ville, région...">
+                    <button>Rechercher</button>
+                </div>
+                
+                <div class="hero-searches">
+                    <span>Recherches populaires:</span>
+                    Designer, Developer, Web, iOS, PHP, Senior, Engineer
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    <!-- end hero section -->
 
         <!-- Footer -->
 

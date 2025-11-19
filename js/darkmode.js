@@ -1,42 +1,37 @@
- // Store darkmode state in memory (not localStorage)
-        let darkmode = false;
-        const themeSwitch = document.getElementById("theme-switch");
+let darkmode = false;
+const themeSwitch = document.getElementById("theme-switch");
+const clickAudio = new Audio("assets/sounds/mixkit-cool-interface-click-tone-2568.wav");
+clickAudio.preload = "auto";
+const logo = document.getElementById("logo");
+const enableDarkmode = () => {
+    document.body.classList.add("darkmode");
+    darkmode = true;
+    if (themeSwitch) themeSwitch.textContent = "☀️";
+    playClickSound();
+    if (logo) logo.src = "assets/logo/logo-darkmode.png";
 
-        const enableDarkmode = () => {
-            document.body.classList.add("darkmode");
-            darkmode = true;
-            themeSwitch.textContent = "☀️";
-        };
+};
 
-        const disableDarkmode = () => {
-            document.body.classList.remove("darkmode");
-            darkmode = false;
-            themeSwitch.textContent = "🌙";
-        };
+const disableDarkmode = () => {
+    document.body.classList.remove("darkmode");
+    darkmode = false;
+    if (themeSwitch) themeSwitch.textContent = "🌙";
+    playClickSound();
+    if (logo) logo.src = "assets/logo/logo-lightmode.png";
 
-        themeSwitch.addEventListener("click", () => {
-            darkmode ? disableDarkmode() : enableDarkmode();
-        });
-
-// import logo from "../assets/logo/logo_jobstart_dark.png";
-// let darkmode=localStorage.getItem("darkmode");
-// const themeSwitch=document.getElementById("theme-switch");
-// const logo=document.querySelector("#logo");
-
-// const enableDarkmode=()=>{
-//     document.body.classList.add("darkmode");
-//     localStorage.setItem("darkmode","active");
-//     logo.src=logo;
-
-// }
-// const disableDarkmode=()=>{
-//     document.body.classList.remove("darkmode");
-//     localStorage.setItem("darkmode",null);
-// }
-
-// if(darkmode==="active") enableDarkmode()
-
-// themeSwitch.addEventListener("click",()=>{
-//     darkmode=localStorage.getItem("darkmode");
-//     darkmode !== "active" ? enableDarkmode():disableDarkmode();
-// });
+};
+const playClickSound=()=>{
+    try {
+        clickAudio.currentTime = 0;
+        clickAudio.play().catch(() => {});
+    } catch (e) {
+        console.error("Error playing click sound:", e);
+    }
+}
+if (themeSwitch) {
+    themeSwitch.addEventListener("click", () => {
+        darkmode ? disableDarkmode() : enableDarkmode();
+    });
+} else {
+    console.warn("theme-switch element not found: sound toggle will not work");
+}
