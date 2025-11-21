@@ -1,11 +1,13 @@
-let darkmode = false;
+let darkmode = localStorage.getItem("darkmode");
 const themeSwitch = document.getElementById("theme-switch");
 const clickAudio = new Audio("assets/sounds/mixkit-cool-interface-click-tone-2568.wav");
 clickAudio.preload = "auto";
 const logo = document.getElementById("logo");
+
 const enableDarkmode = () => {
     document.body.classList.add("darkmode");
-    darkmode = true;
+    localStorage.setItem("darkmode", "active");
+    darkmode = "active";
     if (themeSwitch) themeSwitch.textContent = "☀️";
     playClickSound();
     if (logo) logo.src = "assets/logo/logo-darkmode.png";
@@ -14,24 +16,24 @@ const enableDarkmode = () => {
 
 const disableDarkmode = () => {
     document.body.classList.remove("darkmode");
-    darkmode = false;
+    localStorage.removeItem("darkmode");
+    darkmode = null;
     if (themeSwitch) themeSwitch.textContent = "🌙";
     playClickSound();
     if (logo) logo.src = "assets/logo/logo-lightmode.png";
 
 };
-const playClickSound=()=>{
+const playClickSound = () => {
     try {
         clickAudio.currentTime = 0;
-        clickAudio.play().catch(() => {});
+        clickAudio.play().catch(() => { });
     } catch (e) {
         console.error("Error playing click sound:", e);
     }
 }
+if (darkmode === "active") enableDarkmode();
 if (themeSwitch) {
     themeSwitch.addEventListener("click", () => {
-        darkmode ? disableDarkmode() : enableDarkmode();
+        darkmode !== "active" ? enableDarkmode() : disableDarkmode();
     });
-} else {
-    console.warn("theme-switch element not found: sound toggle will not work");
 }
