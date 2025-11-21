@@ -105,6 +105,8 @@ header .container {
 header #logo {
     width: 140px;
     height: auto;
+    margin-top: 8px;
+
 }
 
 header nav {
@@ -384,6 +386,9 @@ header ul li a:hover {
     .container {
         max-width: 970px;
     }
+    #switch-theme {
+        display: none;
+    }
 }
 
 /* Large devices */
@@ -560,6 +565,16 @@ header ul li a:hover {
             margin-right: 0.5rem;
             font-weight: bold;
         }
+        .hero-searches a{
+            text-decoration: none;
+            margin-left: 5px;
+            color: var(--text-color);
+        }
+        .hero-searches a:hover{
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
 
 /* end hero index */
 

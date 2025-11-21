@@ -62,4 +62,3 @@ function initNavigation() {
 initNavigation();
 
 
-// for hero section recherches populaires
