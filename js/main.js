@@ -62,3 +62,14 @@ function initNavigation() {
 initNavigation();
 
 
+
+// for the auto-typing effect in the hero section
+const datatype = window.typingWords || [];
+    var typed = new Typed(".auto-type-highlight", {
+        strings: datatype,
+        typeSpeed: 150,
+        backSpeed: 100,
+        backDelay: 700,
+        smartBackspace: true,
+        loop: true
+    });

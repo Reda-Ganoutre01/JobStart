@@ -495,7 +495,7 @@ header ul li a:hover {
             color: var(--text-color);
         }
 
-        .hero .hero-content .highlight {
+        .hero .hero-content .auto-type-highlight {
             color: var(--primary-color);
             font-weight: bold;
         }
