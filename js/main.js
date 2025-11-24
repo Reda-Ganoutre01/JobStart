@@ -96,4 +96,21 @@ if (hero_searches) {
     console.warn('No .hero-searches container found in the DOM.');
 }
 
+// Header background change on scroll
+(function() {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    const onScroll = () => {
+        const scrolled = window.scrollY > 20;
+        header.classList.toggle('header-scrolled', scrolled);
+    };
+
+    // run once to set initial state
+    onScroll();
+
+    // use passive listener for performance
+    window.addEventListener('scroll', onScroll, { passive: true });
+})();
+
 
