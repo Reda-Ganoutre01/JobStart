@@ -12,6 +12,9 @@
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+        <!-- icons -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <!-- Google Fonts -->
         <link
@@ -19,7 +22,7 @@
             rel="stylesheet">
 
         <!-- dark mode -->
-         <script type="text/javascript" src="js/darkmode.js" defer></script>
+        <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <!-- <body class="darkmode"> -->
     <body>
@@ -36,10 +39,10 @@
 
                 <!-- theme -->
                 <a href="index.html">
-                    <img src="assets/logo/logo-lightmode.png" alt="JobStar" 
-                    id="logo">
+                    <img src="assets/logo/logo-lightmode.png" alt="JobStar"
+                        id="logo">
                 </a>
-                
+
                 <nav>
                     <!-- Dropdown menu button -->
                     <button class="dropdown-menu" aria-label="Drop down menu"
@@ -79,43 +82,175 @@
         <!-- End Header -->
 
         <!-- Start Section Hero -->
-       <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                 <h2>Trouvez votre premier <span class="auto-type-highlight"></span></h2>
-                <!-- <h2>Trouvez votre premier <span class="highlight">emploi</span>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Trouvez votre premier <span
+                            class="auto-type-highlight"></span></h2>
+                    <!-- <h2>Trouvez votre premier <span class="highlight">emploi</span>
                     ou 
                     
                     <span class="highlight">stage</span>.</h2> -->
-                <p>La plateforme qui connecte les jeunes diplômés avec les
-                    entreprises</p>
-                
-                <div class="search-box">
-                    <select id="job-type">
-                        <option value="" disabled selected>Stage ou Emploi</option>
-                        <option value="stage">Stage</option>
-                        <option value="emploi">Emploi</option>
-                    </select>
-                    <input type="text" placeholder="Titre du poste, mots-clés...">
-                    <input type="text" placeholder="Ville, région...">
-                    <button>Rechercher</button>
-                </div>
-                <!-- for Recherches populaires -->
-                <div class="hero-searches">
+                    <p>La plateforme qui connecte les jeunes diplômés avec les
+                        entreprises</p>
+
+                    <div class="search-box">
+                        <select id="job-type">
+                            <option value disabled selected>Stage ou
+                                Emploi</option>
+                            <option value="stage">Stage</option>
+                            <option value="emploi">Emploi</option>
+                        </select>
+                        <input type="text"
+                            placeholder="Titre du poste, mots-clés...">
+                        <input type="text" placeholder="Ville, région...">
+                        <button>Rechercher</button>
+                    </div>
+                    <!-- for Recherches populaires -->
+                    <div class="hero-searches">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- end hero section -->
+        </section>
+        <!-- end hero section -->
 
         <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/logo/logo-lightmode.png"
+                                alt="JobStar" id="logo">
+                        </a>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <strong>Contactez-nous</strong>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div class="contact-text">
+                                    <div class="phone">+212 5 22 00 00 00</div>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="contact-text">
+                                    Agadir, Maroc<br>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div class="contact-text">
+                                    contact@jobstart.ma
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 JobStar by Reda Ganoutre-Youssef el Menlani . All
-                    rights reserved.</p>
-            </div></footer>
-        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+                    <div class="footer-column">
+                        <h3>Pour les Candidats</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Chercher
+                                    un Stage</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Chercher
+                                    un Emploi</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Mon
+                                    Profil</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Mes
+                                    Candidatures</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Alertes
+                                    Emploi</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Pour les Entreprises</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Publier
+                                    une Offre</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Espace
+                                    Entreprise</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Trouver
+                                    des Candidats</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Nos
+                                    Services</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>À Propos</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Qui
+                                    sommes-nous</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Notre
+                                    Mission</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>L'Équipe</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Témoignages</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Ressources Utiles</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Conseils
+                                    CV</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Conseils
+                                    Entretien</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Guide
+                                    de Carrière</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Mentions
+                                    Légales</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Confidentialité</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="copyright">© 2025 JobStar by Reda Ganoutre-Youssef
+                        el Menlani . All
+                        rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"
+            defer></script>
         <script src="data/constants.global.js" defer></script>
         <script src="js/main.js" defer></script>
         <script src="js/reload.js" defer></script>

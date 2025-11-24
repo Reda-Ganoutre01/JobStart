@@ -95,3 +95,5 @@ if (hero_searches) {
 } else {
     console.warn('No .hero-searches container found in the DOM.');
 }
+
+
