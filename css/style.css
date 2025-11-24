@@ -872,3 +872,75 @@ header ul li a:hover {
             }
         }
 /* end footer */
+
+/* ========== Offers Page (cards) ========== */
+.offers-header h1 { margin: 24px 0 12px; color: var(--text-color); }
+
+.offers-toolbar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.offers-toolbar .search-wrap { flex: 1 1 280px; }
+.offers-toolbar input[type="search"] {
+    padding: 10px 12px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+}
+.offers-toolbar select {
+    padding: 10px 12px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 8px;
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+}
+.offers-toolbar input[type="search"]:focus,
+.offers-toolbar select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(30,144,255,0.15); }
+
+.offers-count { margin: 10px 0 20px; color: var(--secondary-text); }
+
+.offers-grid { display: grid; grid-template-columns: repeat(1, minmax(0,1fr)); gap: 16px; }
+@media (min-width: 768px){ .offers-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }}
+@media (min-width: 1200px){ .offers-grid{ grid-template-columns: repeat(3, minmax(0,1fr)); }}
+
+.offers-grid { align-items: stretch; }
+
+.offer-card{
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease, background-color .2s ease, color .2s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+}
+.offer-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px var(--shadow); }
+.offer-card:focus-within{ outline: 2px solid var(--primary-color); outline-offset: 2px; }
+
+.offer-header{ display:flex; align-items:center; gap:12px; }
+.offer-logo{ width:44px; height:44px; border-radius:8px; object-fit:cover; border:1px solid var(--border-color); background: var(--white); }
+.offer-head-text{ flex:1; min-width:0; }
+.offer-title{ font-size:1rem; margin:0 0 4px; font-weight:600; }
+.offer-meta{ font-size:.9rem; opacity:.8; display:flex; gap:6px; align-items:center; }
+.offer-meta .dot{ opacity:.6; }
+
+.offer-desc{ margin:12px 0; font-size:.95rem; line-height:1.5; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+.offer-tags{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.tag{ font-size:.8rem; padding:4px 8px; border-radius:999px; background: var(--base-variant); border:1px solid var(--border-color); transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+
+.offer-footer{ margin-top:auto; display:flex; justify-content:space-between; align-items:center; font-size:.85rem; opacity:.9; padding-top:10px; border-top:1px solid var(--border-color); }
+
+.badge{ padding:6px 10px; border-radius:999px; font-size:.75rem; border:1px solid var(--border-color); background: var(--base-variant); }
+.badge-stage{ background: rgba(30,144,255,.1); color: var(--primary-color); border-color: rgba(30,144,255,.35); }
+.badge-emploi{ background: rgba(0,230,187,.1); color: var(--success-color); border-color: rgba(0,230,187,.35); }
+.badge-freelance{ background: rgba(102,179,255,.12); color: var(--secondary-color); border-color: rgba(102,179,255,.35); }
+
+.no-results{ padding:24px; text-align:center; border:1px dashed var(--border-color); border-radius:12px; background: var(--card-bg); }
+
+/* Visually hidden utility */
+.sr-only{ position:absolute !important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
