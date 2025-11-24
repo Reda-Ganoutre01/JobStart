@@ -93,13 +93,24 @@ header {
     top: 0;
     z-index: 1000;
     padding: 10px 0;
-    /* transition: background-color 0.3s ease; */
+    transition: background-color 0.25s ease, box-shadow 0.25s ease, height 0.25s ease;
+}
+
+/* Header state when page is scrolled */
+header.header-scrolled {
+    background-color: var(--card-bg);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    height: 82px;
+    border-bottom: 1px solid var(--border-color);
+
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: -13px;
+
 }
 
 header #logo {
