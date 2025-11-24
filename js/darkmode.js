@@ -9,7 +9,6 @@ const enableDarkmode = () => {
     localStorage.setItem("darkmode", "active");
     darkmode = "active";
     if (themeSwitch) themeSwitch.textContent = "☀️";
-    playClickSound();
     if (logo) logo.src = "assets/logo/logo-darkmode.png";
 
 };
@@ -19,7 +18,6 @@ const disableDarkmode = () => {
     localStorage.removeItem("darkmode");
     darkmode = null;
     if (themeSwitch) themeSwitch.textContent = "🌙";
-    playClickSound();
     if (logo) logo.src = "assets/logo/logo-lightmode.png";
 
 };
@@ -34,6 +32,9 @@ const playClickSound = () => {
 if (darkmode === "active") enableDarkmode();
 if (themeSwitch) {
     themeSwitch.addEventListener("click", () => {
-        darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+        const willEnable = darkmode !== "active";
+        willEnable ? enableDarkmode() : disableDarkmode();
+        // play click sound only when user clicks the switch
+        playClickSound();
     });
 }
