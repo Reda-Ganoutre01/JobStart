@@ -12,15 +12,16 @@
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
-        <!-- icons -->
+        <!-- AOS library -->
+         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+            <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
         <!-- Google Fonts -->
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
             rel="stylesheet">
-
         <!-- dark mode -->
         <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
@@ -33,16 +34,16 @@
             </svg>
         </div>
 
-          <!-- Header -->
+        <!-- Header -->
         <header>
             <div class="container">
 
                 <!-- theme -->
                 <a href="index.html">
-                    <img src="assets/logo/logo-lightmode.png" alt="JobStar" 
-                    id="logo">
+                    <img src="assets/logo/logo-lightmode.png" alt="JobStar"
+                        id="logo">
                 </a>
-                
+
                 <nav>
                     <!-- Dropdown menu button -->
                     <button class="dropdown-menu" aria-label="Drop down menu"
@@ -67,7 +68,7 @@
                     <!--Start  theme -->
                     <button id="theme-switch">🌙</button>
 
-                    <div class="header-btns">
+                    <div class="header-btns" >
                         <button type="button">
                             <a href="login.html">Se
                                 Connecter</a></button>
@@ -82,9 +83,11 @@
         <!-- End Header -->
 
         <!-- Start Section Hero -->
-        <section class="hero">
+        <section class="hero" >
             <div class="container">
-                <div class="hero-content">
+                <div class="hero-content" data-aos="zoom-in-up"
+                data-aos-delay="500"
+     data-aos-duration="1000">
                     <h2>Trouvez votre premier <span
                             class="auto-type-highlight"></span></h2>
                     <!-- <h2>Trouvez votre premier <span class="highlight">emploi</span>
@@ -249,8 +252,13 @@
             </div>
         </footer>
         <!-- End Footer -->
-        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"
-            defer></script>
+
+
+        <!-- Typed.js library -->
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+        <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>AOS.init();</script>
         <script src="data/constants.global.js" defer></script>
         <script src="js/main.js" defer></script>
         <script src="js/reload.js" defer></script>

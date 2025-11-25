@@ -13,6 +13,8 @@
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+             <!-- AOS library -->
+         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <!-- icons -->
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -80,7 +82,8 @@
         <!-- End Header -->
     
   <!-- start login -->
-  <div class="login-wrapper">
+  <div class="login-wrapper" data-aos="fade-up"
+     data-aos-duration="2000">
         <div class="login-container">
             <!-- Left Side -->
             <div class="login-left">
@@ -348,6 +351,9 @@
             </div>
         </footer>
         <!-- End Footer -->
+         <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>AOS.init();</script>
         <script src="js/main.js"></script>
         <script src="js/reload.js"></script>
         <script src="js/login.js"></script>
