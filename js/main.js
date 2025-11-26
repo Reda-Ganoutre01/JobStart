@@ -74,42 +74,91 @@ const datatype = window.typingWords || [];
         loop: true
     });
 
-
+// (stats rendering moved below with animated counter)
 // for keywords popular searches (uses global `popularSearches`)
 const hero_searches = document.querySelector('.hero-searches');
-const popularSearches = window.popularSearches || [""];
+const popularSearches=window.popularSearches || [""];
 
 if (hero_searches) {
-    let span = document.createElement('span');
-    span.textContent = "Recherches populaires: ";
+    let span=document.createElement('span');
+    span.textContent="Recherches populaires: ";
     hero_searches.appendChild(span);
-    const categoryMap = {
-        'designer':'Design',
-        'developer':'Development',
-        'design':'Design',
-        'development':'Development',
-        'marketing':'Marketing',
-        'data':'Data'
-    };
-    popularSearches.forEach((term, idx) => {
-        const a = document.createElement('a');
-        const key = String(term||'').trim().toLowerCase();
-        const cat = categoryMap[key];
-        if (cat) {
-            const p = new URLSearchParams({ category: cat });
-            a.href = `Offers.html?${p.toString()}`;
-        } else {
-            a.href = `Offers.html?q=${encodeURIComponent(term)}`;
-        }
-        a.textContent = term;
+    for (const el of popularSearches) {
+        let a=document.createElement('a');
+        a.href=el|| "#";
+        a.textContent=el;
         hero_searches.appendChild(a);
-        if (idx < popularSearches.length - 1) {
-            hero_searches.appendChild(document.createTextNode(", "));
+        if (el !== popularSearches[popularSearches.length - 1]) {
+            hero_searches.appendChild(document.createTextNode(","));
         }
-    });
+    }
 } else {
     console.warn('No .hero-searches container found in the DOM.');
 }
+
+// Render stats on hero index page (simple version)
+(function renderStatsSimple() {
+    const statsContainer = document.querySelector('.stats');
+    const data = Array.isArray(window.statData) ? window.statData : [];
+    if (!statsContainer || !data.length) return;
+
+    // Clear any placeholder content
+    statsContainer.innerHTML = '';
+
+    // Simple counter using setInterval (easy for beginners)
+    function simpleCount(element, target, duration) {
+        if (!element) return;
+        const parsed = Number(target) || 0;
+        if (parsed <= 0) { element.textContent = String(parsed); return; }
+
+        const fps = 20; // updates per second
+        const interval = Math.round(1000 / fps); // ms per update
+        const steps = Math.max(1, Math.round(duration / interval));
+        const step = Math.max(1, Math.floor(parsed / steps));
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= parsed) {
+                element.textContent = parsed.toLocaleString();
+                clearInterval(timer);
+            } else {
+                element.textContent = current.toLocaleString();
+            }
+        }, interval);
+    }
+
+    data.forEach(item => {
+        const wrap = document.createElement('div');
+        wrap.className = 'stat-item';
+
+        const num = document.createElement('div');
+        num.className = 'stat-number';
+        num.textContent = '0';
+
+        // determine suffix: use any explicit suffix in the value (like '%' or '+'),
+        // otherwise default to '+' to match design requirement
+        const rawValue = String(item.value || item.count || '');
+        const suffixMatch = rawValue.match(/[%+]/);
+        const suffix = suffixMatch ? suffixMatch[0] : '+';
+        // store suffix as data attribute so CSS can render it via ::after
+        num.setAttribute('data-suffix', suffix);
+
+        const label = document.createElement('div');
+        label.className = 'stat-label';
+        label.textContent = item.label || '';
+
+        wrap.appendChild(num);
+        wrap.appendChild(label);
+        statsContainer.appendChild(wrap);
+
+        // get numeric target from the value (strip non-digits)
+        const raw = String(item.value || item.count || '0');
+        const target = parseInt(raw.replace(/[^0-9]/g, ''), 10) || 0;
+        // animate with a simple counter over 1.6s
+        simpleCount(num, target, 1600);
+    });
+})();
 
 // Header background change on scroll
 (function() {
