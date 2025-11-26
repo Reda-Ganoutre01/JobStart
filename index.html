@@ -13,9 +13,9 @@
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
         <!-- AOS library -->
-         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-            <!-- icons -->
+        <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
         <!-- Google Fonts -->
@@ -68,7 +68,7 @@
                     <!--Start  theme -->
                     <button id="theme-switch">🌙</button>
 
-                    <div class="header-btns" >
+                    <div class="header-btns">
                         <button type="button">
                             <a href="login.html">Se
                                 Connecter</a></button>
@@ -83,11 +83,11 @@
         <!-- End Header -->
 
         <!-- Start Section Hero -->
-        <section class="hero" >
+        <section class="hero">
             <div class="container">
                 <div class="hero-content" data-aos="zoom-in-up"
-                data-aos-delay="500"
-     data-aos-duration="2000">
+                    data-aos-delay="500"
+                    data-aos-duration="2000">
                     <h2>Trouvez votre premier <span
                             class="auto-type-highlight"></span></h2>
                     <!-- <h2>Trouvez votre premier <span class="highlight">emploi</span>
@@ -113,15 +113,74 @@
                     <div class="hero-searches">
                     </div>
                     <!-- Stats -->
-                <div class="stats" data-aos="zoom-out-up" data-aos-delay="500" data-aos-duration="2000">
-               
-                   
-                </div>
+                    <div class="stats" data-aos="zoom-out-up"
+                        data-aos-delay="500" data-aos-duration="2000">
+
+                    </div>
                 </div>
             </div>
         </section>
         <!-- end hero section -->
-     
+        <!-- How It Works -->
+        <section class="section-alt"
+        data-aos="zoom-in"
+                        data-aos-delay="1000" data-aos-duration="2000"
+        >
+            <div class="container">
+                <h2 class="section-title">Comment ça marche ?</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon"
+                            style="background: rgba(30, 144, 255, 0.1);">
+                            <svg style="color: #1e90ff;" width="40" height="40"
+                                fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3>1. Créez votre profil</h3>
+                        <p>Inscrivez-vous en quelques minutes et complétez votre
+                            profil professionnel</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon"
+                            style="background: rgba(0, 230, 187, 0.1);">
+                            <svg style="color: #00e6bb;" width="40" height="40"
+                                fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                        <h3>2. Explorez les offres</h3>
+                        <p>Parcourez des centaines d'offres adaptées aux jeunes
+                            diplômés</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-icon"
+                            style="background: rgba(102, 179, 255, 0.1);">
+                            <svg style="color: #66b3ff;" width="40" height="40"
+                                fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>3. Postulez facilement</h3>
+                        <p>Envoyez votre candidature en un clic avec votre
+                            profil</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- End How It Works -->
 
         <!-- Footer -->
         <footer class="footer">
@@ -259,12 +318,27 @@
         </footer>
         <!-- End Footer -->
 
-
         <!-- Typed.js library -->
-        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js" defer></script>
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"
+            defer></script>
         <!--AOS library -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>AOS.init();</script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                if (window.AOS) {
+                    AOS.init({
+                        once: false,
+                        duration: 800,
+                        easing: 'ease-out-cubic',
+                        offset: 120
+                    });
+                }
+            });
+
+            window.addEventListener('load', function () {
+                if (window.AOS) AOS.refresh();
+            });
+        </script>
         <script src="data/constants.global.js" defer></script>
         <script src="js/main.js" defer></script>
         <script src="js/reload.js" defer></script>

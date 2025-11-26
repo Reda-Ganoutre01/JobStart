@@ -83,25 +83,28 @@ body {
 
 /* End Global Rules */
 
-/* Stats (hero) - moved from login.css so index page shows styled stats */
+/* Stats (hero) - responsive, centered numbers */
 .stats {
-    display: flex;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(120px, 1fr));
+    gap: 1.25rem;
     align-items: center;
-    justify-content: center;
-    padding: 18px 24px;
+    justify-items: center;
+    padding: 14px 18px;
     border-radius: 12px;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
+    max-width: 900px;
+    background: transparent;
 }
 
 .stats .stat-item {
     text-align: center;
-    min-width: 120px;
+    width: 100%;
 }
 
 .stats .stat-number {
     font-family: 'Poppins', sans-serif;
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 800;
     margin-bottom: 6px;
     line-height: 1;
@@ -109,13 +112,11 @@ body {
 
 .stats .stat-item:nth-child(1) .stat-number { color: var(--primary-color); }
 .stats .stat-item:nth-child(2) .stat-number { color: var(--success-color); }
-.stats .stat-item:nth-child(3) .stat-number { color:var(--secondary-color); }
+.stats .stat-item:nth-child(3) .stat-number { color: var(--secondary-color); }
 
-/* (plus sign moved to label text in JS) */
-
-/* show a plus icon after each stat number */
-.stats .stat-number::after {
-    content: '+';
+/* show a plus icon after each stat number when present */
+.stats .stat-number[data-suffix]::after {
+    content: attr(data-suffix);
     margin-left: 6px;
     font-weight: 700;
     opacity: 0.95;
@@ -125,6 +126,95 @@ body {
     font-size: 13px;
     color: var(--secondary-text);
 }
+
+@media (max-width: 768px) {
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+        padding: 12px;
+    }
+
+    .stats .stat-number {
+        font-size: 26px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .stats .stat-number {
+        font-size: 38px;
+    }
+}
+
+/* How It Works */
+.section-alt {
+    padding: 56px 0;
+    background: transparent;
+}
+
+.section-alt .section-title {
+    text-align: center;
+    font-size: 1.95rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.step-card {
+    text-align: center;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.darkmode .step-card {
+    background: var(--card-bg);
+    border-color: #2b2f3a;
+}
+
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+}
+
+.step-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+
+.step-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.step-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.step-card p {
+    color: var(--secondary-text);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* end How It Works */
 
 
 /* Start Header */
@@ -518,7 +608,7 @@ header ul li a:hover {
 .hero {
     position: relative;
     width: 100%;
-        height: 401px;
+    height: 401px;
 
     min-height: 450px;
     overflow: hidden;
@@ -637,34 +727,7 @@ header ul li a:hover {
     cursor: pointer;
 }
 
- /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 48rem;
-            margin: 0 auto;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.25rem;
-            font-weight: bold;
-        }
-
-        .stat-label {
-            margin-top: 0.5rem;
-            color: #232738;
-        }
-
-        .dark-mode .stat-label {
-            color: #a4a5b8;
-        }
-
-/* end hero index */
+/* Duplicate hero stats block removed (styles consolidated earlier) */
 
 /* Responsive: hero adjustments for tablet and mobile */
 @media (max-width: 992px) {
