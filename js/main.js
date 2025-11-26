@@ -75,26 +75,78 @@ const datatype = window.typingWords || [];
     });
 
 
-// for keywords popular searches (uses global `popularSearches`)
+// Popular searches: link to Offers page with smart params (category when possible)
 const hero_searches = document.querySelector('.hero-searches');
-const popularSearches=window.popularSearches || [""];
+const popularSearches = window.popularSearches || [""];
 
 if (hero_searches) {
-    let span=document.createElement('span');
-    span.textContent="Recherches populaires: ";
+    let span = document.createElement('span');
+    span.textContent = "Recherches populaires: ";
     hero_searches.appendChild(span);
-    for (const el of popularSearches) {
-        let a=document.createElement('a');
-        a.href=el|| "#";
-        a.textContent=el;
-        hero_searches.appendChild(a);
-        if (el !== popularSearches[popularSearches.length - 1]) {
-            hero_searches.appendChild(document.createTextNode(","));
+    const categoryMap = {
+        'designer':'Design',
+        'developer':'Development',
+        'design':'Design',
+        'development':'Development',
+        'marketing':'Marketing',
+        'data':'Data'
+    };
+    popularSearches.forEach((term, idx) => {
+        const a = document.createElement('a');
+        const key = String(term||'').trim().toLowerCase();
+        const cat = categoryMap[key];
+        if (cat) {
+            const p = new URLSearchParams({ category: cat });
+            a.href = `Offers.html?${p.toString()}`;
+        } else {
+            a.href = `Offers.html?q=${encodeURIComponent(term)}`;
         }
-    }
+        a.textContent = term;
+        hero_searches.appendChild(a);
+        if (idx < popularSearches.length - 1) {
+            hero_searches.appendChild(document.createTextNode(", "));
+        }
+    });
 } else {
     console.warn('No .hero-searches container found in the DOM.');
 }
+
+// Hero search box: redirect to Offers with parameters
+(function(){
+  const searchBox = document.querySelector('.search-box');
+  if(!searchBox) return;
+  const typeSel = searchBox.querySelector('#job-type');
+  const inputs = searchBox.querySelectorAll('input');
+  const btn = searchBox.querySelector('button');
+  if(!btn) return;
+  const typeMap = { 'stage': 'Stage', 'emploi': 'Emploi' };
+    const categoryMap = {
+        'designer':'Design',
+        'design':'Design',
+        'developer':'Development',
+        'developpeur':'Development',
+        'development':'Development',
+        'marketing':'Marketing',
+        'data':'Data'
+    };
+  btn.addEventListener('click', () => {
+    const kw = (inputs[0]?.value || '').trim();
+    const loc = (inputs[1]?.value || '').trim();
+    const t = typeMap[(typeSel?.value || '').toLowerCase()] || '';
+    const params = new URLSearchParams();
+        if(kw){
+            const key = kw.toLowerCase();
+            const cat = categoryMap[key];
+            if (cat) params.set('category', cat);
+            else params.set('q', kw);
+        }
+        if(loc) params.set('loc', loc);
+    if(t) params.set('type', t);
+    // carry page size default
+    params.set('size','10');
+    window.location.href = `Offers.html?${params.toString()}`;
+  });
+})();
 
 // Header background change on scroll
 (function() {

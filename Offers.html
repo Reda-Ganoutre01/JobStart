@@ -24,8 +24,12 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <!-- dark mode -->
     <script type="text/javascript" src="js/darkmode.js" defer></script>
+    <!-- auth utilities -->
+    <script type="text/javascript" src="js/auth.js" defer></script>
   </head>
   <body>
     <!-- Page loader (inserted by assistant) -->
@@ -83,34 +87,117 @@
     <!-- End Header -->
 
     <main>
-      <section class="offers container">
-        <div class="offers-header">
-          <h1>Offres d'emploi et de stage</h1>
-          <div class="offers-toolbar">
-            <div class="search-wrap">
+      <div
+        class="offers-layout container login-wrapper"
+        data-aos="fade-up"
+        data-aos-duration="2000"
+      >
+        <aside
+          class="offers-sidebar"
+          aria-label="Filtres"
+          class="offers-layout container login-wrapper"
+          data-aos="fade-right"
+          data-aos-duration="2000"
+        >
+          <form class="filter-form" onsubmit="return false" novalidate>
+            <div class="filter-group">
+              <label for="offer-search">Mots-clés</label>
               <input
                 id="offer-search"
                 type="search"
-                placeholder="Rechercher un poste, société, ville..."
-                aria-label="Rechercher des offres"
+                placeholder="Titre, entreprise..."
               />
             </div>
-            <div class="filters-wrap">
-              <label for="offer-type" class="sr-only">Type</label>
-              <select id="offer-type" aria-label="Filtrer par type">
+            <div class="filter-group">
+              <label for="filter-location">Localisation</label>
+              <input id="filter-location" type="text" placeholder="Ville" />
+            </div>
+            <div class="filter-group">
+              <label for="offer-type">Type</label>
+              <select id="offer-type">
                 <option value="Tous" selected>Tous</option>
                 <option value="Emploi">Emploi</option>
                 <option value="Stage">Stage</option>
                 <option value="Freelance">Freelance</option>
               </select>
             </div>
+            <div class="filter-group">
+              <label for="filter-category">Catégorie</label>
+              <select id="filter-category">
+                <option value="">Toutes</option>
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Data">Data</option>
+              </select>
+            </div>
+            <fieldset class="filter-group">
+              <legend>Date de publication</legend>
+              <label
+                ><input type="radio" name="filter-date" value="" checked />
+                Toutes</label
+              >
+              <label
+                ><input type="radio" name="filter-date" value="7" /> < 7
+                jours</label
+              >
+              <label
+                ><input type="radio" name="filter-date" value="30" /> < 30
+                jours</label
+              >
+            </fieldset>
+            <div class="filter-actions">
+              <button
+                type="button"
+                id="reset-filters"
+                class="reset-btn"
+                aria-label="Réinitialiser les filtres"
+              >
+                Réinitialiser les filtres
+              </button>
+            </div>
+          </form>
+        </aside>
+        <section
+          class="offers-results"
+          aria-labelledby="offers-heading"
+          class="offers-layout container login-wrapper"
+          data-aos="fade-left"
+          data-aos-duration="2000"
+        >
+          <div class="offers-topbar">
+            <h1 id="offers-heading">Offres disponibles</h1>
+            <div class="results-meta">
+              Résultats: <span id="offers-count">0</span>
+            </div>
+            <div class="results-actions">
+              <label class="sr-only" for="sort-select">Trier</label>
+              <select id="sort-select">
+                <option value="recent" selected>Plus récentes</option>
+                <option value="old">Plus anciennes</option>
+              </select>
+              <label class="sr-only" for="page-size">Par page</label>
+              <select id="page-size">
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+              </select>
+            </div>
           </div>
-          <div class="offers-count">
-            Total: <span id="offers-count">0</span>
+          <div id="offers-loading" class="offers-loading" aria-hidden="true">
+            <div
+              class="spinner"
+              role="status"
+              aria-label="Chargement des offres"
+            ></div>
           </div>
-        </div>
-        <div id="offers-list" class="offers-grid" aria-live="polite"></div>
-      </section>
+          <div id="offers-list" class="offers-list" aria-live="polite"></div>
+          <nav
+            id="offers-pagination"
+            class="offers-pagination"
+            aria-label="Pagination"
+          ></nav>
+        </section>
+      </div>
     </main>
     <!-- Footer -->
     <footer class="footer">
@@ -279,5 +366,10 @@
     <script src="js/main.js"></script>
     <script src="js/offers.js"></script>
     <script src="js/reload.js"></script>
+    <!--AOS library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>

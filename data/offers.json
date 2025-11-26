@@ -9,7 +9,9 @@
     "salary": "8 000 - 12 000 MAD",
     "tags": ["React", "CSS", "HTML", "JavaScript"],
     "description": "Rejoignez notre équipe web pour développer des interfaces modernes et performantes.",
-    "logo": "assets/logo/logo_jobstart_single.png"
+    "logo": "assets/logo/logo_jobstart_single.png",
+    "categories": ["Development"],
+    "jobType": "Full Time"
   },
   {
     "id": 2,
@@ -21,7 +23,9 @@
     "salary": "Indemnité de stage",
     "tags": ["Python", "SQL", "PowerBI"],
     "description": "Analyse de données et création de tableaux de bord décisionnels.",
-    "logo": "assets/logo/logo_jobstart_single.png"
+    "logo": "assets/logo/logo_jobstart_single.png",
+    "categories": ["Data"],
+    "jobType": "Internship"
   },
   {
     "id": 3,
@@ -357,6 +361,43 @@
     "salary": "Tarif journalier",
     "tags": ["Node.js", "REST", "GraphQL"],
     "description": "Développement d'APIs robustes et sécurisées.",
-    "logo": "assets/logo/logo-darkmode.png"
+    "logo": "assets/logo/logo-darkmode.png",
+    "categories": ["Development"],
+    "jobType": "Freelance"
+  },
+  {
+    "id": 31,
+    "title": "Junior Graphic Designer (Web)",
+    "company": "DesignFlow",
+    "location": "New York, USA",
+    "type": "Emploi",
+    "postedDate": "2025-11-24",
+    "salary": "$150 - $180 / week",
+    "tags": ["Figma", "Sketch", "UI", "Brand"],
+    "description": "Collaborer avec l'équipe produit pour créer des interfaces web modernes et accessibles, en respectant la charte graphique et les objectifs business.",
+    "logo": "assets/logo/logo-lightmode.png",
+    "categories": ["Design", "Development"],
+    "jobType": "Full Time",
+    "featured": true,
+    "urgent": true,
+    "expirationDate": "2026-05-18",
+    "experienceYears": 1,
+    "qualification": "Bachelor Degree",
+    "careerLevel": "Junior",
+    "gender": "Both",
+    "responsibilities": [
+      "Participer au cycle complet de design produit (idée à livraison)",
+      "Créer et maintenir des bibliothèques UI cohérentes",
+      "Produire des prototypes haute fidélité pour tests utilisateurs",
+      "Collaborer avec les développeurs pour assurer la fidélité des interfaces",
+      "Contribuer à l'amélioration continue du design system"
+    ],
+    "skills": [
+      "Maîtrise d'outils de design (Figma, Sketch)",
+      "Connaissance des principes UX/UI",
+      "Sens du détail typographique et visuel",
+      "Capacité à travailler en équipe agile",
+      "Notions d'accessibilité web"
+    ]
   }
 ]
