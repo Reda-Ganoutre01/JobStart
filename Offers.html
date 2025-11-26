@@ -1,223 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JobStart-Offers</title>
-        <!-- Styling File -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/scrollbar.css">
-        <!-- Site logo / favicon -->
-        <link rel="icon" href="assets/logo/logo_jobstart_single.png"
-            type="image/png">
-        <link rel="apple-touch-icon"
-            href="assets/logo/logo_jobstart_single.png">
-        <!-- icons -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-            rel="stylesheet">
-         <!-- dark mode -->
-         <script type="text/javascript" src="js/darkmode.js" defer></script>
-    </head>
-    <body>
-        <!-- Page loader (inserted by assistant) -->
-        <div id="site-loader" aria-hidden="true">
-            <svg viewBox="25 25 50 50" class="loader-svg">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobStart-Offers</title>
+    <!-- Styling File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/scrollbar.css" />
+    <!-- Site logo / favicon -->
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- dark mode -->
+    <script type="text/javascript" src="js/darkmode.js" defer></script>
+    <!-- auth utilities -->
+    <script type="text/javascript" src="js/auth.js" defer></script>
+  </head>
+  <body>
+    <!-- Page loader (inserted by assistant) -->
+    <div id="site-loader" aria-hidden="true">
+      <svg viewBox="25 25 50 50" class="loader-svg">
+        <circle r="20" cy="50" cx="50"></circle>
+      </svg>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <!-- theme -->
+        <a href="index.html">
+          <img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo" />
+        </a>
+
+        <nav>
+          <!-- Dropdown menu button -->
+          <button
+            class="dropdown-menu"
+            aria-label="Drop down menu"
+            title="Drop down menu"
+            aria-expanded="false"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+
+          <ul id="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Offers.html">Offers</a></li>
+            <li><a href="Conseils.html">Conseils</a></li>
+            <li><a href="Apropos.html">A propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <!-- Mobile-only action links -->
+            <li class="mobile-action"><a href="login.html">Se Connecter</a></li>
+            <li class="mobile-action"><a href="SignUp.html">S'inscrire</a></li>
+          </ul>
+          <!--Start  theme -->
+          <button id="theme-switch">🌙</button>
+
+          <div class="header-btns">
+            <button type="button">
+              <a href="login.html">Se Connecter</a>
+            </button>
+            <button type="button">
+              <a href="SignUp.html">S'inscrire</a>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main>
+      <div
+        class="offers-layout container login-wrapper"
+        data-aos="fade-up"
+        data-aos-duration="2000"
+      >
+        <aside
+          class="offers-sidebar"
+          aria-label="Filtres"
+          class="offers-layout container login-wrapper"
+          data-aos="fade-right"
+          data-aos-duration="2000"
+        >
+          <form class="filter-form" onsubmit="return false" novalidate>
+            <div class="filter-group">
+              <label for="offer-search">Mots-clés</label>
+              <input
+                id="offer-search"
+                type="search"
+                placeholder="Titre, entreprise..."
+              />
+            </div>
+            <div class="filter-group">
+              <label for="filter-location">Localisation</label>
+              <input id="filter-location" type="text" placeholder="Ville" />
+            </div>
+            <div class="filter-group">
+              <label for="offer-type">Type</label>
+              <select id="offer-type">
+                <option value="Tous" selected>Tous</option>
+                <option value="Emploi">Emploi</option>
+                <option value="Stage">Stage</option>
+                <option value="Freelance">Freelance</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="filter-category">Catégorie</label>
+              <select id="filter-category">
+                <option value="">Toutes</option>
+                <option value="Design">Design</option>
+                <option value="Development">Development</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Data">Data</option>
+              </select>
+            </div>
+            <fieldset class="filter-group">
+              <legend>Date de publication</legend>
+              <label
+                ><input type="radio" name="filter-date" value="" checked />
+                Toutes</label
+              >
+              <label
+                ><input type="radio" name="filter-date" value="7" /> < 7
+                jours</label
+              >
+              <label
+                ><input type="radio" name="filter-date" value="30" /> < 30
+                jours</label
+              >
+            </fieldset>
+            <div class="filter-actions">
+              <button
+                type="button"
+                id="reset-filters"
+                class="reset-btn"
+                aria-label="Réinitialiser les filtres"
+              >
+                Réinitialiser les filtres
+              </button>
+            </div>
+          </form>
+        </aside>
+        <section
+          class="offers-results"
+          aria-labelledby="offers-heading"
+          class="offers-layout container login-wrapper"
+          data-aos="fade-left"
+          data-aos-duration="2000"
+        >
+          <div class="offers-topbar">
+            <h1 id="offers-heading">Offres disponibles</h1>
+            <div class="results-meta">
+              Résultats: <span id="offers-count">0</span>
+            </div>
+            <div class="results-actions">
+              <label class="sr-only" for="sort-select">Trier</label>
+              <select id="sort-select">
+                <option value="recent" selected>Plus récentes</option>
+                <option value="old">Plus anciennes</option>
+              </select>
+              <label class="sr-only" for="page-size">Par page</label>
+              <select id="page-size">
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+          </div>
+          <div id="offers-loading" class="offers-loading" aria-hidden="true">
+            <div
+              class="spinner"
+              role="status"
+              aria-label="Chargement des offres"
+            ></div>
+          </div>
+          <div id="offers-list" class="offers-list" aria-live="polite"></div>
+          <nav
+            id="offers-pagination"
+            class="offers-pagination"
+            aria-label="Pagination"
+          ></nav>
+        </section>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/logo/logo-lightmode.png"
+                alt="JobStar"
+                id="logo"
+              />
+            </a>
+            <div class="contact-info">
+              <div class="contact-item">
+                <strong>Contactez-nous</strong>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                  <div class="phone">+212 5 22 00 00 00</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-text">Agadir, Maroc<br /></div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-text">contact@jobstart.ma</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Candidats</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Emploi</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Mon Profil</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mes Candidatures</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Alertes Emploi</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Entreprises</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Publier une Offre</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Espace Entreprise</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Trouver des Candidats</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Nos Services</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>À Propos</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Qui sommes-nous</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Notre Mission</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>L'Équipe</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Témoignages</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>FAQ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Ressources Utiles</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Conseils CV</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Conseils Entretien</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Guide de Carrière</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mentions Légales</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Confidentialité</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
 
-         <!-- Header -->
-        <header>
-            <div class="container">
-
-                <!-- theme -->
-                <a href="index.html">
-                    <img src="assets/logo/logo-lightmode.png" alt="JobStar" 
-                    id="logo">
-                </a>
-                
-                <nav>
-                    <!-- Dropdown menu button -->
-                    <button class="dropdown-menu" aria-label="Drop down menu"
-                        title="Drop down menu" aria-expanded="false">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </button>
-
-                    <ul id="nav-links">
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="Offers.html">Offers</a></li>
-                        <li><a href="Conseils.html">Conseils</a></li>
-                        <li><a href="Apropos.html">A propos</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <!-- Mobile-only action links -->
-                        <li class="mobile-action"><a href="login.html">Se
-                                Connecter</a></li>
-                        <li class="mobile-action"><a
-                                href="SignUp.html">S'inscrire</a></li>
-                    </ul>
-                    <!--Start  theme -->
-                    <button id="theme-switch">🌙</button>
-
-                    <div class="header-btns">
-                        <button type="button">
-                            <a href="login.html">Se
-                                Connecter</a></button>
-                        <button type="button">
-                            <a
-                                href="SignUp.html">S'inscrire</a>
-                        </button>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <!-- End Header -->
-    
-    <main>
-        <center><h1>Offers</h1>
-        </center>
-    </main>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <a href="index.html" class="logo">
-                            <img src="assets/logo/logo-lightmode.png"
-                                alt="JobStar" id="logo">
-                        </a>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <strong>Contactez-nous</strong>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone-alt"></i>
-                                <div class="contact-text">
-                                    <div class="phone">+212 5 22 00 00 00</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="contact-text">
-                                    Agadir, Maroc<br>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <div class="contact-text">
-                                    contact@jobstart.ma
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Pour les Candidats</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Chercher
-                                    un Stage</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Chercher
-                                    un Emploi</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mon
-                                    Profil</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mes
-                                    Candidatures</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Alertes
-                                    Emploi</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Pour les Entreprises</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Publier
-                                    une Offre</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Espace
-                                    Entreprise</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Trouver
-                                    des Candidats</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Nos
-                                    Services</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>À Propos</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Qui
-                                    sommes-nous</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Notre
-                                    Mission</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>L'Équipe</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Témoignages</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>FAQ</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Ressources Utiles</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Conseils
-                                    CV</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Conseils
-                                    Entretien</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Guide
-                                    de Carrière</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mentions
-                                    Légales</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Confidentialité</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="footer-bottom">
-                    <p class="copyright">© 2025 JobStar by Reda Ganoutre-Youssef
-                        el Menlani . All
-                        rights reserved.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- End Footer -->
-        <script src="js/main.js"></script>
-        <script src="js/reload.js"></script>
-</body>
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 JobStar by Reda Ganoutre-Youssef el Menlani . All rights
+            reserved.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+    <script src="js/main.js"></script>
+    <script src="js/offers.js"></script>
+    <script src="js/reload.js"></script>
+    <!--AOS library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
 </html>
