@@ -17,3 +17,23 @@ window.typingWords = [
     "mission",
     "poste junior"
 ];
+window.statData=[
+    {
+        "id": 1,
+        "label":"Offres actives",
+        "value":"1250 ",
+
+    },
+     {
+        "id": 2,
+        "label":"Candidats inscrits",
+        "value":"5000 ",
+
+    },
+     {
+        "id": 3,
+        "label":"Entreprises",
+        "value":"300 ",
+
+    },
+]

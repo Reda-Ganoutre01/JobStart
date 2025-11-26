@@ -157,28 +157,42 @@
         }
 
         .stats-section {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            display: flex;
             gap: 20px;
             position: relative;
             z-index: 1;
             margin-top: 40px;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
         }
 
         .stat-item {
             text-align: center;
+            flex: 1 1 0;
+            min-width: 0;
         }
 
         .stat-number {
             font-family: 'Poppins', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            line-height: 1;
         }
+
+        /* colored stat numbers */
+        .stats-section .stat-item:nth-child(1) .stat-number { color: #1e90ff; }
+        .stats-section .stat-item:nth-child(2) .stat-number { color: #00e6bb; }
+        .stats-section .stat-item:nth-child(3) .stat-number { color: #b19cff; }
 
         .stat-label {
             font-size: 13px;
             opacity: 0.85;
+            color: var(--secondary-text);
         }
 
         /* Right Side - Form */
