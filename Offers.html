@@ -6,6 +6,7 @@
     <title>JobStart-Offers</title>
     <!-- Styling File -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/offers.css" />
     <link rel="stylesheet" href="css/scrollbar.css" />
     <!-- Site logo / favicon -->
     <link
@@ -93,9 +94,8 @@
         data-aos-duration="2000"
       >
         <aside
-          class="offers-sidebar"
+          class="offers-sidebar login-wrapper"
           aria-label="Filtres"
-          class="offers-layout container login-wrapper"
           data-aos="fade-right"
           data-aos-duration="2000"
         >
@@ -145,6 +145,10 @@
                 ><input type="radio" name="filter-date" value="30" /> < 30
                 jours</label
               >
+              <label
+                ><input type="radio" name="filter-date" value="30+" /> 30+
+                jours</label
+              >
             </fieldset>
             <div class="filter-actions">
               <button
@@ -159,9 +163,8 @@
           </form>
         </aside>
         <section
-          class="offers-results"
+          class="offers-results login-wrapper"
           aria-labelledby="offers-heading"
-          class="offers-layout container login-wrapper"
           data-aos="fade-left"
           data-aos-duration="2000"
         >
@@ -190,7 +193,256 @@
               aria-label="Chargement des offres"
             ></div>
           </div>
-          <div id="offers-list" class="offers-list" aria-live="polite"></div>
+          <div id="offers-list" class="offers-list" aria-live="polite">
+            <article
+              class="offer-row"
+              data-offer-id="1"
+              data-category="Development"
+              data-location="Casablanca, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=1"
+                aria-label="Voir détails Développeur Front-End Junior"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="Atlas Tech"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">Développeur Front-End Junior</h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Development</span>
+                  <span class="location">Casablanca, Maroc</span>
+                  <span class="posted">Il y a 7 jours</span>
+                  <span class="salary">8 000 - 12 000 MAD</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Emploi</span>
+                  <span class="badge badge-featured">Featured</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=1'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="offer-row"
+              data-offer-id="2"
+              data-category="Data"
+              data-location="Rabat, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=2"
+                aria-label="Voir détails Stagiaire Data Analyst"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="DataMaroc"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">Stagiaire Data Analyst</h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Data</span>
+                  <span class="location">Rabat, Maroc</span>
+                  <span class="posted">Il y a 9 jours</span>
+                  <span class="salary">Indemnité de stage</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Stage</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=2'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="offer-row"
+              data-offer-id="3"
+              data-category="Design"
+              data-location="Marrakech, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=3"
+                aria-label="Voir détails UX/UI Designer"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="Creativa"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">UX/UI Designer</h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Design</span>
+                  <span class="location">Marrakech, Maroc</span>
+                  <span class="posted">Il y a 12 jours</span>
+                  <span class="salary">10 000 - 15 000 MAD</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Emploi</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=3'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="offer-row"
+              data-offer-id="4"
+              data-category="Development"
+              data-location="Tanger, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=4"
+                aria-label="Voir détails Développeur Full-Stack Node.js"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="SoukOnline"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">Développeur Full-Stack Node.js</h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Development</span>
+                  <span class="location">Tanger, Maroc</span>
+                  <span class="posted">Il y a 17 jours</span>
+                  <span class="salary">12 000 - 18 000 MAD</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Emploi</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=4'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="offer-row"
+              data-offer-id="5"
+              data-category="Marketing"
+              data-location="Agadir, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=5"
+                aria-label="Voir détails Stagiaire Marketing Digital"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="Maroc Media"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">Stagiaire Marketing Digital</h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Marketing</span>
+                  <span class="location">Agadir, Maroc</span>
+                  <span class="posted">Il y a 22 jours</span>
+                  <span class="salary">Indemnité de stage</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Stage</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=5'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article
+              class="offer-row"
+              data-offer-id="6"
+              data-category="Development"
+              data-location="Remote, Maroc"
+            >
+              <a
+                class="offer-row-link"
+                href="OfferDetail.html?id=6"
+                aria-label="Voir détails Développeur Mobile Flutter (Freelance)"
+              ></a>
+              <div class="logo-wrap">
+                <img
+                  class="offer-logo"
+                  src="assets/logo/logo_jobstart_single.png"
+                  alt="AppCraft"
+                />
+              </div>
+              <div class="offer-row-main">
+                <h3 class="offer-title">
+                  Développeur Mobile Flutter (Freelance)
+                </h3>
+                <div class="offer-row-meta">
+                  <span class="cats">Development</span>
+                  <span class="location">Remote, Maroc</span>
+                  <span class="posted">Il y a 26 jours</span>
+                  <span class="salary">Selon profil</span>
+                </div>
+                <div class="offer-row-badges">
+                  <span class="badge badge-type">Freelance</span>
+                </div>
+                <div class="offer-row-actions">
+                  <button
+                    type="button"
+                    class="detail-btn"
+                    onclick="location.href='OfferDetail.html?id=6'"
+                  >
+                    Détails
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
           <nav
             id="offers-pagination"
             class="offers-pagination"
@@ -342,7 +594,7 @@
 
         <div class="footer-bottom">
           <p class="copyright">
-            © 2025 JobStar by Reda Ganoutre-Youssef el Menlani . All rights
+            © 2025 JobStar . All rights
             reserved.
           </p>
           <div class="social-links">

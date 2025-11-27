@@ -10,43 +10,19 @@
   const mapBox = $('#map-box');
   const loadingEl = $('#detail-loading');
 
-  // Real company domain mapping (subset) + logo builder (Clearbit)
-  const realCompanyDomains = {
-    'google': 'google.com',
-    'microsoft': 'microsoft.com',
-    'amazon': 'amazon.com',
-    'ibm': 'ibm.com',
-    'meta': 'meta.com',
-    'facebook': 'facebook.com',
-    'apple': 'apple.com',
-    'netflix': 'netflix.com',
-    'adobe': 'adobe.com',
-    'oracle': 'oracle.com',
-    'intel': 'intel.com',
-    'nvidia': 'nvidia.com',
-    'atlassian': 'atlassian.com',
-    'salesforce': 'salesforce.com',
-    'spotify': 'spotify.com',
-    'paypal': 'paypal.com',
-    'airbnb': 'airbnb.com',
-    'uber': 'uber.com',
-    'tesla': 'tesla.com'
-  };
-  const realDomainValues = Object.values(realCompanyDomains);
-
+  // Fallback logos for deterministic selection if JSON logo missing
+  const fallbackLogos = [
+    'assets/logo/logo_jobstart_single.png',
+    'assets/logo/logo-lightmode.png',
+    'assets/logo/logo-darkmode.png'
+  ];
   function hashString(str){
     let h = 0; for (let i=0;i<str.length;i++) h = (h*31 + str.charCodeAt(i)) >>> 0; return h;
   }
-  function pickRealDomain(company){
-    const name = (company||'').toLowerCase().replace(/[.,]/g,'');
-    const tokens = name.split(/\s+/).filter(Boolean);
-    for (const t of tokens){ if (realCompanyDomains[t]) return realCompanyDomains[t]; }
+  function deterministicFallback(company){
+    const name = (company||'').toLowerCase();
     const hash = hashString(name);
-    return realDomainValues[hash % realDomainValues.length];
-  }
-  function logoForCompany(company){
-    const domain = pickRealDomain(company);
-    return `https://logo.clearbit.com/${domain}`;
+    return fallbackLogos[hash % fallbackLogos.length];
   }
 
   function formatDate(d){
@@ -88,7 +64,7 @@
     if (o.urgent) badges.push(`<span class="badge badge-urgent">Urgent</span>`);
     if (o.featured) badges.push(`<span class="badge badge-featured">Featured</span>`);
     const meta = [o.company, o.location, o.salary, o.postedDate ? new Date(o.postedDate).toLocaleDateString() : ''].filter(Boolean);
-    const logoSrc = logoForCompany(o.company);
+    const logoSrc = o.logo || deterministicFallback(o.company);
     headerEl.innerHTML = `
       <div class="detail-header-top">
         <div class="detail-logo"><img id="detail-logo-img" src="${logoSrc}" alt="${o.company||''}"></div>
@@ -103,7 +79,7 @@
     // Fallback on logo error to any provided static logo
     const img = $('#detail-logo-img');
     if (img){
-      img.addEventListener('error', ()=>{ if (o.logo) img.src = o.logo; });
+      img.addEventListener('error', ()=>{ img.src = deterministicFallback(o.company); });
     }
     
 

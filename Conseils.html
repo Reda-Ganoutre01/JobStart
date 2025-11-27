@@ -1,223 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JobStart-Conseils</title>
-        <!-- Styling File -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/scrollbar.css">
-        <!-- Site logo / favicon -->
-        <link rel="icon" href="assets/logo/logo_jobstart_single.png"
-            type="image/png">
-        <link rel="apple-touch-icon"
-            href="assets/logo/logo_jobstart_single.png">
-        <!-- icons -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-            rel="stylesheet">
-         <!-- dark mode -->
-         <script type="text/javascript" src="js/darkmode.js" defer></script>
-    </head>
-    <body>
-        <!-- Page loader (inserted by assistant) -->
-        <div id="site-loader" aria-hidden="true">
-            <svg viewBox="25 25 50 50" class="loader-svg">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobStart-Conseils</title>
+    <!-- Styling File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/conseils.css" />
+    <link rel="stylesheet" href="css/scrollbar.css" />
+    <!-- Site logo / favicon -->
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- AOS animations -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <!-- dark mode -->
+    <script type="text/javascript" src="js/darkmode.js" defer></script>
+  </head>
+  <body>
+    <!-- Page loader (inserted by assistant) -->
+    <div id="site-loader" aria-hidden="true">
+      <svg viewBox="25 25 50 50" class="loader-svg">
+        <circle r="20" cy="50" cx="50"></circle>
+      </svg>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <!-- theme -->
+        <a href="index.html">
+          <img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo" />
+        </a>
+
+        <nav>
+          <!-- Dropdown menu button -->
+          <button
+            class="dropdown-menu"
+            aria-label="Drop down menu"
+            title="Drop down menu"
+            aria-expanded="false"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+
+          <ul id="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Offers.html">Offers</a></li>
+            <li><a href="Conseils.html">Conseils</a></li>
+            <li><a href="Apropos.html">A propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <!-- Mobile-only action links -->
+            <li class="mobile-action"><a href="login.html">Se Connecter</a></li>
+            <li class="mobile-action"><a href="SignUp.html">S'inscrire</a></li>
+          </ul>
+          <!--Start  theme -->
+          <button id="theme-switch">🌙</button>
+
+          <div class="header-btns">
+            <button type="button">
+              <a href="login.html">Se Connecter</a>
+            </button>
+            <button type="button">
+              <a href="SignUp.html">S'inscrire</a>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <main>
+      <section class="conseils-hero">
+        <div class="container">
+          <h1 data-aos="fade-up">Conseils Carrière</h1>
+          <p data-aos="fade-up" data-aos-delay="80">
+            Boostez votre candidature avec des ressources sur le CV, la lettre
+            de motivation et la préparation aux entretiens.
+          </p>
+          <div class="hero-actions" data-aos="zoom-in" data-aos-delay="140">
+            <a class="btn btn-primary" href="#articles"
+              ><i class="fa-solid fa-newspaper"></i> Articles</a
+            >
+            <a class="btn" href="#videos"
+              ><i class="fa-solid fa-video"></i> Vidéos</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="articles" class="conseils-section">
+        <div class="container">
+          <h2>Articles utiles</h2>
+          <div class="resource-grid">
+            <article class="resource-card" data-aos="fade-up">
+              <div class="rc-icon"><i class="fa-solid fa-file-lines"></i></div>
+              <h3>Rédiger un CV efficace</h3>
+              <p>
+                Structure, rubriques clés, mots‑clés ATS et erreurs à éviter
+                pour un CV percutant.
+              </p>
+              <div class="tags">
+                <span class="tag">CV</span>
+                <span class="tag">ATS</span>
+                <span class="tag">Junior/Senior</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://europa.eu/europass/fr/create-europass-cv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-arrow-up-right-from-square"></i> Voir
+                  le guide</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="resource-card"
+              data-aos="fade-up"
+              data-aos-delay="60"
+            >
+              <div class="rc-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </div>
+              <h3>Lettre de motivation convaincante</h3>
+              <p>
+                Accroche, valeur ajoutée, mise en page et adaptation à l’offre
+                pour se démarquer.
+              </p>
+              <div class="tags">
+                <span class="tag">Lettre</span>
+                <span class="tag">Storytelling</span>
+                <span class="tag">Personnalisation</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.service-public.fr/particuliers/vosdroits/F387"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-arrow-up-right-from-square"></i> Bonnes
+                  pratiques</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="resource-card"
+              data-aos="fade-up"
+              data-aos-delay="120"
+            >
+              <div class="rc-icon"><i class="fa-solid fa-comments"></i></div>
+              <h3>Réussir son entretien</h3>
+              <p>
+                Préparer ses réponses, poser les bonnes questions et gérer le
+                stress le jour J.
+              </p>
+              <div class="tags">
+                <span class="tag">Entretien</span>
+                <span class="tag">STAR</span>
+                <span class="tag">Soft skills</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=méthode+STAR+entretien"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-magnifying-glass"></i> Méthode STAR</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="resource-card"
+              data-aos="fade-up"
+              data-aos-delay="180"
+            >
+              <div class="rc-icon"><i class="fa-solid fa-id-badge"></i></div>
+              <h3>Optimiser son profil LinkedIn</h3>
+              <p>
+                Titre, résumé, réalisations et recommandations pour attirer les
+                recruteurs.
+              </p>
+              <div class="tags">
+                <span class="tag">LinkedIn</span>
+                <span class="tag">Personal branding</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=optimiser+profil+linkedin+2025"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-magnifying-glass"></i> Bonnes
+                  pratiques</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="resource-card"
+              data-aos="fade-up"
+              data-aos-delay="240"
+            >
+              <div class="rc-icon"><i class="fa-solid fa-briefcase"></i></div>
+              <h3>Portfolio & projets</h3>
+              <p>
+                Sélectionner, décrire et présenter vos projets pour prouver vos
+                compétences.
+              </p>
+              <div class="tags">
+                <span class="tag">Portfolio</span>
+                <span class="tag">Projets</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=comment+faire+un+portfolio+professionnel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-magnifying-glass"></i> Exemples</a
+                >
+              </div>
+            </article>
+
+            <article
+              class="resource-card"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="rc-icon">
+                <i class="fa-solid fa-circle-question"></i>
+              </div>
+              <h3>Questions fréquentes (FAQ)</h3>
+              <p>
+                Disponibilité, prétentions salariales, échecs… des réponses
+                claires et crédibles.
+              </p>
+              <div class="tags">
+                <span class="tag">FAQ</span>
+                <span class="tag">Salaire</span>
+                <span class="tag">Disponibilité</span>
+              </div>
+              <div class="actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=questions+entretien+d+embauche+réponses"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-solid fa-magnifying-glass"></i> S’entraîner</a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="videos" class="conseils-section">
+        <div class="container">
+          <h2>Vidéos recommandées</h2>
+          <div class="video-grid">
+            <div class="video-card" data-aos="fade-up">
+              <h3>Rédiger un CV (pas à pas)</h3>
+              <p>
+                Comprendre la structure attendue, l’impact des mots‑clés et la
+                mise en forme.
+              </p>
+              <div class="video-actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=comment+écrire+un+cv+professionnel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-brands fa-youtube"></i> Voir sur YouTube</a
+                >
+              </div>
+            </div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="80">
+              <h3>Lettre de motivation courte et efficace</h3>
+              <p>Aller à l’essentiel: accroche, valeur, adéquation au poste.</p>
+              <div class="video-actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=lettre+de+motivation+conseils"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-brands fa-youtube"></i> Voir sur YouTube</a
+                >
+              </div>
+            </div>
+            <div class="video-card" data-aos="fade-up" data-aos-delay="160">
+              <h3>Préparer un entretien (méthode STAR)</h3>
+              <p>
+                Structurer vos réponses pour illustrer vos compétences avec des
+                exemples concrets.
+              </p>
+              <div class="video-actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://www.youtube.com/results?search_query=préparation+entretien+méthode+STAR"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  ><i class="fa-brands fa-youtube"></i> Voir sur YouTube</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="conseils-cta" data-aos="fade-up">
+        <div class="container">
+          <div class="cta-box">
+            <div class="cta-text">
+              <h3>Besoin d’un avis sur votre CV ?</h3>
+              <p>Envoyez‑nous un message, nous vous répondrons rapidement.</p>
+            </div>
+            <a class="btn btn-primary" href="contact.html"
+              ><i class="fa-regular fa-paper-plane"></i> Nous écrire</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- AOS init -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (window.AOS) {
+          AOS.init({
+            duration: 650,
+            easing: "ease-out-quart",
+            once: false,
+            offset: 90,
+          });
+        }
+      });
+    </script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/logo/logo-lightmode.png"
+                alt="JobStar"
+                id="logo"
+              />
+            </a>
+            <div class="contact-info">
+              <div class="contact-item">
+                <strong>Contactez-nous</strong>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                  <div class="phone">+212 5 22 00 00 00</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-text">Agadir, Maroc<br /></div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-text">contact@jobstart.ma</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Candidats</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Emploi</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Mon Profil</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mes Candidatures</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Alertes Emploi</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Entreprises</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Publier une Offre</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Espace Entreprise</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Trouver des Candidats</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Nos Services</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>À Propos</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Qui sommes-nous</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Notre Mission</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>L'Équipe</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Témoignages</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>FAQ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Ressources Utiles</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Conseils CV</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Conseils Entretien</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Guide de Carrière</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mentions Légales</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Confidentialité</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Header -->
-        <header>
-            <div class="container">
-
-                <!-- theme -->
-                <a href="index.html">
-                    <img src="assets/logo/logo-lightmode.png" alt="JobStar" 
-                    id="logo">
-                </a>
-                
-                <nav>
-                    <!-- Dropdown menu button -->
-                    <button class="dropdown-menu" aria-label="Drop down menu"
-                        title="Drop down menu" aria-expanded="false">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </button>
-
-                    <ul id="nav-links">
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="Offers.html">Offers</a></li>
-                        <li><a href="Conseils.html">Conseils</a></li>
-                        <li><a href="Apropos.html">A propos</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <!-- Mobile-only action links -->
-                        <li class="mobile-action"><a href="login.html">Se
-                                Connecter</a></li>
-                        <li class="mobile-action"><a
-                                href="SignUp.html">S'inscrire</a></li>
-                    </ul>
-                    <!--Start  theme -->
-                    <button id="theme-switch">🌙</button>
-
-                    <div class="header-btns">
-                        <button type="button">
-                            <a href="login.html">Se
-                                Connecter</a></button>
-                        <button type="button">
-                            <a
-                                href="SignUp.html">S'inscrire</a>
-                        </button>
-                    </div>
-                </nav>
-            </div>
-        </header>
-        <!-- End Header -->
-    
-    <main>
-        <center><h1>Conseils</h1>
-        </center>
-    </main>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <a href="index.html" class="logo">
-                            <img src="assets/logo/logo-lightmode.png"
-                                alt="JobStar" id="logo">
-                        </a>
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <strong>Contactez-nous</strong>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone-alt"></i>
-                                <div class="contact-text">
-                                    <div class="phone">+212 5 22 00 00 00</div>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="contact-text">
-                                    Agadir, Maroc<br>
-                                </div>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <div class="contact-text">
-                                    contact@jobstart.ma
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Pour les Candidats</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Chercher
-                                    un Stage</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Chercher
-                                    un Emploi</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mon
-                                    Profil</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mes
-                                    Candidatures</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Alertes
-                                    Emploi</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Pour les Entreprises</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Publier
-                                    une Offre</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Espace
-                                    Entreprise</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Trouver
-                                    des Candidats</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Nos
-                                    Services</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>À Propos</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Qui
-                                    sommes-nous</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Notre
-                                    Mission</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>L'Équipe</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Témoignages</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>FAQ</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-column">
-                        <h3>Ressources Utiles</h3>
-                        <ul class="footer-links">
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Conseils
-                                    CV</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Conseils
-                                    Entretien</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Guide
-                                    de Carrière</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Mentions
-                                    Légales</a></li>
-                            <li><a href="#"><i
-                                        class="fas fa-chevron-right"></i>Confidentialité</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="footer-bottom">
-                    <p class="copyright">© 2025 JobStar by Reda Ganoutre-Youssef
-                        el Menlani . All
-                        rights reserved.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="social-link" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- End Footer -->
-        <script src="js/main.js"></script>
-        <script src="js/reload.js"></script>
-</body>
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 JobStar . All rights
+            reserved.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+    <script src="js/main.js"></script>
+    <script src="js/reload.js"></script>
+  </body>
 </html>

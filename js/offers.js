@@ -26,32 +26,6 @@
     'assets/logo/logo-darkmode.png'
   ];
 
-  // Mapping of real company name tokens (lowercased) to their domains for logo fetching
-  // Clearbit logo service: https://logo.clearbit.com/<domain>
-  // NOTE: Real company logos are trademarks; ensure usage complies with brand guidelines.
-  const realCompanyDomains = {
-    'google': 'google.com',
-    'microsoft': 'microsoft.com',
-    'amazon': 'amazon.com',
-    'ibm': 'ibm.com',
-    'meta': 'meta.com',
-    'facebook': 'facebook.com',
-    'apple': 'apple.com',
-    'netflix': 'netflix.com',
-    'adobe': 'adobe.com',
-    'oracle': 'oracle.com',
-    'intel': 'intel.com',
-    'nvidia': 'nvidia.com',
-    'atlassian': 'atlassian.com',
-    'salesforce': 'salesforce.com',
-    'spotify': 'spotify.com',
-    'paypal': 'paypal.com',
-    'airbnb': 'airbnb.com',
-    'uber': 'uber.com',
-    'tesla': 'tesla.com'
-  };
-  const realDomainValues = Object.values(realCompanyDomains);
-
   function hashString(str){
     let h = 0;
     for (let i=0;i<str.length;i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
@@ -64,28 +38,9 @@
     return fallbackLogos[hash % fallbackLogos.length];
   }
 
-  function pickRealDomain(company){
-    const name = (company||'').toLowerCase().replace(/[.,]/g,'');
-    const tokens = name.split(/\s+/).filter(Boolean);
-    for (const t of tokens){
-      if (realCompanyDomains[t]) return realCompanyDomains[t];
-    }
-    // Hash-pick a domain to provide a variety even for fictional names
-    const hash = hashString(name);
-    return realDomainValues[hash % realDomainValues.length];
-  }
-
-  function logoForCompany(company){
-    const domain = pickRealDomain(company);
-    return `https://logo.clearbit.com/${domain}`;
-  }
-
-  function assignLogos(){
-    state.offers = state.offers.map(o => ({
-      ...o,
-      logo: logoForCompany(o.company)
-    }));
-  }
+  // We now rely on the logo path provided in offers.json.
+  // If a logo value is missing or fails to load, we fall back deterministically
+  // to one of the local JobStar logo variants for visual consistency.
 
   // Ensure each offer has categories, inferred from title/tags when missing
   function enrichCategories(){
@@ -166,55 +121,75 @@
   }
 
   function render(){
-    if (!els.list) return;
-    let data = state.filtered;
-    data = sortData(data);
-    const pageData = paginate(data);
-    els.count.textContent = `${data.length}`;
+    // Compute sorted + paginated items
+    const sorted = sortData(state.filtered);
+    const pageItems = paginate(sorted);
+    // Update results count with total filtered
+    if (els.count) els.count.textContent = `${sorted.length}`;
+    // Toggle visibility of static cards in the DOM based on data-offer-id
+    if (els.list){
+      const rows = $all('.offer-row', els.list);
+      const existingById = new Map(rows.map(r => [r.getAttribute('data-offer-id'), r]));
+      const pageIds = pageItems.map(o => String(o.id));
 
-    if (pageData.length === 0) {
-      els.list.innerHTML = `<div class="no-results">Aucune offre trouvée. Essayez d'élargir vos filtres.</div>`;
-      renderPagination();
-      return;
-    }
-
-    const listHtml = pageData.map(o => {
-      const cats = (o.categories||[]).join(', ');
-      const typeLabel = o.jobType || o.type || '';
-      return `
-      <article class="offer-row">
-        <a class="offer-row-link" href="OfferDetail.html?id=${o.id}" aria-label="Voir détails ${o.title}"></a>
-        <div class="logo-wrap"><img class="offer-logo" src="${o.logo}" alt="${o.company}"></div>
-        <div class="offer-row-main">
-          <h3 class="offer-title">${o.title}</h3>
-          <div class="offer-row-meta">
-            ${cats ? `<span class="cats">${cats}</span>` : ''}
-            <span class="location">${o.location||''}</span>
-            <span class="posted">${formatDateRelative(o.postedDate)}</span>
-            ${o.salary ? `<span class="salary">${o.salary}</span>`:''}
-          </div>
-          <div class="offer-row-badges">
-            ${typeLabel?`<span class="badge badge-type">${typeLabel}</span>`:''}
-            ${o.urgent?`<span class="badge badge-urgent">Urgent</span>`:''}
-            ${o.featured?`<span class="badge badge-featured">Featured</span>`:''}
-          </div>
-          <div class="offer-row-actions">
-            <button type="button" class="detail-btn" onclick="location.href='OfferDetail.html?id=${o.id}'">Détails</button>
-          </div>
-        </div>
-      </article>`;
-    }).join('');
-
-    els.list.innerHTML = listHtml;
-    const imgs = els.list.querySelectorAll('.offer-logo');
-    imgs.forEach(img => {
-      img.addEventListener('error', () => {
-        if (!img.dataset.fallback){
-          img.dataset.fallback = '1';
-          img.src = deterministicFallback(img.alt);
+      // Hide rows not in current page and sync logos for visible static rows
+      rows.forEach(row => {
+        const id = row.getAttribute('data-offer-id');
+        const shouldShow = id && pageIds.includes(id);
+        row.style.display = shouldShow ? '' : 'none';
+        if (shouldShow && id){
+          const offer = pageItems.find(o => String(o.id) === String(id));
+          if (offer){
+            const imgEl = row.querySelector('.logo-wrap img');
+            if (imgEl){
+              const desired = offer.logo || deterministicFallback(offer.company);
+              if (imgEl.src !== desired) imgEl.src = desired;
+              imgEl.alt = offer.company || 'Entreprise';
+              // Fallback on error to local deterministic logo
+              imgEl.onerror = function(){ this.onerror = null; this.src = deterministicFallback(offer.company); };
+            }
+          }
         }
       });
-    });
+
+      // Append missing rows for items that don't have static HTML yet
+      pageItems.forEach(o => {
+        const idStr = String(o.id);
+        if (!existingById.has(idStr)){
+          const article = document.createElement('article');
+          article.className = 'offer-row';
+          article.setAttribute('data-offer-id', idStr);
+          // minimal row content mirroring static structure
+          article.innerHTML = `
+            <a class="offer-row-link" href="OfferDetail.html?id=${idStr}" aria-label="Voir les détails"></a>
+            <div class="logo-wrap"><img src="${o.logo || ''}" alt="${o.company || 'Entreprise'}" /></div>
+            <div class="offer-row-main">
+              <h3 class="offer-title">${o.title || ''}</h3>
+              <div class="offer-row-meta">
+                <span>${o.company || ''}</span>
+                <span>• ${o.location || ''}</span>
+                <span>• ${o.categories && o.categories[0] ? o.categories[0] : (o.type||'')}</span>
+                <span>• ${formatDateRelative(o.postedDate)}</span>
+              </div>
+              <div class="offer-row-badges">
+                ${o.type ? `<span class="badge badge-type">${o.type}</span>` : ''}
+                ${o.featured ? `<span class="badge badge-featured">FEATURED</span>` : ''}
+                ${o.urgent ? `<span class="badge badge-urgent">URGENT</span>` : ''}
+              </div>
+            </div>
+            <div class="offer-row-actions">
+              <button class="detail-btn" aria-label="Détails">Détails</button>
+            </div>`;
+          els.list.appendChild(article);
+          existingById.set(idStr, article);
+        }
+      });
+
+      // If no rows are visible, show optional .no-results element
+      const anyVisible = $all('.offer-row', els.list).some(r => r.style.display !== 'none');
+      const noRes = $('.no-results', els.list);
+      if (noRes){ noRes.style.display = anyVisible ? 'none' : ''; }
+    }
     renderPagination();
   }
 
@@ -282,12 +257,21 @@
         const catList = (o.categories||[]).map(c=>String(c).toLowerCase());
         if (!catList.includes(cat)) return false;
       }
-      // Date filter
+      // Date filter: supports "7", "30" for <= N days and "7+", "30+" for >= N days
       if(dateRange){
-        const daysLimit = parseInt(dateRange,10);
         const posted = new Date(o.postedDate).getTime();
         const diffDays = Math.floor((now - posted)/(1000*60*60*24));
-        if(diffDays > daysLimit) return false;
+        const plusMode = /\+$/.test(dateRange);
+        const daysLimit = parseInt(dateRange,10);
+        if (!Number.isNaN(daysLimit)){
+          if (plusMode){
+            // show items older than or equal to N days
+            if (diffDays < daysLimit) return false;
+          } else {
+            // show items newer than or equal to N days
+            if (diffDays > daysLimit) return false;
+          }
+        }
       }
       if (!q) return true;
       const s = computeScore(o);
@@ -301,21 +285,16 @@
   async function loadOffers(){
     try{
       setLoading(true);
-      if(els.list) els.list.innerHTML = '';
       const res = await fetch('data/offers.json', {cache:'no-store'});
       if (!res.ok) throw new Error('HTTP '+res.status);
       const json = await res.json();
       state.offers = Array.isArray(json) ? json : [];
       enrichCategories();
-      // Override any existing logo values with deterministic random logos
-      assignLogos();
+      // Logos are taken directly from JSON; no external override.
       state.filtered = [...state.offers];
       render();
     }catch(err){
       console.error('Failed to load offers:', err);
-      if (els.list){
-        els.list.innerHTML = `<div class="no-results">Impossible de charger les offres. Réessayez plus tard.</div>`;
-      }
     } finally { setLoading(false); }
   }
 

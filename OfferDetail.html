@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Détail de l'offre</title>
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/offer_detail.css" />
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
     <link
       rel="icon"
@@ -12,7 +13,12 @@
       type="image/png"
     />
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-    <script>document.addEventListener('DOMContentLoaded',()=>{ if (window.AOS) AOS.init({ once:true, duration:600, easing:'ease-out'}); });</script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.AOS)
+          AOS.init({ once: true, duration: 600, easing: "ease-out" });
+      });
+    </script>
     <script src="js/darkmode.js" defer></script>
     <script src="js/auth.js" defer></script>
     <script src="js/offer_detail.js" defer></script>
@@ -48,26 +54,50 @@
 
     <main class="container offer-detail-container" aria-live="polite">
       <div id="detail-loading" class="detail-loading" aria-hidden="true">
-        <div class="spinner" role="status" aria-label="Chargement de l'offre"></div>
+        <div
+          class="spinner"
+          role="status"
+          aria-label="Chargement de l'offre"
+        ></div>
       </div>
       <div class="detail-header" id="detail-header" data-aos="fade-down">
         <!-- Filled by JS -->
       </div>
       <div class="detail-two-column">
-        <div class="detail-section" id="detail-description" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="detail-section"
+          id="detail-description"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           <h2>Description du poste</h2>
           <p id="desc-text"></p>
         </div>
-        <div class="detail-section" id="detail-resp" data-aos="fade-up" data-aos-delay="200">
+        <div
+          class="detail-section"
+          id="detail-resp"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           <h2>Responsabilités clés</h2>
           <ul class="bullet-list" id="resp-list"></ul>
         </div>
       </div>
-      <div class="detail-section" id="detail-skills" data-aos="fade-up" data-aos-delay="300">
+      <div
+        class="detail-section"
+        id="detail-skills"
+        data-aos="fade-up"
+        data-aos-delay="300"
+      >
         <h2>Compétences & Expérience</h2>
         <ul class="bullet-list" id="skills-list"></ul>
       </div>
-      <div class="detail-section" id="detail-overview" data-aos="fade-up" data-aos-delay="400">
+      <div
+        class="detail-section"
+        id="detail-overview"
+        data-aos="fade-up"
+        data-aos-delay="400"
+      >
         <h2>Aperçu</h2>
         <div class="overview-grid" id="overview-grid"></div>
         <div class="map-box" id="map-box"></div>
