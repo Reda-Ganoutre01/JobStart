@@ -247,6 +247,32 @@
     height: 28px;
 }
 
+/* Semantic modifiers for step icon colors (moved from inline styles) */
+.step-icon--primary {
+    background: rgba(30, 144, 255, 0.1);
+}
+.step-icon--primary svg {
+    color: var(--primary-color);
+}
+.step-icon--success {
+    background: rgba(0, 230, 187, 0.08);
+}
+.step-icon--success svg {
+    color: var(--success-color);
+}
+.step-icon--accent {
+    background: rgba(102, 179, 255, 0.08);
+}
+.step-icon--accent svg {
+    color: var(--secondary-color);
+}
+
+/* Ensure SVG icons inherit the `color` for stroke-based icons */
+.step-icon svg {
+    stroke: currentColor;
+    fill: none;
+}
+
 .step-card:hover .step-icon {
     transform: translateY(-4px) scale(1.06);
     box-shadow: 0 8px 20px rgba(30, 40, 60, 0.06);

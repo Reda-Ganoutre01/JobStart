@@ -6,7 +6,8 @@
         <title>JobStart-contact</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="css/scrollbar.css">
+        <link rel="stylesheet" href="css/form-candidat.css">
         <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
@@ -23,7 +24,7 @@
          <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <body>
-        <!-- Page loader -->
+      <!-- Page loader -->
         <div id="site-loader" aria-hidden="false">
             <div class="loader-container">
                 <div class="logo-wrapper">
@@ -41,7 +42,6 @@
                 <p class="loading-text">Chargement de vos opportunités...</p>
             </div>
         </div>
-
          <!-- Header -->
         <header>
             <div class="container">
@@ -91,53 +91,33 @@
         <!-- End Header -->
     
     <main>
-        <div class="container-contact">
-        <!-- Left Section -->
-        <div class="left-section">
-            <h1>Contactez-nous</h1>
-        </div>
-
-        <!-- Right Section -->
-        <div class="right-section">
-            <form id="contactForm">
-                <!-- Vos informations -->
-                <div class="section-title">Vos informations</div>
-                
-                <div class="profile-choice">
-                    <label>Choisissez votre profil <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="candidat" name="profile" value="candidat" required>
-                            <label for="candidat">Candidat</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="recruteur" name="profile" value="recruteur">
-                            <label for="recruteur">Recruteur</label>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="container-form-candidat">
+            <div class="header">
+                Vos informations
+            </div>
+            
+            <form class="form-candidat" id="registrationForm">
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Civilité <span class="required">*</span></label>
                         <select required>
-                            <option value="">Civilité *</option>
+                            <option value="">Sélectionner</option>
                             <option value="M">M.</option>
                             <option value="Mme">Mme</option>
-                            <option value="Mlle">Mlle</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" placeholder="Prénom *" required>
+                        <label>Prénom <span class="required">*</span></label>
+                        <input type="text" placeholder="Prénom" required>
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" placeholder="Nom *" required>
+                        <label>Nom <span class="required">*</span></label>
+                        <input type="text" placeholder="Nom" required>
                     </div>
-                </div>
-
-                <div class="form-row two-cols">
                     <div class="form-group">
+                        <label>Tel  <span class="required">*</span></label>
                         <div class="phone-group">
                             <select class="country-code-select" name="country_code" required>
                                 <option value="">Select Country</option>
@@ -396,28 +376,52 @@
                             <input type="tel" class="phone-input" placeholder="650-123456" required>
                         </div>
                     </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Votre email <span class="required">*</span></label>
+                        <input type="email" placeholder="Votre email" required>
+                    </div>
                     
                     <div class="form-group">
-                        <input type="email" placeholder="Email *" required>
+                        <label>Confirmez votre email <span class="required">*</span></label>
+                        <input type="email" placeholder="Confirmez votre email" required>
                     </div>
                 </div>
 
-                <!-- Votre demande -->
-                <div class="section-title" style="margin-top: 40px;">Votre demande</div>
-                
-                <div class="form-group full-width">
-                    <textarea placeholder="Message *" required></textarea>
+                <div class="form-row">
+                    <div class="form-group password-group">
+                        <label>Choisissez un mot de passe <span class="required">*</span></label>
+                        <input type="password" id="password" placeholder="Mot de passe" required>
+                        <i class="fa-solid fa-lock toggle-password" id="togglePassword" onclick="togglePassword()"></i>
+                    </div>
+                    
+                    <div class="form-group password-group">
+                        <label>Confirmez votre mot de passe <span class="required">*</span></label>
+                        <input type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe" required>
+                        <i class="fa-solid fa-lock toggle-password" id="toggleConfirmPassword" onclick="toggleConfirmPassword()"></i>
+                    </div>
                 </div>
 
+                <div class="cv-upload" id="cvUpload">
+                    <input type="file" id="cvFile" class="file-input" accept=".pdf,.doc,.docx" onchange="handleFileSelect(event)">
+                    <div class="cv-upload-icon">📄</div>
+                    <div>
+                        <strong>Déposez votre CV ici</strong> ou cliquez pour sélectionner
+                    </div>
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">
+                        Formats acceptés: PDF, DOC, DOCX (Max: 5MB)
+                    </div>
+                    <div class="cv-filename" id="cvFilename"></div>
+                </div>
+                
                 <div class="note">
                     ( <span class="required">*</span> ) champ obligatoire
                 </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="submit-btn" id="submitBtn">Envoyer votre message</button>
+                <button type="submit" class="submit-btn">Je m'inscris</button>
             </form>
         </div>
-    </div>
     </main>
         <!-- Footer -->
         <footer class="footer">
@@ -555,7 +559,7 @@
         </footer>
         <!-- End Footer -->
         <script src="js/main.js"></script>
+        <script src="js/condidat.js"></script>
         <script src="js/loading.js"></script>
-        <script src="js/contact.js"></script>
 </body>
 </html>

@@ -6,7 +6,8 @@
         <title>JobStart-contact</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/contact.css">
+        <link rel="stylesheet" href="css/scrollbar.css">
+        <link rel="stylesheet" href="css/form-recruteur.css">
         <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
@@ -23,7 +24,7 @@
          <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <body>
-        <!-- Page loader -->
+       <!-- Page loader -->
         <div id="site-loader" aria-hidden="false">
             <div class="loader-container">
                 <div class="logo-wrapper">
@@ -91,36 +92,111 @@
         <!-- End Header -->
     
     <main>
-        <div class="container-contact">
-        <!-- Left Section -->
-        <div class="left-section">
-            <h1>Contactez-nous</h1>
-        </div>
-
-        <!-- Right Section -->
-        <div class="right-section">
-            <form id="contactForm">
-                <!-- Vos informations -->
-                <div class="section-title">Vos informations</div>
+            <div class="container-form">
+        <!-- Section 1: Votre entreprise -->
+        <div class="section-header">Votre entreprise</div>
+        <form id="form-recruteur">
+            <div class="form-section">
                 
-                <div class="profile-choice">
-                    <label>Choisissez votre profil <span class="required">*</span></label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="candidat" name="profile" value="candidat" required>
-                            <label for="candidat">Candidat</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="recruteur" name="profile" value="recruteur">
-                            <label for="recruteur">Recruteur</label>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nom de l'entreprise <span class="required">*</span></label>
+                        <input type="text" placeholder="Nom de l'entreprise" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Adresse <span class="required">*</span></label>
+                        <input type="text" placeholder="Adresse" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Secteur d'activité <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Sélectionner</option>
+                            <option value="tech">Technologies</option>
+                            <option value="finance">Finance</option>
+                            <option value="sante">Santé</option>
+                            <option value="education">Éducation</option>
+                            <option value="commerce">Commerce</option>
+                            <option value="industrie">Industrie</option>
+                            <option value="autres">Autres</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Description de l'entreprise <span class="required">*</span></label>
+                    <textarea id="companyDescription" placeholder="Décrivez votre entreprise..." required></textarea>
+                </div>
+                <br>
+                <div class="form-row triple">
+                    <div class="form-group">
+                        <label>Code postal <span class="required">*</span></label>
+                        <input type="text" placeholder="Code postal" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Ville <span class="required">*</span></label>
+                        <input type="text" placeholder="Ville" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Pays <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Sélectionner</option>
+                            <option value="MA" selected>Maroc</option>
+                            <option value="FR">France</option>
+                            <option value="BE">Belgique</option>
+                            <option value="CH">Suisse</option>
+                            <option value="CA">Canada</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
+                        <label>Nombre d'employés <span class="required">*</span></label>
                         <select required>
-                            <option value="">Civilité *</option>
+                            <option value="">Sélectionner</option>
+                            <option value="1-10">1-10</option>
+                            <option value="11-50">11-50</option>
+                            <option value="51-200">51-200</option>
+                            <option value="201-500">201-500</option>
+                            <option value="500+">500+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Site Internet de l'entreprise</label>
+                        <input type="url" placeholder="https://www.exemple.com">
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Logo</label>
+                    <div class="logo-upload" id="logoUpload">
+                        <input type="file" id="logoFile" class="file-input" accept=".png,.gif,.jpg,.jpeg">
+                        <div class="logo-upload-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div>
+                            <strong>Cliquez pour charger l'image</strong>
+                        </div>
+                        <div class="logo-info">
+                            Extensions autorisées: png, gif, jpg, jpeg
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Vos coordonnées de contact -->
+            <div class="section-header">Vos coordonnées de contact</div>
+            <div class="form-section">
+                <div class="form-row triple">
+                    <div class="form-group">
+                        <label>Civilité <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Sélectionner</option>
                             <option value="M">M.</option>
                             <option value="Mme">Mme</option>
                             <option value="Mlle">Mlle</option>
@@ -128,17 +204,37 @@
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" placeholder="Prénom *" required>
+                        <label>Prénom <span class="required">*</span></label>
+                        <input type="text" placeholder="Prénom" required>
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" placeholder="Nom *" required>
+                        <label>Nom <span class="required">*</span></label>
+                        <input type="text" placeholder="Nom" required>
                     </div>
                 </div>
 
-                <div class="form-row two-cols">
+                <div class="form-row">
                     <div class="form-group">
-                        <div class="phone-group">
+                        <label>Quelle est votre fonction ? <span class="required">*</span></label>
+                        <select required>
+                            <option value="">Sélectionner</option>
+                            <option value="directeur">Directeur Général</option>
+                            <option value="rh">Responsable RH</option>
+                            <option value="recruteur">Recruteur</option>
+                            <option value="manager">Manager</option>
+                            <option value="autres">Autres</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Page LinkedIn</label>
+                        <input type="url" placeholder="https://linkedin.com/in/...">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="phone-group">
                             <select class="country-code-select" name="country_code" required>
                                 <option value="">Select Country</option>
                                 <option value="93">Afghanistan +93</option>
@@ -395,28 +491,52 @@
                             </select>
                             <input type="tel" class="phone-input" placeholder="650-123456" required>
                         </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Vos identifiants -->
+            <div class="section-header">Vos identifiants</div>
+            <div class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Votre email <span class="required">*</span></label>
+                        <input type="email" placeholder="Votre email" required>
                     </div>
                     
                     <div class="form-group">
-                        <input type="email" placeholder="Email *" required>
+                        <label>Confirmez votre email <span class="required">*</span></label>
+                        <input type="email" placeholder="Confirmez votre email" required>
                     </div>
                 </div>
 
-                <!-- Votre demande -->
-                <div class="section-title" style="margin-top: 40px;">Votre demande</div>
-                
-                <div class="form-group full-width">
-                    <textarea placeholder="Message *" required></textarea>
+                <div class="form-row">
+                    <div class="form-group password-group">
+                        <label>Choisissez un mot de passe <span class="required">*</span></label>
+                        <input type="password" id="password" placeholder="Mot de passe" required>
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                    
+                    <div class="form-group password-group">
+                        <label>Confirmez votre mot de passe <span class="required">*</span></label>
+                        <input type="password" id="confirmPassword" placeholder="Confirmez votre mot de passe" required>
+                        <i class="fas fa-eye toggle-password" id="toggleConfirmPassword"></i>
+                    </div>
                 </div>
 
                 <div class="note">
                     ( <span class="required">*</span> ) champ obligatoire
                 </div>
+            </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="submit-btn" id="submitBtn">Envoyer votre message</button>
-            </form>
-        </div>
+            <!-- Terms and Submit -->
+            <div class="terms-section">
+                <div class="terms-text">
+                    En cliquant sur le bouton « Je m'inscris » vous acceptez les 
+                    <a href="#">Conditions Générales de Vente et d'Utilisation</a>
+                </div>
+                <button type="submit" class="submit-btn">Je m'inscris</button>
+            </div>
+        </form>
     </div>
     </main>
         <!-- Footer -->
@@ -556,6 +676,6 @@
         <!-- End Footer -->
         <script src="js/main.js"></script>
         <script src="js/loading.js"></script>
-        <script src="js/contact.js"></script>
+        <script src="js/recruteur.js"></script>
 </body>
 </html>

@@ -42,21 +42,46 @@
   // If a logo value is missing or fails to load, we fall back deterministically
   // to one of the local JobStar logo variants for visual consistency.
 
-  // Ensure each offer has categories, inferred from title/tags when missing
+  // Ensure each offer has accurate categories: infer from title/tags, fallback to normalized provided ones
   function enrichCategories(){
+    const allowed = new Set(['development','design','marketing','data','finance','rh']);
+    const normalizeProvided = (cats)=>{
+      return (cats||[])
+        .map(c=>String(c).trim().toLowerCase())
+        .map(c=>{
+          if (/(dev|software|programmeur|ingénieur)/.test(c)) return 'development';
+          if (/(ux|ui|design|graph|maquette|prototype)/.test(c)) return 'design';
+          if (/(marketing|seo|content|communication)/.test(c)) return 'marketing';
+          if (/(data|bi|etl|ml|ai|analytics)/.test(c)) return 'data';
+          if (/(finance|compta|account)/.test(c)) return 'finance';
+          if (/(rh|ressources humaines|talent|recrut)/.test(c)) return 'rh';
+          return c;
+        })
+        .filter(c=>allowed.has(c))
+        .map(c=> c.charAt(0).toUpperCase()+c.slice(1));
+    };
     const infer = (o)=>{
-      const cats = new Set((o.categories||[]).map(c=>String(c)));
+      const inferred = new Set();
       const text = `${o.title||''} ${(o.tags||[]).join(' ')}`.toLowerCase();
-      const addIf = (cond,cat)=>{ if(cond) cats.add(cat); };
-      addIf(/(react|vue|angular|node|java|php|python|flutter|api|wordpress|full-?stack|backend|front-?end|mobile|ios|android)/.test(text),'Development');
-      addIf(/(ux|ui|design|figma|sketch|photoshop|illustrator|graphiste|branding|maquette|prototype)/.test(text),'Design');
+      const addIf = (cond,cat)=>{ if(cond) inferred.add(cat); };
+      // Development: include devops/cloud tools explicitly
+      addIf(/(react|vue|angular|node|java|php|python|flutter|api|wordpress|full-?stack|backend|front-?end|mobile|ios|android|devops|docker|kubernetes|k8s|terraform|ansible|cicd|ci\/?cd|linux|aws|azure|gcp)/.test(text),'Development');
+      // Design: avoid generic 'design' to reduce false positives; focus on UX/UI/graphic terms
+      addIf(/(\bux\b|\bui\b|designer\b|figma\b|sketch\b|photoshop\b|illustrator\b|graphiste\b|branding\b|maquette\b|prototype\b|wireframe\b)/.test(text),'Design');
       addIf(/(seo|marketing|content|communication|réseau[x]? sociaux|social)/.test(text),'Marketing');
-      addIf(/(data|sql|python|pandas|machine learning|ml|etl|airflow|bi|powerbi|tableau)/.test(text),'Data');
+      // Data: avoid generic 'data' and generic 'sql/python'; require strong analytics/ML/BI signals
+      addIf(/(\bdata\s*(analyst|scientist|engineer)\b|\betl\b|\bairflow\b|\bdbt\b|\bbi\b|power\s*bi\b|\btableau\b|\blook(er)?\b|\bpandas\b|\bnumpy\b|scikit|sklearn|machine\s*learning|\bml\b|\bspark\b|\bhadoop\b)/.test(text),'Data');
       addIf(/(compta|finance|financier|account)/.test(text),'Finance');
       addIf(/(rh|ressources humaines|recruit|recrut)/.test(text),'RH');
-      return Array.from(cats);
+      return Array.from(inferred);
     };
-    state.offers = state.offers.map(o => ({...o, categories: infer(o)}));
+    state.offers = state.offers.map(o => {
+      const inferred = infer(o);
+      const provided = normalizeProvided(o.categories);
+      // If we inferred any, prefer inferred; else use normalized provided
+      const finalCats = inferred.length ? inferred : provided;
+      return { ...o, categories: finalCats };
+    });
   }
 
   function formatDateRelative(iso){
@@ -69,6 +94,8 @@
       return `Il y a ${days} jours`;
     } catch { return ''; }
   }
+
+  // Static DOM offers removed: data now comes exclusively from JSON
 
   function setLoading(on){
     if(!els.loading) return;
@@ -121,74 +148,51 @@
   }
 
   function render(){
-    // Compute sorted + paginated items
     const sorted = sortData(state.filtered);
     const pageItems = paginate(sorted);
-    // Update results count with total filtered
     if (els.count) els.count.textContent = `${sorted.length}`;
-    // Toggle visibility of static cards in the DOM based on data-offer-id
     if (els.list){
-      const rows = $all('.offer-row', els.list);
-      const existingById = new Map(rows.map(r => [r.getAttribute('data-offer-id'), r]));
-      const pageIds = pageItems.map(o => String(o.id));
-
-      // Hide rows not in current page and sync logos for visible static rows
-      rows.forEach(row => {
-        const id = row.getAttribute('data-offer-id');
-        const shouldShow = id && pageIds.includes(id);
-        row.style.display = shouldShow ? '' : 'none';
-        if (shouldShow && id){
-          const offer = pageItems.find(o => String(o.id) === String(id));
-          if (offer){
-            const imgEl = row.querySelector('.logo-wrap img');
-            if (imgEl){
-              const desired = offer.logo || deterministicFallback(offer.company);
-              if (imgEl.src !== desired) imgEl.src = desired;
-              imgEl.alt = offer.company || 'Entreprise';
-              // Fallback on error to local deterministic logo
-              imgEl.onerror = function(){ this.onerror = null; this.src = deterministicFallback(offer.company); };
-            }
-          }
-        }
-      });
-
-      // Append missing rows for items that don't have static HTML yet
-      pageItems.forEach(o => {
-        const idStr = String(o.id);
-        if (!existingById.has(idStr)){
+      els.list.innerHTML = '';
+      if (!pageItems.length){
+        const empty = document.createElement('div');
+        empty.className = 'no-results';
+        empty.textContent = 'Aucune offre trouvée.';
+        els.list.appendChild(empty);
+      } else {
+        const frag = document.createDocumentFragment();
+        pageItems.forEach(o => {
+          const idStr = String(o.id);
           const article = document.createElement('article');
           article.className = 'offer-row';
           article.setAttribute('data-offer-id', idStr);
-          // minimal row content mirroring static structure
+          const logoSrc = o.logo || deterministicFallback(o.company);
+          const cats = (o.categories && o.categories.length ? o.categories[0] : (o.type||''));
+          const salary = o.salary ? `<span class="salary">${o.salary}</span>` : '';
           article.innerHTML = `
-            <a class="offer-row-link" href="OfferDetail.html?id=${idStr}" aria-label="Voir les détails"></a>
-            <div class="logo-wrap"><img src="${o.logo || ''}" alt="${o.company || 'Entreprise'}" /></div>
+            <a class="offer-row-link" href="OfferDetail.html?id=${idStr}" aria-label="Voir détails ${o.title||''}"></a>
+            <div class="logo-wrap"><img src="${logoSrc}" alt="${o.company||'Entreprise'}" onerror="this.onerror=null;this.src='${deterministicFallback(o.company)}'" /></div>
             <div class="offer-row-main">
               <h3 class="offer-title">${o.title || ''}</h3>
               <div class="offer-row-meta">
-                <span>${o.company || ''}</span>
-                <span>• ${o.location || ''}</span>
-                <span>• ${o.categories && o.categories[0] ? o.categories[0] : (o.type||'')}</span>
-                <span>• ${formatDateRelative(o.postedDate)}</span>
+                ${o.company ? `<span class="company">${o.company}</span>` : ''}
+                ${o.location ? `<span class="location">${o.location}</span>` : ''}
+                ${cats ? `<span class="cats">${cats}</span>` : ''}
+                <span class="posted">${formatDateRelative(o.postedDate)}</span>
+                ${salary}
               </div>
               <div class="offer-row-badges">
                 ${o.type ? `<span class="badge badge-type">${o.type}</span>` : ''}
-                ${o.featured ? `<span class="badge badge-featured">FEATURED</span>` : ''}
-                ${o.urgent ? `<span class="badge badge-urgent">URGENT</span>` : ''}
+                ${o.featured ? `<span class="badge badge-featured">Featured</span>` : ''}
+                ${o.urgent ? `<span class="badge badge-urgent">Urgent</span>` : ''}
               </div>
             </div>
             <div class="offer-row-actions">
-              <button class="detail-btn" aria-label="Détails">Détails</button>
+              <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${idStr}'">Détails</button>
             </div>`;
-          els.list.appendChild(article);
-          existingById.set(idStr, article);
-        }
-      });
-
-      // If no rows are visible, show optional .no-results element
-      const anyVisible = $all('.offer-row', els.list).some(r => r.style.display !== 'none');
-      const noRes = $('.no-results', els.list);
-      if (noRes){ noRes.style.display = anyVisible ? 'none' : ''; }
+          frag.appendChild(article);
+        });
+        els.list.appendChild(frag);
+      }
     }
     renderPagination();
   }
@@ -290,7 +294,6 @@
       const json = await res.json();
       state.offers = Array.isArray(json) ? json : [];
       enrichCategories();
-      // Logos are taken directly from JSON; no external override.
       state.filtered = [...state.offers];
       render();
     }catch(err){

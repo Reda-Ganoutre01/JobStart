@@ -6,27 +6,12 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-20",
-    "expirationDate": "2026-03-31",
     "salary": "8 000 - 12 000 MAD",
     "tags": ["React", "CSS", "HTML", "JavaScript"],
     "description": "Rejoignez notre équipe web pour développer des interfaces modernes et performantes.",
     "logo": "assets/logo/logo_jobstart_single.png",
     "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 1,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Junior",
-    "gender": "Both",
-    "responsibilities": [
-      "Développer des fonctionnalités front-end réactives",
-      "Participer aux revues de code",
-      "Écrire des tests unitaires et d'intégration",
-      "Collaborer avec l'équipe design et backend",
-      "Maintenir la documentation technique"
-    ],
-    "skills": ["React", "JavaScript", "CSS", "HTML", "Git"]
+    "jobType": "Full Time"
   },
   {
     "id": 2,
@@ -35,27 +20,12 @@
     "location": "Rabat, Maroc",
     "type": "Stage",
     "postedDate": "2025-11-18",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Python", "SQL", "PowerBI"],
     "description": "Analyse de données et création de tableaux de bord décisionnels.",
     "logo": "assets/logo/logo_jobstart_single.png",
     "categories": ["Data"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Nettoyer et préparer les données",
-      "Construire des dashboards PowerBI",
-      "Analyser des tendances et KPIs",
-      "Documenter les sources et modèles",
-      "Présenter les résultats aux équipes"
-    ],
-    "skills": ["Python", "SQL", "PowerBI", "Statistiques", "Communication"]
+    "jobType": "Internship"
   },
   {
     "id": 3,
@@ -64,27 +34,10 @@
     "location": "Marrakech, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-15",
-    "expirationDate": "2026-03-31",
     "salary": "10 000 - 15 000 MAD",
     "tags": ["Figma", "Prototypage", "Design System"],
     "description": "Concevoir des parcours utilisateurs et des interfaces intuitives.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Design"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 2,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Concevoir des maquettes et prototypes",
-      "Maintenir le design system",
-      "Réaliser des tests utilisateurs",
-      "Collaborer avec développeurs et PO",
-      "Assurer la cohérence UX/UI"
-    ],
-    "skills": ["Figma", "UX", "UI", "Design System", "Accessibilité"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 4,
@@ -93,27 +46,10 @@
     "location": "Tanger, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-10",
-    "expirationDate": "2026-03-31",
     "salary": "12 000 - 18 000 MAD",
     "tags": ["Node.js", "Express", "MongoDB", "Docker"],
     "description": "Développement d'APIs et d'applications e-commerce scalables.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Concevoir et développer des APIs REST",
-      "Optimiser performance et sécurité",
-      "Écrire des tests et CI/CD",
-      "Assurer intégration front/back",
-      "Maintenir bases de données"
-    ],
-    "skills": ["Node.js", "Express", "MongoDB", "Docker", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 5,
@@ -122,27 +58,10 @@
     "location": "Agadir, Maroc",
     "type": "Stage",
     "postedDate": "2025-11-05",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["SEO", "Réseaux sociaux", "Canva"],
     "description": "Création de contenu et optimisation SEO/SMO.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Marketing"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Créer et planifier du contenu",
-      "Optimiser SEO/SMO",
-      "Gérer les réseaux sociaux",
-      "Mesurer la performance",
-      "Participer aux campagnes"
-    ],
-    "skills": ["SEO", "Social Media", "Canva", "Analytics", "Rédaction"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 6,
@@ -151,27 +70,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-11-01",
-    "expirationDate": "2026-03-15",
     "salary": "Selon profil",
     "tags": ["Flutter", "Dart", "REST"],
     "description": "Développement d'applications mobiles cross-platform.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Développer des apps Flutter",
-      "Intégrer APIs REST",
-      "Assurer performance et UX",
-      "Livrer selon les briefs",
-      "Corriger bugs et publier"
-    ],
-    "skills": ["Flutter", "Dart", "REST", "CI/CD", "UX Mobile"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 7,
@@ -180,27 +82,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-19",
-    "expirationDate": "2026-03-31",
     "salary": "15 000 - 22 000 MAD",
     "tags": ["CI/CD", "Docker", "Kubernetes", "Linux"],
     "description": "Automatisation des pipelines et gestion des environnements cloud.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Maintenir pipelines CI/CD",
-      "Gérer clusters Kubernetes",
-      "Industrialiser déploiements",
-      "Surveiller disponibilité",
-      "Améliorer sécurité et coûts"
-    ],
-    "skills": ["Docker", "Kubernetes", "CI/CD", "Linux", "Cloud"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 8,
@@ -209,27 +94,10 @@
     "location": "Rabat, Maroc",
     "type": "Stage",
     "postedDate": "2025-11-17",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Excel", "Reporting", "Analyse"],
     "description": "Participation aux clôtures et à l'analyse financière.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Data"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Collecter et vérifier les données",
-      "Préparer des rapports",
-      "Analyser des écarts",
-      "Classer des documents",
-      "Soutenir l'équipe finance"
-    ],
-    "skills": ["Excel", "Reporting", "Analyse", "Organisation", "Communication"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 9,
@@ -238,27 +106,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-14",
-    "expirationDate": "2026-03-31",
     "salary": "20 000 - 28 000 MAD",
     "tags": ["Gestion", "Agile", "Scrum"],
     "description": "Pilotage de projets digitaux multi-équipes.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 4,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Définir périmètre et planning",
-      "Coordonner les équipes",
-      "Suivre risques et budget",
-      "Animer les cérémonies Agile",
-      "Communiquer aux parties prenantes"
-    ],
-    "skills": ["Gestion de projet", "Agile/Scrum", "Communication", "Organisation", "Reporting"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 10,
@@ -267,27 +118,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-11-12",
-    "expirationDate": "2026-03-15",
     "salary": "Mission - Selon profil",
     "tags": ["Illustrator", "Branding", "Affiches"],
     "description": "Conception de visuels marketing et identité de marque.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Design"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Concevoir des visuels adaptés aux supports",
-      "Respecter chartes et briefs",
-      "Livrer des fichiers prêts à l'impression",
-      "Collaboration avec marketing",
-      "Iterer selon feedback"
-    ],
-    "skills": ["Illustrator", "Branding", "Composition", "Typographie", "Communication"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 11,
@@ -296,27 +130,10 @@
     "location": "Fès, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-11",
-    "expirationDate": "2026-03-31",
     "salary": "12 000 - 18 000 MAD",
     "tags": ["Selenium", "Cypress", "API", "Tests"],
     "description": "Mise en place de suites de tests automatisés.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Écrire et maintenir des tests UI/API",
-      "Intégrer tests dans CI/CD",
-      "Analyser résultats et tickets",
-      "Automatiser scénarios critiques",
-      "Améliorer qualité logicielle"
-    ],
-    "skills": ["Selenium", "Cypress", "API Testing", "CI/CD", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 12,
@@ -325,27 +142,10 @@
     "location": "Casablanca, Maroc",
     "type": "Stage",
     "postedDate": "2025-11-09",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Rédaction", "Réseaux sociaux", "Presse"],
     "description": "Support communication interne et externe.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Marketing"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Rédiger et relire des contenus",
-      "Animer les réseaux sociaux",
-      "Préparer des dossiers de presse",
-      "Aider aux événements",
-      "Suivre la performance"
-    ],
-    "skills": ["Rédaction", "Social Media", "Organisation", "Canva", "Communication"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 13,
@@ -354,27 +154,10 @@
     "location": "Rabat, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-08",
-    "expirationDate": "2026-03-31",
     "salary": "14 000 - 20 000 MAD",
     "tags": ["Java", "Spring", "REST", "SQL"],
     "description": "Développement de services backend haute performance.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Développer des APIs avec Spring",
-      "Optimiser requêtes SQL",
-      "Assurer sécurité et performances",
-      "Écrire tests unitaires",
-      "Documenter les services"
-    ],
-    "skills": ["Java", "Spring", "REST", "SQL", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 14,
@@ -383,27 +166,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-11-07",
-    "expirationDate": "2026-03-15",
     "salary": "Tarif journalier",
     "tags": ["SEO", "Blog", "Optimisation"],
     "description": "Rédaction d'articles optimisés pour le référencement.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Marketing"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 2,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Rédiger des contenus SEO",
-      "Effectuer des recherches de mots-clés",
-      "Optimiser balises et maillage",
-      "Suivre performances SEO",
-      "Adapter le ton et style"
-    ],
-    "skills": ["SEO", "Copywriting", "Analytics", "Google Search Console", "CMS"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 15,
@@ -412,27 +178,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-06",
-    "expirationDate": "2026-03-31",
     "salary": "18 000 - 25 000 MAD",
     "tags": ["ETL", "Python", "Airflow", "SQL"],
     "description": "Conception et optimisation de pipelines de données.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Data"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Construire et maintenir des pipelines",
-      "Industrialiser avec Airflow",
-      "Optimiser stockage et requêtes",
-      "Surveiller qualité des données",
-      "Collaborer avec data science"
-    ],
-    "skills": ["Python", "ETL", "Airflow", "SQL", "Cloud Data"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 16,
@@ -441,27 +190,10 @@
     "location": "Meknès, Maroc",
     "type": "Stage",
     "postedDate": "2025-11-05",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Administration", "Recrutement"],
     "description": "Support aux processus de recrutement et intégration.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Marketing"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Diffuser des offres et trier des CV",
-      "Planifier des entretiens",
-      "Préparer documents d'intégration",
-      "Mettre à jour dossiers RH",
-      "Assister aux projets RH"
-    ],
-    "skills": ["Organisation", "Communication", "Pack Office", "Discrétion", "Gestion"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 17,
@@ -470,27 +202,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-04",
-    "expirationDate": "2026-03-31",
     "salary": "16 000 - 23 000 MAD",
     "tags": ["Swift", "Xcode", "UIKit"],
     "description": "Développement d'applications iOS natives.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Développer des fonctionnalités iOS",
-      "Respecter guidelines Apple",
-      "Optimiser performance et mémoire",
-      "Écrire tests et automatisation",
-      "Publier sur App Store"
-    ],
-    "skills": ["Swift", "UIKit", "Xcode", "REST", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 18,
@@ -499,27 +214,10 @@
     "location": "Tanger, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-03",
-    "expirationDate": "2026-03-31",
     "salary": "9 000 - 12 000 MAD",
     "tags": ["Photoshop", "Logo", "Maquettes"],
     "description": "Création d'éléments visuels pour supports digitaux.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Design"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 1,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Junior",
-    "gender": "Both",
-    "responsibilities": [
-      "Créer des maquettes et logos",
-      "Adapter les visuels aux formats",
-      "Collaborer avec marketing",
-      "Respecter chartes graphiques",
-      "Intégrer retours clients"
-    ],
-    "skills": ["Photoshop", "Illustration", "Composition", "Typographie", "Communication"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 19,
@@ -528,27 +226,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-11-02",
-    "expirationDate": "2026-03-31",
     "salary": "22 000 - 30 000 MAD",
     "tags": ["Pentest", "SIEM", "Risque"],
     "description": "Audit de sécurité et recommandations stratégiques.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 4,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Réaliser des pentests",
-      "Mettre en place SIEM",
-      "Évaluer risques et plans d'action",
-      "Former et sensibiliser",
-      "Rédiger rapports et recommandations"
-    ],
-    "skills": ["Pentest", "SIEM", "Sécurité réseau", "Analyse de risques", "Communication"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 20,
@@ -557,27 +238,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-11-01",
-    "expirationDate": "2026-03-15",
     "salary": "Mission - Selon profil",
     "tags": ["HTML", "CSS", "Accessibility"],
     "description": "Intégration de maquettes responsives et optimisées.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Development"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Intégrer des maquettes accessibles",
-      "Optimiser performance front",
-      "Assurer compatibilité navigateurs",
-      "Livrer des pages pixel-perfect",
-      "Collaborer avec designers"
-    ],
-    "skills": ["HTML", "CSS", "Accessibilité", "Performance Web", "Git"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 21,
@@ -586,27 +250,10 @@
     "location": "Casablanca, Maroc",
     "type": "Stage",
     "postedDate": "2025-10-30",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Ticketing", "Réseau", "Windows"],
     "description": "Assistance utilisateurs et suivi des incidents.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Résoudre les tickets utilisateurs",
-      "Installer et configurer postes",
-      "Suivre inventaire IT",
-      "Escalader incidents complexes",
-      "Documenter procédures"
-    ],
-    "skills": ["Support IT", "Réseau", "Windows", "Organisation", "Communication"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 22,
@@ -615,27 +262,10 @@
     "location": "Rabat, Maroc",
     "type": "Emploi",
     "postedDate": "2025-10-29",
-    "expirationDate": "2026-03-31",
     "salary": "14 000 - 18 000 MAD",
     "tags": ["Backlog", "Agile", "Communication"],
     "description": "Gestion du backlog et coordination avec l'équipe dev.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 2,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Junior",
-    "gender": "Both",
-    "responsibilities": [
-      "Gérer le backlog produit",
-      "Prioriser avec les parties prenantes",
-      "Définir user stories et critères",
-      "Suivre livraisons et qualité",
-      "Animer ateliers produit"
-    ],
-    "skills": ["Product Ownership", "Agile", "Communication", "Analyse", "UX Basics"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 23,
@@ -644,27 +274,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-10-28",
-    "expirationDate": "2026-03-15",
     "salary": "Tarif journalier",
     "tags": ["Audit", "Google", "Optimisation"],
     "description": "Audit SEO technique et stratégie de contenu.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Marketing"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Réaliser audits techniques",
-      "Définir stratégie mots-clés",
-      "Optimiser contenu et structure",
-      "Suivre KPIs et reporting",
-      "Former équipes contenu"
-    ],
-    "skills": ["SEO Technique", "Google Tools", "Analytics", "Content Strategy", "Communication"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 24,
@@ -673,27 +286,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-10-27",
-    "expirationDate": "2026-03-31",
     "salary": "16 000 - 22 000 MAD",
     "tags": ["Machine Learning", "Python", "Pandas"],
     "description": "Modélisation et extraction d'insights à partir de gros volumes de données.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Data"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 1,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Junior",
-    "gender": "Both",
-    "responsibilities": [
-      "Préparer données et features",
-      "Entraîner et évaluer modèles",
-      "Industrialiser scoring",
-      "Visualiser et présenter insights",
-      "Collaborer avec métiers"
-    ],
-    "skills": ["Python", "ML", "Pandas", "Stats", "Communication"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 25,
@@ -702,27 +298,10 @@
     "location": "Marrakech, Maroc",
     "type": "Emploi",
     "postedDate": "2025-10-26",
-    "expirationDate": "2026-03-31",
     "salary": "10 000 - 14 000 MAD",
     "tags": ["WordPress", "PHP", "Themes", "Plugins"],
     "description": "Création et optimisation de sites WordPress sur mesure.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 2,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Développer thèmes et plugins",
-      "Optimiser performance et SEO",
-      "Sécuriser sites et backups",
-      "Intégrer maquettes",
-      "Tester et corriger bugs"
-    ],
-    "skills": ["WordPress", "PHP", "MySQL", "SEO", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 26,
@@ -731,27 +310,10 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-10-25",
-    "expirationDate": "2026-03-15",
     "salary": "Mission - Selon profil",
     "tags": ["D3.js", "Dashboard", "Analytics"],
     "description": "Création de dashboards interactifs centrés utilisateur.",
-    "logo": "assets/logo/logo-darkmode.png",
-    "categories": ["Data"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Concevoir visualisations interactives",
-      "Structurer données et axes",
-      "Assurer lisibilité et performance",
-      "Itérer avec utilisateurs",
-      "Documenter livrables"
-    ],
-    "skills": ["D3.js", "Dataviz", "UX", "Analytics", "Communication"]
+    "logo": "assets/logo/logo-darkmode.png"
   },
   {
     "id": 27,
@@ -760,27 +322,10 @@
     "location": "Casablanca, Maroc",
     "type": "Stage",
     "postedDate": "2025-10-24",
-    "expirationDate": "2026-02-28",
     "salary": "Indemnité de stage",
     "tags": ["Python", "Scripts", "Automatisation"],
     "description": "Participation à des scripts d'automatisation internes.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Development"],
-    "jobType": "Internship",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 0,
-    "qualification": "Student",
-    "careerLevel": "Intern",
-    "gender": "Both",
-    "responsibilities": [
-      "Écrire des scripts Python",
-      "Automatiser tâches répétitives",
-      "Documenter modules",
-      "Tester et valider",
-      "Supporter l'équipe dev"
-    ],
-    "skills": ["Python", "Automatisation", "Git", "Organisation", "Communication"]
+    "logo": "assets/logo/logo_lightmode.png"
   },
   {
     "id": 28,
@@ -789,27 +334,10 @@
     "location": "Casablanca, Maroc",
     "type": "Emploi",
     "postedDate": "2025-10-23",
-    "expirationDate": "2026-03-31",
     "salary": "22 000 - 30 000 MAD",
     "tags": ["React", "TypeScript", "Performance", "UI"],
     "description": "Leadership technique sur les interfaces haute performance.",
-    "logo": "assets/logo/logo_jobstart_single.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 5,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Senior",
-    "gender": "Both",
-    "responsibilities": [
-      "Piloter architecture front",
-      "Optimiser performance et accessibilité",
-      "Mentorer l'équipe",
-      "Établir bonnes pratiques",
-      "Coordonner avec produit"
-    ],
-    "skills": ["React", "TypeScript", "Performance", "Testing", "Git"]
+    "logo": "assets/logo/logo_jobstart_single.png"
   },
   {
     "id": 29,
@@ -818,27 +346,10 @@
     "location": "Rabat, Maroc",
     "type": "Emploi",
     "postedDate": "2025-10-22",
-    "expirationDate": "2026-03-31",
     "salary": "13 000 - 17 000 MAD",
     "tags": ["ERP", "Analyse", "Formation"],
     "description": "Implémentation et formation utilisateurs sur solutions ERP.",
-    "logo": "assets/logo/logo-lightmode.png",
-    "categories": ["Development"],
-    "jobType": "Full Time",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 1,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Junior",
-    "gender": "Both",
-    "responsibilities": [
-      "Configurer modules ERP",
-      "Rédiger cahiers des charges",
-      "Former utilisateurs",
-      "Supporter mise en production",
-      "Assurer support applicatif"
-    ],
-    "skills": ["ERP", "Analyse", "SQL", "Formation", "Communication"]
+    "logo": "assets/logo/logo-lightmode.png"
   },
   {
     "id": 30,
@@ -847,27 +358,12 @@
     "location": "Remote, Maroc",
     "type": "Freelance",
     "postedDate": "2025-10-21",
-    "expirationDate": "2026-03-15",
     "salary": "Tarif journalier",
     "tags": ["Node.js", "REST", "GraphQL"],
     "description": "Développement d'APIs robustes et sécurisées.",
     "logo": "assets/logo/logo-darkmode.png",
     "categories": ["Development"],
-    "jobType": "Freelance",
-    "featured": false,
-    "urgent": false,
-    "experienceYears": 3,
-    "qualification": "Bachelor Degree",
-    "careerLevel": "Mid",
-    "gender": "Both",
-    "responsibilities": [
-      "Concevoir APIs REST/GraphQL",
-      "Sécuriser endpoints",
-      "Optimiser performance",
-      "Documenter et tester",
-      "Livrer selon SLA"
-    ],
-    "skills": ["Node.js", "REST", "GraphQL", "Sécurité API", "Testing"]
+    "jobType": "Freelance"
   },
   {
     "id": 31,
@@ -876,7 +372,6 @@
     "location": "New York, USA",
     "type": "Emploi",
     "postedDate": "2025-11-24",
-    "expirationDate": "2026-05-18",
     "salary": "$150 - $180 / week",
     "tags": ["Figma", "Sketch", "UI", "Brand"],
     "description": "Collaborer avec l'équipe produit pour créer des interfaces web modernes et accessibles, en respectant la charte graphique et les objectifs business.",
@@ -885,6 +380,7 @@
     "jobType": "Full Time",
     "featured": true,
     "urgent": true,
+    "expirationDate": "2026-05-18",
     "experienceYears": 1,
     "qualification": "Bachelor Degree",
     "careerLevel": "Junior",

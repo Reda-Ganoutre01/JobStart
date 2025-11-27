@@ -65,14 +65,24 @@ initNavigation();
 
 // for the auto-typing effect in the hero section
 const datatype = window.typingWords || [];
-    var typed = new Typed(".auto-type-highlight", {
-        strings: datatype,
-        typeSpeed: 150,
-        backSpeed: 100,
-        backDelay: 700,
-        smartBackspace: true,
-        loop: true
-    });
+if (typeof Typed !== 'undefined') {
+    try {
+        /* global Typed */
+        var typed = new Typed('.auto-type-highlight', {
+            strings: datatype,
+            typeSpeed: 150,
+            backSpeed: 100,
+            backDelay: 700,
+            smartBackspace: true,
+            loop: true
+        });
+    } catch (e) {
+        console.warn('Typed initialization failed:', e);
+    }
+} else {
+    // typed.js may be deferred or not available; fail gracefully
+    console.warn('Typed.js not available; skipping auto-type effect.');
+}
 
 // (stats rendering moved below with animated counter)
 // for keywords popular searches (uses global `popularSearches`)
@@ -95,9 +105,8 @@ if (hero_searches) {
 } else {
     console.warn('No .hero-searches container found in the DOM.');
 }
-
 // Render stats on hero index page (simple version)
-(function renderStatsSimple() {
+function renderStatsSimple() {
     const statsContainer = document.querySelector('.stats');
     const data = Array.isArray(window.statData) ? window.statData : [];
     if (!statsContainer || !data.length) return;
@@ -158,8 +167,16 @@ if (hero_searches) {
         // animate with a simple counter over 1.6s
         simpleCount(num, target, 1600);
     });
-})();
+}
 
+// Ensure stats render after DOM content is ready. `defer` usually ensures
+// scripts run after parsing, but use DOMContentLoaded to be robust if any
+// earlier runtime errors prevented execution.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', renderStatsSimple);
+} else {
+    try { renderStatsSimple(); } catch (e) { console.warn('renderStatsSimple error:', e); }
+}
 // Header background change on scroll
 (function() {
     const header = document.querySelector('header');
