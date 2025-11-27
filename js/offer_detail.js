@@ -8,6 +8,7 @@
   const skillsEl = $('#skills-list');
   const overviewGrid = $('#overview-grid');
   const mapBox = $('#map-box');
+  const loadingEl = $('#detail-loading');
 
   // Real company domain mapping (subset) + logo builder (Clearbit)
   const realCompanyDomains = {
@@ -64,17 +65,20 @@
 
   async function load(){
     try {
+      if (loadingEl){ loadingEl.classList.remove('hidden'); loadingEl.setAttribute('aria-hidden','false'); }
       const res = await fetch('data/offers.json',{cache:'no-store'});
       const data = await res.json();
       const offer = data.find(o=>o.id===id);
       if(!offer){
         headerEl.innerHTML = '<p>Offre introuvable.</p>';
+        if (loadingEl){ loadingEl.classList.add('hidden'); loadingEl.setAttribute('aria-hidden','true'); }
         return;
       }
       render(offer);
     } catch(e){
       headerEl.innerHTML = '<p>Erreur de chargement.</p>';
     }
+    if (loadingEl){ loadingEl.classList.add('hidden'); loadingEl.setAttribute('aria-hidden','true'); }
   }
 
   function render(o){
