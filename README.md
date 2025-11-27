@@ -153,9 +153,10 @@ serve -s . -l 8000
 
 ---
 
-If you'd like, I can now:
+## 🤝 Contributing
 
-- Add a minimal Node/Express backend that exposes `GET /offers` and `GET /offers/:id` and wire the frontend to it.
-- Or directly implement a small client-side search/filter feature for `Offers.html`.
-
-Tell me which option you prefer and I'll proceed.
+1. 🍴 Fork the repository
+2. 🌿 Create a feature branch
+3. ✏️ Make your changes
+4. 🧪 Test thoroughly
+5. 📤 Submit a pull request
