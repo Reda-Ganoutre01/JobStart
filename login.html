@@ -27,11 +27,23 @@
         <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <body>
-        <!-- Page loader (inserted by assistant) -->
-        <div id="site-loader" aria-hidden="true">
-            <svg viewBox="25 25 50 50" class="loader-svg">
-                <circle r="20" cy="50" cx="50"></circle>
-            </svg>
+       <!-- Page loader -->
+        <div id="site-loader" aria-hidden="false">
+            <div class="loader-container">
+                <div class="logo-wrapper">
+                    <img src="assets/logo/logo_jobstart_single.png" alt="JobStart Logo" class="logo-image">
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <h1 class="brand-text">
+                    <span class="job">Job</span><span class="start">Start</span>
+                </h1>
+
+                <p class="loading-text">Chargement de vos opportunités...</p>
+            </div>
         </div>
 
         <!-- Header -->
@@ -352,8 +364,8 @@
         <!--AOS library -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>AOS.init();</script>
-        <script src="js/main.js"></script>
-        <script src="js/reload.js"></script>
+        <script src="js/main.js" defer></script>
+        <script src="js/loading.js" defer></script>
         <script src="js/login.js"></script>
     </body>
 </html>
