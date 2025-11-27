@@ -1,8 +1,15 @@
+.darkmode {
+
+  --sb-thumb-color: #1e90ff;
+  --sb-track-color: #ffffff;
+
+
+}
 
 body {
   --sb-track-color: #232e33;
   --sb-thumb-color: #1e90ff;
-  --sb-size: 13px;
+  --sb-size: 14px;
 }
 
 body::-webkit-scrollbar {
@@ -22,7 +29,6 @@ body::-webkit-scrollbar-thumb {
 
 @supports not selector(::-webkit-scrollbar) {
   body {
-    scrollbar-color: var(--sb-thumb-color)
-                     var(--sb-track-color);
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }
