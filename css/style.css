@@ -83,153 +83,6 @@ body {
 
 /* End Global Rules */
 
-/* Stats (hero) - responsive, centered numbers */
-.stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    align-items: center;
-    justify-content: center;
-    padding: 14px 18px;
-    border-radius: 12px;
-    margin: 20px auto 0 auto;
-    max-width: 900px;
-    background: transparent;
-}
-
-.stats .stat-item {
-    text-align: center;
-    min-width: 140px;
-    flex: 1 1 140px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.stats .stat-number {
-    font-family: 'Poppins', sans-serif;
-    font-size: 32px;
-    font-weight: 800;
-    margin-bottom: 6px;
-    line-height: 1;
-}
-
-.stats .stat-item:nth-child(1) .stat-number { color: var(--primary-color); }
-.stats .stat-item:nth-child(2) .stat-number { color: var(--success-color); }
-.stats .stat-item:nth-child(3) .stat-number { color: var(--secondary-color); }
-
-/* show a plus icon after each stat number when present */
-.stats .stat-number[data-suffix]::after {
-    content: attr(data-suffix);
-    margin-left: 6px;
-    font-weight: 700;
-    opacity: 0.95;
-}
-
-.stats .stat-label {
-    font-size: 13px;
-    color: var(--secondary-text);
-}
-
-@media (max-width: 768px) {
-    .stats {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-        padding: 12px;
-    }
-
-    .stats .stat-number {
-        font-size: 26px;
-    }
-}
-
-@media (min-width: 1200px) {
-    .stats .stat-number {
-        font-size: 38px;
-    }
-}
-
-/* How It Works */
-.section-alt {
-    padding: 56px 0;
-    background: transparent;
-}
-
-.section-alt .section-title {
-    text-align: center;
-    font-size: 1.7rem;
-    margin-bottom: 1.25rem;
-    color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
-}
-
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    align-items: start;
-}
-
-.step-card {
-    text-align: center;
-    padding: 1.5rem;
-    background: var(--card-bg);
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    transition: transform 0.32s cubic-bezier(.2,.9,.3,1), box-shadow 0.32s cubic-bezier(.2,.9,.3,1), opacity 0.32s;
-    will-change: transform, opacity;
-    transform-origin: center;
-}
-
-.darkmode .step-card {
-    background: var(--card-bg);
-    border-color: #2b2f3a;
-}
-
-.step-card:hover {
-    transform: translateY(-10px) scale(1.01);
-    box-shadow: 0 28px 50px rgba(15, 23, 42, 0.10);
-}
-
-.step-icon {
-    width: 4.5rem;
-    height: 4.5rem;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    transition: transform 0.32s ease, box-shadow 0.32s ease;
-}
-
-.step-icon svg {
-    width: 28px;
-    height: 28px;
-}
-
-.step-card:hover .step-icon {
-    transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 8px 20px rgba(30, 40, 60, 0.06);
-}
-
-.step-card h3 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-.step-card p {
-    color: var(--secondary-text);
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-/* end How It Works */
-
-
 /* Start Header */
 header {
     background-color: var(--base-variant);
@@ -354,6 +207,14 @@ header ul li a:hover {
     border-color: var(--secondary-color);
     transform: translateY(-1px);
 }
+
+/* Header user avatar chip */
+.header-user { display:flex; align-items:center; }
+.user-chip { display:flex; align-items:center; gap:10px; background: var(--card-bg); border:1px solid var(--border-color); padding:6px 10px; border-radius:999px; box-shadow:0 2px 6px var(--shadow); }
+.user-avatar { width:28px; height:28px; border-radius:50%; object-fit:cover; border:1px solid var(--border-color); }
+.user-name { font-size:.85rem; color: var(--text-color); font-weight:600; }
+.logout-btn { background: transparent; border: none; color: var(--primary-color); font-weight:600; cursor:pointer; }
+.logout-btn:hover { text-decoration: underline; }
 
 /* Theme toggle removed: styles intentionally deleted to simplify theme handling */
 /* End Header */
@@ -529,25 +390,6 @@ header ul li a:hover {
 
 }
 
-/* Mobile: swap theme switch and hamburger order (theme before dropdown) */
-@media (max-width: 768px) {
-    nav {
-        display: flex;
-        align-items: center;
-    }
-
-    /* theme button should appear first on mobile */
-    #theme-switch {
-        order: 1;
-        margin-left: 8px;
-    }
-
-    /* hamburger/dropdown comes after theme button */
-    .dropdown-menu {
-        order: 2;
-    }
-}
-
 /* Media Queries */
 
 /* Small devices */
@@ -640,10 +482,8 @@ header ul li a:hover {
 .hero {
     position: relative;
     width: 100%;
-    min-height: 420px;
-    /* allow the hero to grow with its content (search, popular terms, stats)
-       so items aren't clipped on small screens */
-    overflow: visible;
+    min-height: 450px;
+    overflow: hidden;
     padding: 80px 0;
     display: flex;
     align-items: center;
@@ -666,7 +506,6 @@ header ul li a:hover {
 
 .hero .hero-content {
     text-align: center;
-    
 }
 
 .hero .hero-content h2 {
@@ -758,56 +597,19 @@ header ul li a:hover {
     cursor: pointer;
 }
 
-/* Duplicate hero stats block removed (styles consolidated earlier) */
+
+/* end hero index */
 
 /* Responsive: hero adjustments for tablet and mobile */
-@media (max-width: 768px) {
-    /* Force three stats to fit in one row on small phones
-       Adjust basis and font-size so items stay readable */
-    .stats {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        gap: 0.5rem;
-        padding: 8px 8px;
-        overflow-x: hidden;
+@media (max-width: 992px) {
+    .hero {
+        padding: 60px 16px;
+        min-height: 380px;
     }
 
-    /* three equal columns (allow for small gaps) */
-    .stats .stat-item {
-        flex: 0 0 calc((100% - 1rem) / 3);
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 6px 4px;
+    .hero .hero-content h2 {
+        font-size: 2.25rem;
     }
-
-    .stats .stat-number {
-        font-size: 18px;
-        line-height: 1.05;
-    }
-
-    .stats .stat-label {
-        font-size: 12px;
-    }
-}
-
-/* Very small phones: slightly reduce type so everything fits */
-@media (max-width: 360px) {
-    .stats .stat-number { font-size: 16px; }
-    .stats .stat-label { font-size: 11px; }
-}
-
-@media (min-width: 1200px) {
-    .stats .stat-number {
-        font-size: 38px;
-    }
-}
 
     .hero .hero-content p {
         font-size: 1.05rem;
@@ -822,6 +624,7 @@ header ul li a:hover {
     .search-box input {
         font-size: 0.95rem;
     }
+}
 
 @media (max-width: 768px) {
     .hero {
@@ -832,7 +635,7 @@ header ul li a:hover {
 
     .hero::before {
         /* keep background covering visually on smaller screens */
-        height: calc(var(--header-height, 72px) + 480px);
+        height: calc(var(--header-height, 72px) + 340px);
         background-position: center 20%;
         filter: blur(3px);
     }
@@ -1087,16 +890,4 @@ header ul li a:hover {
                 padding: 40px 0 20px;
             }
         }
-.offers-layout { display:flex; gap:32px; padding:32px 0; }
-/* Stack filters/results on smaller screens only */
-@media (max-width: 768px){ .offers-layout{ flex-direction:column; } }
 
-.offers-sidebar { flex:0 0 280px; background: var(--card-bg); border:1px solid var(--border-color); padding:20px 18px; border-radius:16px; box-shadow:0 4px 12px var(--shadow); height:fit-content; }
-@media (max-width: 768px){ .offers-sidebar{ width:100%; } }
-.filter-form { display:flex; flex-direction:column; gap:18px; }
-.filter-group label, .filter-group legend { font-size:.85rem; font-weight:600; margin-bottom:6px; display:block; color: var(--secondary-text); }
-.filter-group input[type="search"], .filter-group input[type="text"], .filter-group select { width:100%; padding:10px 12px; border:1px solid var(--input-border); border-radius:8px; background: var(--input-bg); color: var(--text-color); font-size:.9rem; }
-.filter-group input:focus, .filter-group select:focus { border-color: var(--primary-color); box-shadow:0 0 0 3px rgba(30,144,255,.15); outline:none; }
-
-/* Offers and Offer Detail styles moved to offers.css and offer_detail.css */
-.filter-actions { display:flex; justify-content:space-between; margin-top:8px; }
