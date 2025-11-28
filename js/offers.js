@@ -1,395 +1,597 @@
-(function(){
-  let scoreMap = new WeakMap();
-  const state = {
-    offers: [],
-    filtered: [],
-    search: '',
-    location: '',
-    category: '',
-    type: 'Tous',
-    dateRange: '', // '', '7', '30'
-    sort: 'recent',
-    pageSize: 10,
-    page: 1,
-    totalPages: 1
-  };
+// Simple Offers Management System for Beginners
+// This script handles displaying and filtering job offers
 
-  const els = {};
+// Global variables to store our data and settings
+let allOffers = []; // All job offers from JSON
+let filteredOffers = []; // Offers after applying filters
+let currentPage = 1;
+let offersPerPage = 10;
+let totalPages = 1;
 
-  function $(sel, root=document){ return root.querySelector(sel); }
-  function $all(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+// Current filter settings
+let currentFilters = {
+  search: '',
+  location: '',
+  category: '',
+  type: 'Tous',
+  dateRange: '',
+  sort: 'recent'
+};
 
-  // Local fallback logo variants
-  const fallbackLogos = [
-    'assets/logo/logo_jobstart_single.png',
-    'assets/logo/logo-lightmode.png',
-    'assets/logo/logo-darkmode.png'
-  ];
+// DOM elements - these will be found when page loads
+let elements = {};
 
-  function hashString(str){
-    let h = 0;
-    for (let i=0;i<str.length;i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
-    return h;
-  }
+// Helper function to get DOM elements easily
+function getElement(selector) {
+  return document.querySelector(selector);
+}
 
-  function deterministicFallback(company){
-    const name = (company || '').toLowerCase();
-    const hash = hashString(name);
-    return fallbackLogos[hash % fallbackLogos.length];
-  }
+function getAllElements(selector) {
+  return document.querySelectorAll(selector);
+}
 
-  // We now rely on the logo path provided in offers.json.
-  // If a logo value is missing or fails to load, we fall back deterministically
-  // to one of the local JobStar logo variants for visual consistency.
+// Default logos to use when company logo is missing
+const defaultLogos = [
+  'assets/logo/logo_jobstart_single.png',
+  'assets/logo/logo-lightmode.png', 
+  'assets/logo/logo-darkmode.png'
+];
 
-  // Ensure each offer has accurate categories: infer from title/tags, fallback to normalized provided ones
-  function enrichCategories(){
-    const allowed = new Set(['development','design','marketing','data','finance','rh']);
-    const normalizeProvided = (cats)=>{
-      return (cats||[])
-        .map(c=>String(c).trim().toLowerCase())
-        .map(c=>{
-          if (/(dev|software|programmeur|ingénieur)/.test(c)) return 'development';
-          if (/(ux|ui|design|graph|maquette|prototype)/.test(c)) return 'design';
-          if (/(marketing|seo|content|communication)/.test(c)) return 'marketing';
-          if (/(data|bi|etl|ml|ai|analytics)/.test(c)) return 'data';
-          if (/(finance|compta|account)/.test(c)) return 'finance';
-          if (/(rh|ressources humaines|talent|recrut)/.test(c)) return 'rh';
-          return c;
-        })
-        .filter(c=>allowed.has(c))
-        .map(c=> c.charAt(0).toUpperCase()+c.slice(1));
-    };
-    const infer = (o)=>{
-      const inferred = new Set();
-      const text = `${o.title||''} ${(o.tags||[]).join(' ')}`.toLowerCase();
-      const addIf = (cond,cat)=>{ if(cond) inferred.add(cat); };
-      // Development: include devops/cloud tools explicitly
-      addIf(/(react|vue|angular|node|java|php|python|flutter|api|wordpress|full-?stack|backend|front-?end|mobile|ios|android|devops|docker|kubernetes|k8s|terraform|ansible|cicd|ci\/?cd|linux|aws|azure|gcp)/.test(text),'Development');
-      // Design: avoid generic 'design' to reduce false positives; focus on UX/UI/graphic terms
-      addIf(/(\bux\b|\bui\b|designer\b|figma\b|sketch\b|photoshop\b|illustrator\b|graphiste\b|branding\b|maquette\b|prototype\b|wireframe\b)/.test(text),'Design');
-      addIf(/(seo|marketing|content|communication|réseau[x]? sociaux|social)/.test(text),'Marketing');
-      // Data: avoid generic 'data' and generic 'sql/python'; require strong analytics/ML/BI signals
-      addIf(/(\bdata\s*(analyst|scientist|engineer)\b|\betl\b|\bairflow\b|\bdbt\b|\bbi\b|power\s*bi\b|\btableau\b|\blook(er)?\b|\bpandas\b|\bnumpy\b|scikit|sklearn|machine\s*learning|\bml\b|\bspark\b|\bhadoop\b)/.test(text),'Data');
-      addIf(/(compta|finance|financier|account)/.test(text),'Finance');
-      addIf(/(rh|ressources humaines|recruit|recrut)/.test(text),'RH');
-      return Array.from(inferred);
-    };
-    state.offers = state.offers.map(o => {
-      const inferred = infer(o);
-      const provided = normalizeProvided(o.categories);
-      // If we inferred any, prefer inferred; else use normalized provided
-      const finalCats = inferred.length ? inferred : provided;
-      return { ...o, categories: finalCats };
-    });
-  }
+// Get a default logo based on company name
+function getDefaultLogo(companyName) {
+  if (!companyName) return defaultLogos[0];
+  
+  // Simple way to pick a logo based on company name
+  const nameLength = companyName.length;
+  const logoIndex = nameLength % defaultLogos.length;
+  return defaultLogos[logoIndex];
+}
 
-  function formatDateRelative(iso){
-    try {
-      const d = new Date(iso);
-      const days = Math.floor((Date.now() - d.getTime())/(1000*60*60*24));
-      if (Number.isNaN(days)) return '';
-      if (days <= 0) return "Aujourd'hui";
-      if (days === 1) return 'Hier';
-      return `Il y a ${days} jours`;
-    } catch { return ''; }
-  }
-
-  // Static DOM offers removed: data now comes exclusively from JSON
-
-  function setLoading(on){
-    if(!els.loading) return;
-    els.loading.classList.toggle('active', !!on);
-  }
-
-  function badgeColor(type){
-    switch(type){
-      case 'Stage': return 'badge badge-stage';
-      case 'Emploi': return 'badge badge-emploi';
-      case 'Freelance': return 'badge badge-freelance';
-      default: return 'badge';
-    }
-  }
-
-  function sortData(arr){
-    // If a query exists and scores are computed, sort by score first, then date
-    const byDateRecent = (a,b)=> new Date(b.postedDate) - new Date(a.postedDate);
-    const byDateOld = (a,b)=> new Date(a.postedDate) - new Date(b.postedDate);
-    let out = [...arr];
-    if (state.search && scoreMap.size){
-      out.sort((a,b)=>{
-        const sa = scoreMap.get(a)||0; const sb = scoreMap.get(b)||0;
-        if (sb !== sa) return sb - sa;
-        return state.sort==='old' ? byDateOld(a,b) : byDateRecent(a,b);
-      });
-      return out;
-    }
-    if(state.sort === 'recent') return out.sort(byDateRecent);
-    if(state.sort === 'old') return out.sort(byDateOld);
-    return out;
-  }
-
-  function paginate(arr){
-    state.totalPages = Math.max(1, Math.ceil(arr.length / state.pageSize));
-    if(state.page > state.totalPages) state.page = state.totalPages;
-    const start = (state.page - 1) * state.pageSize;
-    return arr.slice(start, start + state.pageSize);
-  }
-
-  function renderPagination(){
-    if(!els.pagination) return;
-    if(state.totalPages <= 1){ els.pagination.innerHTML = ''; return; }
-    let html = `<button type="button" ${state.page===1?'disabled':''} data-page="prev">Précédent</button>`;
-    for(let p=1;p<=state.totalPages;p++){
-      html += `<button type="button" class="${p===state.page?'active':''}" data-page="${p}">${p}</button>`;
-    }
-    html += `<button type="button" ${state.page===state.totalPages?'disabled':''} data-page="next">Suivant</button>`;
-    els.pagination.innerHTML = html;
-  }
-
-  function render(){
-    const sorted = sortData(state.filtered);
-    const pageItems = paginate(sorted);
-    if (els.count) els.count.textContent = `${sorted.length}`;
-    if (els.list){
-      els.list.innerHTML = '';
-      if (!pageItems.length){
-        const empty = document.createElement('div');
-        empty.className = 'no-results';
-        empty.textContent = 'Aucune offre trouvée.';
-        els.list.appendChild(empty);
-      } else {
-        const frag = document.createDocumentFragment();
-        pageItems.forEach(o => {
-          const idStr = String(o.id);
-          const article = document.createElement('article');
-          article.className = 'offer-row';
-          article.setAttribute('data-offer-id', idStr);
-          const logoSrc = o.logo || deterministicFallback(o.company);
-          const cats = (o.categories && o.categories.length ? o.categories[0] : (o.type||''));
-          const salary = o.salary ? `<span class="salary">${o.salary}</span>` : '';
-          article.innerHTML = `
-            <a class="offer-row-link" href="OfferDetail.html?id=${idStr}" aria-label="Voir détails ${o.title||''}"></a>
-            <div class="logo-wrap"><img src="${logoSrc}" alt="${o.company||'Entreprise'}" onerror="this.onerror=null;this.src='${deterministicFallback(o.company)}'" /></div>
-            <div class="offer-row-main">
-              <h3 class="offer-title">${o.title || ''}</h3>
-              <div class="offer-row-meta">
-                ${o.company ? `<span class="company">${o.company}</span>` : ''}
-                ${o.location ? `<span class="location">${o.location}</span>` : ''}
-                ${cats ? `<span class="cats">${cats}</span>` : ''}
-                <span class="posted">${formatDateRelative(o.postedDate)}</span>
-                ${salary}
-              </div>
-              <div class="offer-row-badges">
-                ${o.type ? `<span class="badge badge-type">${o.type}</span>` : ''}
-                ${o.featured ? `<span class="badge badge-featured">Featured</span>` : ''}
-                ${o.urgent ? `<span class="badge badge-urgent">Urgent</span>` : ''}
-              </div>
-            </div>
-            <div class="offer-row-actions">
-              <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${idStr}'">Détails</button>
-            </div>`;
-          frag.appendChild(article);
-        });
-        els.list.appendChild(frag);
-      }
-    }
-    renderPagination();
-  }
-
-  function applyFilters(){
-    const q = state.search.trim().toLowerCase();
-    const type = state.type;
-    const dateRange = state.dateRange;
-    const loc = state.location.trim().toLowerCase();
-    const cat = state.category.trim().toLowerCase();
-    const now = Date.now();
-    // Clear scores
-    scoreMap = new WeakMap();
-    const tokens = q ? q.split(/\s+/).filter(Boolean) : [];
-
-    const tokenScore = (text, token, weight) => {
-      if (!text) return 0;
-      const t = String(text).toLowerCase();
-      // word boundary match gets full weight; substring gets half
-      const boundary = new RegExp(`(^|\b|_|-)${token}(\b|$)`);
-      if (boundary.test(t)) return weight;
-      if (t.includes(token)) return weight*0.5;
-      return 0;
-    };
-
-    const computeScore = (o) => {
-      if (!tokens.length) return 0;
-      let s = 0;
-      const cats = (o.categories||[]).join(' ');
-      const tags = (o.tags||[]).join(' ');
-      const fields = {
-        title: 3,
-        company: 3,
-        categories: 2,
-        tags: 2,
-        location: 1.5,
-        description: 1
-      };
-      for (const tk of tokens){
-        s += tokenScore(o.title, tk, fields.title);
-        s += tokenScore(o.company, tk, fields.company);
-        s += tokenScore(cats, tk, fields.categories);
-        s += tokenScore(tags, tk, fields.tags);
-        s += tokenScore(o.location, tk, fields.location);
-        s += tokenScore(o.description, tk, fields.description);
-      }
-      // phrase bonus
-      if (q){
-        const phraseBonus = (text,w)=> text && String(text).toLowerCase().includes(q) ? w : 0;
-        s += phraseBonus(o.title, 1.5) + phraseBonus(o.company, 1) + phraseBonus(o.description, 0.5);
-      }
-      return s;
-    };
-
-    const matchesAllTokens = (o) => {
-      if (!tokens.length) return true;
-      const hay = `${o.title} ${o.company} ${o.location} ${(o.tags||[]).join(' ')} ${(o.categories||[]).join(' ')} ${o.description||''}`.toLowerCase();
-      return tokens.every(tk => hay.includes(tk));
-    };
-
-    state.filtered = state.offers.filter(o => {
-      const matchesType = type === 'Tous' || o.type === type;
-      if (!matchesType) return false;
-      if (loc && !(String(o.location||'').toLowerCase().includes(loc))) return false;
-      if (cat){
-        const catList = (o.categories||[]).map(c=>String(c).toLowerCase());
-        if (!catList.includes(cat)) return false;
-      }
-      // Date filter: supports "7", "30" for <= N days and "7+", "30+" for >= N days
-      if(dateRange){
-        const posted = new Date(o.postedDate).getTime();
-        const diffDays = Math.floor((now - posted)/(1000*60*60*24));
-        const plusMode = /\+$/.test(dateRange);
-        const daysLimit = parseInt(dateRange,10);
-        if (!Number.isNaN(daysLimit)){
-          if (plusMode){
-            // show items older than or equal to N days
-            if (diffDays < daysLimit) return false;
-          } else {
-            // show items newer than or equal to N days
-            if (diffDays > daysLimit) return false;
-          }
-        }
-      }
-      if (!q) return true;
-      const s = computeScore(o);
-      scoreMap.set(o, s);
-      return s > 0 && matchesAllTokens(o);
-    });
-    state.page = 1; // reset to first page after filtering
-    render();
-  }
-
-  async function loadOffers(){
-    try{
-      setLoading(true);
-      const res = await fetch('data/offers.json', {cache:'no-store'});
-      if (!res.ok) throw new Error('HTTP '+res.status);
-      const json = await res.json();
-      state.offers = Array.isArray(json) ? json : [];
-      enrichCategories();
-      state.filtered = [...state.offers];
-      render();
-    }catch(err){
-      console.error('Failed to load offers:', err);
-    } finally { setLoading(false); }
-  }
-
-  function bind(){
-    els.search = $('#offer-search');
-    els.location = $('#filter-location');
-    els.type = $('#offer-type');
-    els.category = $('#filter-category');
-    els.list = $('#offers-list');
-    els.count = $('#offers-count');
-    els.pagination = $('#offers-pagination');
-    els.sort = $('#sort-select');
-    els.pageSize = $('#page-size');
-    els.dateRadios = $all('input[name="filter-date"]');
-    els.loading = $('#offers-loading');
-    els.resetBtn = $('#reset-filters');
-
-    if(els.pagination){
-      els.pagination.addEventListener('click', e => {
-        const btn = e.target.closest('button[data-page]');
-        if(!btn) return;
-        const val = btn.getAttribute('data-page');
-        if(val === 'prev' && state.page > 1){ state.page--; render(); }
-        else if(val === 'next' && state.page < state.totalPages){ state.page++; render(); }
-        else {
-          const num = parseInt(val,10); if(!isNaN(num)){ state.page = num; render(); }
-        }
-      });
+// Add categories to offers that don't have them
+function addCategoriesToOffers() {
+  allOffers = allOffers.map(offer => {
+    // If offer already has categories, keep them
+    if (offer.categories && offer.categories.length > 0) {
+      return offer;
     }
 
-    if (els.search){
-      els.search.addEventListener('input', (e)=>{ state.search = e.target.value; applyFilters(); });
-    }
-    if (els.location){
-      let t; els.location.addEventListener('input', (e)=>{ clearTimeout(t); const val = e.target.value; t = setTimeout(()=>{ state.location = val; applyFilters(); }, 250); });
-    }
-    if (els.type){
-      els.type.addEventListener('change', (e)=>{ state.type = e.target.value; applyFilters(); });
-    }
-    if (els.category){
-      els.category.addEventListener('change', (e)=>{ state.category = e.target.value; applyFilters(); });
-    }
-    if (els.sort){
-      els.sort.addEventListener('change', e=>{ state.sort = e.target.value; render(); });
-    }
-    if (els.pageSize){
-      els.pageSize.addEventListener('change', e=>{ state.pageSize = parseInt(e.target.value,10)||10; state.page=1; render(); });
-    }
-    if (els.dateRadios.length){
-      els.dateRadios.forEach(r => r.addEventListener('change', e=>{ if(e.target.checked){ state.dateRange = e.target.value; applyFilters(); } }));
-    }
-    if (els.resetBtn){
-      els.resetBtn.addEventListener('click', ()=>{
-        // Reset state
-        state.search = '';
-        state.location = '';
-        state.category = '';
-        state.type = 'Tous';
-        state.dateRange = '';
-        state.sort = 'recent';
-        state.pageSize = 10;
-        state.page = 1;
-        // Reset UI controls
-        if(els.search) els.search.value='';
-        if(els.location) els.location.value='';
-        if(els.category) els.category.value='';
-        if(els.type) els.type.value='Tous';
-        if(els.sort) els.sort.value='recent';
-        if(els.pageSize) els.pageSize.value='10';
-        if(els.dateRadios.length){ els.dateRadios.forEach(r=>{ r.checked = r.value === ''; }); }
-        // Apply
-        applyFilters();
-      });
-    }
-  }
+    // Try to guess category from title and tags
+    const text = (offer.title + ' ' + (offer.tags || []).join(' ')).toLowerCase();
+    let categories = [];
 
-  document.addEventListener('DOMContentLoaded', function(){
-    bind();
-    // Prefill from URL params (q, type, date, pageSize)
-    const params = new URLSearchParams(location.search);
-    const q = params.get('q');
-    const t = params.get('type');
-    const d = params.get('date');
-    const ps = parseInt(params.get('size')||'',10);
-    const loc = params.get('loc') || params.get('location');
-    const cat = params.get('category');
-    if(q){ state.search = q; if(els.search) els.search.value = q; }
-    if(t){ state.type = t; if(els.type) els.type.value = t; }
-    if(d){ state.dateRange = d; if(els.dateRadios){ els.dateRadios.forEach(r=>{ r.checked = r.value===d; }); } }
-    if(ps && !Number.isNaN(ps)){ state.pageSize = ps; if(els.pageSize) els.pageSize.value = String(ps); }
-    if(loc){ state.location = loc; if(els.location) els.location.value = loc; }
-    if(cat){ state.category = cat; if(els.category) els.category.value = cat; }
-    loadOffers();
+    // Check for development keywords
+    if (text.includes('développeur') || text.includes('dev') || text.includes('programmer') || 
+        text.includes('react') || text.includes('javascript') || text.includes('python') || 
+        text.includes('java') || text.includes('php') || text.includes('node')) {
+      categories.push('Development');
+    }
+    
+    // Check for design keywords  
+    if (text.includes('designer') || text.includes('design') || text.includes('ux') || 
+        text.includes('ui') || text.includes('figma') || text.includes('graphique')) {
+      categories.push('Design');
+    }
+    
+    // Check for marketing keywords
+    if (text.includes('marketing') || text.includes('seo') || text.includes('communication') || 
+        text.includes('social')) {
+      categories.push('Marketing');
+    }
+    
+    // Check for data keywords
+    if (text.includes('data') || text.includes('analyst') || text.includes('analytics') || 
+        text.includes('bi') || text.includes('sql')) {
+      categories.push('Data');
+    }
+
+    // If no category found, assign based on job type
+    if (categories.length === 0) {
+      categories.push('Other');
+    }
+
+    return { ...offer, categories: categories };
   });
-})();
+}
+
+// Calculate how long ago a date was (e.g., "Il y a 3 jours")
+function calculateDaysAgo(dateString) {
+  try {
+    const offerDate = new Date(dateString);
+    const today = new Date();
+    const timeDiff = today.getTime() - offerDate.getTime();
+    const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24));
+    
+    if (daysDiff <= 0) return "Aujourd'hui";
+    if (daysDiff === 1) return 'Hier';
+    return `Il y a ${daysDiff} jours`;
+  } catch (error) {
+    return '';
+  }
+}
+
+// Show or hide the loading spinner
+function showLoading(show) {
+  const loadingElement = elements.loading;
+  if (loadingElement) {
+    if (show) {
+      loadingElement.classList.add('active');
+    } else {
+      loadingElement.classList.remove('active');
+    }
+  }
+}
+
+// Sort offers by date (newest first or oldest first)
+function sortOffers(offers) {
+  const sortedOffers = [...offers]; // Make a copy
+  
+  if (currentFilters.sort === 'recent') {
+    // Newest first
+    sortedOffers.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
+  } else if (currentFilters.sort === 'old') {
+    // Oldest first  
+    sortedOffers.sort((a, b) => new Date(a.postedDate) - new Date(b.postedDate));
+  }
+  
+  return sortedOffers;
+}
+
+// Calculate pagination (how many pages we need)
+function calculatePagination(totalOffers) {
+  totalPages = Math.ceil(totalOffers / offersPerPage);
+  if (totalPages < 1) totalPages = 1;
+  if (currentPage > totalPages) currentPage = totalPages;
+}
+
+// Get offers for current page only
+function getOffersForCurrentPage(offers) {
+  const startIndex = (currentPage - 1) * offersPerPage;
+  const endIndex = startIndex + offersPerPage;
+  return offers.slice(startIndex, endIndex);
+}
+
+// Create pagination buttons (Previous, 1, 2, 3, Next)
+function createPaginationButtons() {
+  const paginationElement = elements.pagination;
+  if (!paginationElement) return;
+  
+  // If only one page, don't show pagination
+  if (totalPages <= 1) {
+    paginationElement.innerHTML = '';
+    return;
+  }
+  
+  let html = '';
+  
+  // Previous button
+  const prevDisabled = currentPage === 1 ? 'disabled' : '';
+  html += `<button type="button" ${prevDisabled} data-page="prev">Précédent</button>`;
+  
+  // Page number buttons
+  for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+    const activeClass = pageNum === currentPage ? 'active' : '';
+    html += `<button type="button" class="${activeClass}" data-page="${pageNum}">${pageNum}</button>`;
+  }
+  
+  // Next button
+  const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+  html += `<button type="button" ${nextDisabled} data-page="next">Suivant</button>`;
+  
+  paginationElement.innerHTML = html;
+}
+
+// Create HTML for a single job offer
+function createOfferHTML(offer) {
+  const offerId = offer.id;
+  const logoSrc = offer.logo || getDefaultLogo(offer.company);
+  const category = offer.categories && offer.categories.length > 0 ? offer.categories[0] : offer.type;
+  const salary = offer.salary ? `<span class="salary">${offer.salary}</span>` : '';
+  const defaultLogo = getDefaultLogo(offer.company);
+  
+  return `
+    <a class="offer-row-link" href="OfferDetail.html?id=${offerId}" aria-label="Voir détails ${offer.title}"></a>
+    <div class="logo-wrap">
+      <img src="${logoSrc}" alt="${offer.company || 'Entreprise'}" onerror="this.onerror=null;this.src='${defaultLogo}'" />
+    </div>
+    <div class="offer-row-main">
+      <h3 class="offer-title">${offer.title || ''}</h3>
+      <div class="offer-row-meta">
+        ${offer.company ? `<span class="company">${offer.company}</span>` : ''}
+        ${offer.location ? `<span class="location">${offer.location}</span>` : ''}
+        ${category ? `<span class="cats">${category}</span>` : ''}
+        <span class="posted">${calculateDaysAgo(offer.postedDate)}</span>
+        ${salary}
+      </div>
+      <div class="offer-row-badges">
+        ${offer.type ? `<span class="badge badge-type">${offer.type}</span>` : ''}
+        ${offer.featured ? `<span class="badge badge-featured">Featured</span>` : ''}
+        ${offer.urgent ? `<span class="badge badge-urgent">Urgent</span>` : ''}
+      </div>
+    </div>
+    <div class="offer-row-actions">
+      <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${offerId}'">Détails</button>
+    </div>
+  `;
+}
+
+// Display offers on the page
+function displayOffers() {
+  const sortedOffers = sortOffers(filteredOffers);
+  calculatePagination(sortedOffers.length);
+  const offersToShow = getOffersForCurrentPage(sortedOffers);
+  
+  // Update count
+  if (elements.count) {
+    elements.count.textContent = sortedOffers.length;
+  }
+  
+  // Update offers list
+  if (elements.list) {
+    elements.list.innerHTML = '';
+    
+    if (offersToShow.length === 0) {
+      // No offers found
+      const noResultsDiv = document.createElement('div');
+      noResultsDiv.className = 'no-results';
+      noResultsDiv.textContent = 'Aucune offre trouvée.';
+      elements.list.appendChild(noResultsDiv);
+    } else {
+      // Show offers
+      offersToShow.forEach(offer => {
+        const offerElement = document.createElement('article');
+        offerElement.className = 'offer-row';
+        offerElement.setAttribute('data-offer-id', offer.id);
+        offerElement.innerHTML = createOfferHTML(offer);
+        elements.list.appendChild(offerElement);
+      });
+    }
+  }
+  
+  // Update pagination
+  createPaginationButtons();
+}
+
+// Check if an offer matches our search filters
+function offerMatchesFilters(offer) {
+  // Check job type filter (Emploi, Stage, Freelance)
+  if (currentFilters.type !== 'Tous' && offer.type !== currentFilters.type) {
+    return false;
+  }
+  
+  // Check location filter
+  if (currentFilters.location) {
+    const offerLocation = (offer.location || '').toLowerCase();
+    const filterLocation = currentFilters.location.toLowerCase();
+    if (!offerLocation.includes(filterLocation)) {
+      return false;
+    }
+  }
+  
+  // Check category filter
+  if (currentFilters.category) {
+    const offerCategories = (offer.categories || []).map(cat => cat.toLowerCase());
+    if (!offerCategories.includes(currentFilters.category.toLowerCase())) {
+      return false;
+    }
+  }
+  
+  // Check date filter
+  if (currentFilters.dateRange) {
+    const today = new Date();
+    const offerDate = new Date(offer.postedDate);
+    const daysDiff = Math.floor((today - offerDate) / (1000 * 60 * 60 * 24));
+    
+    if (currentFilters.dateRange === '7' && daysDiff > 7) return false;
+    if (currentFilters.dateRange === '30' && daysDiff > 30) return false;
+    if (currentFilters.dateRange === '30+' && daysDiff < 30) return false;
+  }
+  
+  // Check search text
+  if (currentFilters.search) {
+    const searchText = currentFilters.search.toLowerCase();
+    const offerText = [
+      offer.title,
+      offer.company,
+      offer.location,
+      offer.description,
+      ...(offer.tags || []),
+      ...(offer.categories || [])
+    ].join(' ').toLowerCase();
+    
+    if (!offerText.includes(searchText)) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+// Apply all filters and update the display
+function applyFilters() {
+  // Filter offers based on current filter settings
+  filteredOffers = allOffers.filter(offerMatchesFilters);
+  
+  // Reset to first page when filters change
+  currentPage = 1;
+  
+  // Update display
+  displayOffers();
+}
+
+// Load job offers from JSON file
+async function loadOffers() {
+  try {
+    showLoading(true);
+    
+    // Fetch offers from JSON file
+    const response = await fetch('data/offers.json');
+    if (!response.ok) {
+      throw new Error('Failed to load offers');
+    }
+    
+    const offersData = await response.json();
+    
+    // Make sure we have an array
+    if (Array.isArray(offersData)) {
+      allOffers = offersData;
+    } else {
+      allOffers = [];
+    }
+    
+    // Add categories to offers that don't have them
+    addCategoriesToOffers();
+    
+    // Initially show all offers
+    filteredOffers = [...allOffers];
+    
+    // Display the offers
+    displayOffers();
+    
+  } catch (error) {
+    console.error('Error loading offers:', error);
+    
+    // Show error message to user
+    if (elements.list) {
+      elements.list.innerHTML = `
+        <div class="error-message">
+          <p>Erreur lors du chargement des offres.</p>
+          <button onclick="loadOffers()" class="retry-btn">Réessayer</button>
+        </div>
+      `;
+    }
+  } finally {
+    showLoading(false);
+  }
+}
+
+// Find all DOM elements we need
+function findElements() {
+  elements.search = getElement('#offer-search');
+  elements.location = getElement('#filter-location');
+  elements.type = getElement('#offer-type');
+  elements.category = getElement('#filter-category');
+  elements.list = getElement('#offers-list');
+  elements.count = getElement('#offers-count');
+  elements.pagination = getElement('#offers-pagination');
+  elements.sort = getElement('#sort-select');
+  elements.pageSize = getElement('#page-size');
+  elements.dateRadios = getAllElements('input[name="filter-date"]');
+  elements.loading = getElement('#offers-loading');
+  elements.resetBtn = getElement('#reset-filters');
+}
+
+// Handle pagination button clicks
+function handlePaginationClick(event) {
+  const button = event.target.closest('button[data-page]');
+  if (!button) return;
+  
+  const pageAction = button.getAttribute('data-page');
+  
+  if (pageAction === 'prev' && currentPage > 1) {
+    currentPage--;
+    displayOffers();
+  } else if (pageAction === 'next' && currentPage < totalPages) {
+    currentPage++;
+    displayOffers();
+  } else {
+    const pageNumber = parseInt(pageAction, 10);
+    if (!isNaN(pageNumber)) {
+      currentPage = pageNumber;
+      displayOffers();
+    }
+  }
+}
+
+// Handle search input changes
+function handleSearchInput(event) {
+  currentFilters.search = event.target.value;
+  applyFilters();
+}
+
+// Handle location input changes (with small delay)
+let locationTimeout;
+function handleLocationInput(event) {
+  clearTimeout(locationTimeout);
+  const value = event.target.value;
+  
+  locationTimeout = setTimeout(() => {
+    currentFilters.location = value;
+    applyFilters();
+  }, 300); // Wait 300ms after user stops typing
+}
+
+// Handle job type dropdown changes
+function handleTypeChange(event) {
+  currentFilters.type = event.target.value;
+  applyFilters();
+}
+
+// Handle category dropdown changes  
+function handleCategoryChange(event) {
+  currentFilters.category = event.target.value;
+  applyFilters();
+}
+
+// Handle sort dropdown changes
+function handleSortChange(event) {
+  currentFilters.sort = event.target.value;
+  displayOffers(); // Re-display with new sorting
+}
+
+// Handle page size dropdown changes
+function handlePageSizeChange(event) {
+  offersPerPage = parseInt(event.target.value, 10) || 10;
+  currentPage = 1; // Reset to first page
+  displayOffers();
+}
+
+// Handle date radio button changes
+function handleDateChange(event) {
+  if (event.target.checked) {
+    currentFilters.dateRange = event.target.value;
+    applyFilters();
+  }
+}
+
+// Reset all filters to default values
+function resetAllFilters() {
+  // Reset filter values
+  currentFilters.search = '';
+  currentFilters.location = '';
+  currentFilters.category = '';
+  currentFilters.type = 'Tous';
+  currentFilters.dateRange = '';
+  currentFilters.sort = 'recent';
+  offersPerPage = 10;
+  currentPage = 1;
+  
+  // Reset form inputs
+  if (elements.search) elements.search.value = '';
+  if (elements.location) elements.location.value = '';
+  if (elements.category) elements.category.value = '';
+  if (elements.type) elements.type.value = 'Tous';
+  if (elements.sort) elements.sort.value = 'recent';
+  if (elements.pageSize) elements.pageSize.value = '10';
+  
+  // Reset date radio buttons
+  elements.dateRadios.forEach(radio => {
+    radio.checked = radio.value === '';
+  });
+  
+  // Apply filters (which will show all offers)
+  applyFilters();
+}
+
+// Set up all event listeners
+function setupEventListeners() {
+  // Pagination clicks
+  if (elements.pagination) {
+    elements.pagination.addEventListener('click', handlePaginationClick);
+  }
+  
+  // Search input
+  if (elements.search) {
+    elements.search.addEventListener('input', handleSearchInput);
+  }
+  
+  // Location input  
+  if (elements.location) {
+    elements.location.addEventListener('input', handleLocationInput);
+  }
+  
+  // Job type dropdown
+  if (elements.type) {
+    elements.type.addEventListener('change', handleTypeChange);
+  }
+  
+  // Category dropdown
+  if (elements.category) {
+    elements.category.addEventListener('change', handleCategoryChange);
+  }
+  
+  // Sort dropdown
+  if (elements.sort) {
+    elements.sort.addEventListener('change', handleSortChange);
+  }
+  
+  // Page size dropdown
+  if (elements.pageSize) {
+    elements.pageSize.addEventListener('change', handlePageSizeChange);
+  }
+  
+  // Date radio buttons
+  elements.dateRadios.forEach(radio => {
+    radio.addEventListener('change', handleDateChange);
+  });
+  
+  // Reset button
+  if (elements.resetBtn) {
+    elements.resetBtn.addEventListener('click', resetAllFilters);
+  }
+}
+
+// Check URL for initial filter values (like ?search=developer&type=Emploi)
+function loadFiltersFromURL() {
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  const searchParam = urlParams.get('q') || urlParams.get('search');
+  const typeParam = urlParams.get('type');
+  const dateParam = urlParams.get('date');
+  const locationParam = urlParams.get('location') || urlParams.get('loc');
+  const categoryParam = urlParams.get('category');
+  const sizeParam = urlParams.get('size');
+  
+  // Apply URL parameters to filters and form inputs
+  if (searchParam) {
+    currentFilters.search = searchParam;
+    if (elements.search) elements.search.value = searchParam;
+  }
+  
+  if (typeParam) {
+    currentFilters.type = typeParam;
+    if (elements.type) elements.type.value = typeParam;
+  }
+  
+  if (dateParam) {
+    currentFilters.dateRange = dateParam;
+    elements.dateRadios.forEach(radio => {
+      radio.checked = radio.value === dateParam;
+    });
+  }
+  
+  if (locationParam) {
+    currentFilters.location = locationParam;
+    if (elements.location) elements.location.value = locationParam;
+  }
+  
+  if (categoryParam) {
+    currentFilters.category = categoryParam;
+    if (elements.category) elements.category.value = categoryParam;
+  }
+  
+  if (sizeParam) {
+    const pageSize = parseInt(sizeParam, 10);
+    if (!isNaN(pageSize)) {
+      offersPerPage = pageSize;
+      if (elements.pageSize) elements.pageSize.value = sizeParam;
+    }
+  }
+}
+
+// Initialize everything when page loads
+function initializeOffersPage() {
+  // Find all DOM elements
+  findElements();
+  
+  // Set up event listeners
+  setupEventListeners();
+  
+  // Load filters from URL if any
+  loadFiltersFromURL();
+  
+  // Load and display offers
+  loadOffers();
+}
+
+// Start everything when the page is ready
+document.addEventListener('DOMContentLoaded', initializeOffersPage);

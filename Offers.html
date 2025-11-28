@@ -7,29 +7,23 @@
     <!-- Styling File -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/offers.css" />
-    <!-- Site logo / favicon -->
-    <link
-      rel="icon"
-      href="assets/logo/logo_jobstart_single.png"
-      type="image/png"
-    />
-    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
-    <!-- icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <!-- AOS library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <!-- dark mode -->
-    <script type="text/javascript" src="js/darkmode.js" defer></script>
-    <!-- auth utilities -->
-    <script type="text/javascript" src="js/auth.js" defer></script>
+     <!-- Site logo / favicon -->
+        <link rel="icon" href="assets/logo/logo_jobstart_single.png"
+            type="image/png">
+        <link rel="apple-touch-icon"
+            href="assets/logo/logo_jobstart_single.png">
+        <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+        <!-- icons -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Google Fonts -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+            rel="stylesheet">
+        <!-- dark mode -->
+        <script type="text/javascript" src="js/darkmode.js" defer></script>
   </head>
   <body>
     <!-- Page loader -->
@@ -98,7 +92,8 @@
     </header>
     <!-- End Header -->
 
-    <main>
+    <!-- start Offers -->
+      <main>
       <div
         class="offers-layout container login-wrapper"
         data-aos="fade-up"
@@ -108,7 +103,7 @@
           class="offers-sidebar login-wrapper"
           aria-label="Filtres"
           data-aos="fade-right"
-          data-aos-duration="2000"
+          data-aos-duration="5000"
         >
           <form class="filter-form" onsubmit="return false" novalidate>
             <div class="filter-group">
@@ -177,9 +172,21 @@
           class="offers-results login-wrapper"
           aria-labelledby="offers-heading"
           data-aos="fade-left"
-          data-aos-duration="2000"
+          data-aos-duration="5000"
         >
           <div class="offers-topbar">
+            <!-- Mobile filter toggle button -->
+            <button
+              class="mobile-filter-toggle"
+              aria-label="Toggle filters"
+              title="Toggle filters"
+              aria-expanded="false"
+            >
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+
             <h1 id="offers-heading">Offres disponibles</h1>
             <div class="results-meta">
               Résultats: <span id="offers-count">0</span>
@@ -213,6 +220,8 @@
         </section>
       </div>
     </main>
+    <!-- end Offers -->
+  
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
@@ -377,13 +386,12 @@
       </div>
     </footer>
     <!-- End Footer -->
-    <script src="js/main.js"></script>
-    <script src="js/offers.js"></script>
-    <script src="js/loading.js"></script>
-    <!--AOS library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
+ 
+        <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="js/offers.js"></script>
+        <script src="js/loading.js" defer></script>
+        <script src="js/main.js" defer></script>
   </body>
 </html>
