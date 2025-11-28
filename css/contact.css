@@ -1,7 +1,8 @@
 main {
     background-color: var(--base-variant);
-    padding: 30px;
+    padding: 30px 15px;
 }
+
 .container-contact {
     max-width: 1200px;
     margin: 0 auto;
@@ -10,8 +11,10 @@ main {
     gap: 0;
     background-color: var(--primary-color);
     border-radius: 8px;
+    border-bottom: 1px solid var(--border-color);
     overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 20px 60px rgba(30, 144, 255, 0.12);
+    transition: all 0.3s ease;
 }
 
 .left-section {
@@ -20,7 +23,6 @@ main {
     background-color: var(--primary-color);
     color: var(--text-color);
     padding: 60px 40px;
-    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -40,8 +42,9 @@ main {
 .section-title {
     font-size: 20px;
     font-weight: 600;
-    color: var(--blue-text);
-    margin-bottom: 25px;
+    color: var(--text-color);
+    margin: 20px 0 12px;
+    letter-spacing: 0.2px;
 }
 
 .profile-choice {
@@ -63,6 +66,7 @@ main {
     display: flex;
     gap: 30px;
     margin-top: 10px;
+    flex-wrap: wrap;
 }
 
 .radio-option {
@@ -89,8 +93,8 @@ main {
 .form-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 18px;
+    margin-bottom: 22px;
 }
 
 .form-row.two-cols {
@@ -100,6 +104,7 @@ main {
 .form-group {
     display: flex;
     flex-direction: column;
+    gap: 8px;
 }
 
 .form-group.full-width {
@@ -112,7 +117,9 @@ input, select, textarea {
     border-radius: 4px;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
-    transition: border-color 0.3s var(--primary-color);
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input:focus, select:focus, textarea:focus {
@@ -122,116 +129,85 @@ input:focus, select:focus, textarea:focus {
 
 select {
     cursor: pointer;
-    background-color: white;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-color: var(--input-border);
 }
-
 .phone-group {
     display: flex;
-    gap: 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
 }
+/* .phone-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    flex-wrap: wrap;
+} */
 
 .phone-group:focus-within {
-    border-color: var(--blue-text);
+    border-color: var(--primary-color);
 }
 
-.country-code {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 12px;
-    background-color: white;
-    border-right: 1px solid #ddd;
+
+
+/* .country-code-select {
+    flex: 0 0 160px;
+    min-width: 120px;
+    max-width: 40%;
+} */
+
+/* Apply visual styles whether the class is on the select element itself
+   or on a wrapper that contains a select. */
+.country-code-select,
+.country-code-select select {
+    width: 100%;
+    padding: 12px 40px 12px 14px;
+    height: 48px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    box-sizing: border-box;
+    cursor: pointer;
 }
-.country-code-select {
-    width: 180px;
-}
+
+/* Ensure the native drop-down arrow has room and doesn't overlap text */
+.country-code-select::-ms-expand,
+.country-code-select select::-ms-expand { display: none; }
+
 .phone-input {
-    flex: 1;
-    border: none;
-    padding: 12px 15px;
-}
-
-.phone-input:focus {
-    outline: none;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    height: 48px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
 }
 
 textarea {
     min-height: 150px;
     resize: vertical;
+    padding: 14px 16px;
+    border-radius: 6px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    line-height: 1.45;
 }
 
 .note {
     font-size: 13px;
     color: var(--secondary-text);
     margin: 20px 0;
-}
-
-.recaptcha-container {
-    margin: 25px 0;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.recaptcha-box {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.recaptcha-checkbox {
-    width: 24px;
-    height: 24px;
-    border: 2px solid #ddd;
-    border-radius: 3px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-.recaptcha-checkbox.checked {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-    color: white;
-}
-
-.recaptcha-text {
-    font-size: 12px;
-    color: var(--text-color);
-}
-
-.recaptcha-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 10px;
-    color: #999;
-    margin-left: 10px;
-}
-
-.terms-text {
-    font-size: 13px;
-    color: var(--secondary-text);
-    text-align: center;
-    margin: 20px 0;
-    line-height: 1.6;
-}
-
-.terms-text a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.terms-text a:hover {
-    text-decoration: underline;
 }
 
 .submit-btn {
@@ -262,7 +238,28 @@ textarea {
     transform: none;
 }
 
+/* Tablet Responsiveness */
+@media (max-width: 1024px) {
+
+    .container-contact {
+        grid-template-columns: 1fr 1.5fr;
+    }
+    
+    .left-section h1 {
+        font-size: 36px;
+    }
+    
+    .right-section {
+        padding: 35px 40px;
+    }
+}
+
+/* Mobile Landscape & Small Tablets */
 @media (max-width: 968px) {
+    main {
+        padding: 20px 15px;
+    }
+
     .container-contact {
         grid-template-columns: 1fr;
     }
@@ -276,6 +273,10 @@ textarea {
         text-align: center;
     }
 
+    .right-section {
+        padding: 30px 25px;
+    }
+
     .form-row {
         grid-template-columns: 1fr;
     }
@@ -283,18 +284,120 @@ textarea {
     .form-row.two-cols {
         grid-template-columns: 1fr;
     }
+    
+    .section-title {
+        font-size: 18px;
+    }
+    .phone-input {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+}
 }
 
+/* Mobile Portrait */
 @media (max-width: 576px) {
-    body {
-        padding: 20px 10px;
+    main {
+        padding: 15px 10px;
     }
 
-    .right-section {
+    .container-contact {
+        border-radius: 4px;
+    }
+
+    .left-section {
         padding: 30px 20px;
     }
 
-    .recaptcha-container {
-        justify-content: center;
+    .left-section h1 {
+        font-size: 28px;
+    }
+
+    .right-section {
+        padding: 25px 20px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .radio-group {
+        gap: 20px;
+    }
+
+    .form-row {
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    input, select, textarea {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .phone-group {
+        gap: 8px;
+    }
+
+    .country-code-select {
+        max-width: 45%;
+        font-size: 12px;
+        min-width: 90px;
+    }
+
+    textarea {
+        min-height: 120px;
+    }
+
+    .submit-btn {
+        max-width: 100%;
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+
+    .note {
+        font-size: 12px;
+        margin: 15px 0;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 400px) {
+    .left-section h1 {
+        font-size: 24px;
+    }
+
+    .right-section {
+        padding: 20px 15px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .country-code-select {
+        min-width: 90px;
+        max-width: 100%;
+    }
+
+    input, select, textarea {
+        font-size: 12px;
+    } 
+}
+
+/* Landscape Orientation Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+    .left-section {
+        padding: 30px 20px;
+    }
+
+    .left-section h1 {
+        font-size: 24px;
+    }
+
+    .right-section {
+        padding: 20px 25px;
     }
 }

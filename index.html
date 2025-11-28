@@ -324,22 +324,7 @@
             defer></script>
         <!--AOS library -->
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                if (window.AOS) {
-                    AOS.init({
-                        once: false,
-                        duration: 800,
-                        easing: 'ease-out-cubic',
-                        offset: 120
-                    });
-                }
-            });
-
-            window.addEventListener('load', function () {
-                if (window.AOS) AOS.refresh();
-            });
-        </script>
+        <script src="js/aos.js"></script>
         <script src="data/constants.global.js" defer></script>
         <script src="js/loading.js" defer></script>
         <script src="js/main.js" defer></script>

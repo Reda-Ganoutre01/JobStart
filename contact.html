@@ -12,6 +12,8 @@
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+              <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -42,7 +44,7 @@
             </div>
         </div>
 
-         <!-- Header -->
+         <!--Start Header -->
         <header>
             <div class="container">
 
@@ -89,9 +91,11 @@
             </div>
         </header>
         <!-- End Header -->
-    
-    <main>
-        <div class="container-contact">
+    <!-- Start Contact Main -->
+   <main >
+        <div class="container-contact" data-aos="fade-up"
+        data-aos-delay="2600"
+                    data-aos-duration="5000">
         <!-- Left Section -->
         <div class="left-section">
             <h1>Contactez-nous</h1>
@@ -140,7 +144,7 @@
                     <div class="form-group">
                         <div class="phone-group">
                             <select class="country-code-select" name="country_code" required>
-                                <option value="">Select Country</option>
+                                <option value="" disabled selected>Select Country</option>
                                 <option value="93">Afghanistan +93</option>
                                 <option value="358">Aland Islands +358</option>
                                 <option value="355">Albania +355</option>
@@ -393,10 +397,10 @@
                                 <option value="260">Zambia +260</option>
                                 <option value="263">Zimbabwe +263</option>
                             </select>
-                            <input type="tel" class="phone-input" placeholder="650-123456" required>
+                            <input type="tel" class="phone-input" placeholder="06-00000000" required>
                         </div>
                     </div>
-                    
+                    <br>
                     <div class="form-group">
                         <input type="email" placeholder="Email *" required>
                     </div>
@@ -419,6 +423,7 @@
         </div>
     </div>
     </main>
+     <!-- End Contact Main -->
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
@@ -554,6 +559,9 @@
             </div>
         </footer>
         <!-- End Footer -->
+         <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="js/aos.js"></script>
         <script src="js/main.js"></script>
         <script src="js/loading.js"></script>
         <script src="js/contact.js"></script>
