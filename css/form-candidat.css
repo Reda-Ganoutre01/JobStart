@@ -56,17 +56,20 @@ label {
     color: #c8102e;
 }
 
-input, select {
+input, select, textarea {
     padding: 12px 15px;
-    border: 1px solid var(--base-variant);
-    border-radius: 4px;
     font-size: 14px;
     transition: border-color 0.3s;
     width: 100%;
     box-sizing: border-box;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: var(--primary-color);
 }
@@ -83,9 +86,10 @@ input:focus, select:focus {
     align-items: center;
     gap: 5px;
     padding: 12px 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background-color: white;
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .country-code-select {
@@ -124,17 +128,18 @@ input:focus, select:focus {
 .cv-upload {
     margin: 30px 0;
     padding: 30px;
-    border: 2px dashed #ddd;
-    border-radius: 4px;
+    border: 2px dashed var(--input-border);
+    border-radius: 6px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
-    background-color: #fafafa;
+    background-color: var(--input-bg);
+    color: var(--text-color);
 }
 
 .cv-upload:hover {
     border-color: var(--secondary-color);
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.02);
 }
 
 .cv-upload.dragover {
@@ -162,7 +167,7 @@ input:focus, select:focus {
 .note {
     margin: 20px 0;
     font-size: 14px;
-    color: #666;
+    color: var(--secondary-text);
 }
 
 .submit-btn {
