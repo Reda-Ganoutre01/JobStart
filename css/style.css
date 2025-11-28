@@ -3,7 +3,6 @@
 @import url('loader.css');
 @import url('footer.css');
 @import url('conseils.css');
-@import url('offer_detail.css');
 /* Start CSS Variables */
 :root {
     --primary-color: #1e90ff;
