@@ -7,43 +7,53 @@
     <!-- Styling File -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/offers.css" />
-     <!-- Site logo / favicon -->
-        <link rel="icon" href="assets/logo/logo_jobstart_single.png"
-            type="image/png">
-        <link rel="apple-touch-icon"
-            href="assets/logo/logo_jobstart_single.png">
-        <!-- AOS library -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
-        <!-- icons -->
-        <link rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <!-- Google Fonts -->
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-            rel="stylesheet">
-        <!-- dark mode -->
-        <script type="text/javascript" src="js/darkmode.js" defer></script>
+    <!-- Site logo / favicon -->
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- dark mode -->
+    <script type="text/javascript" src="js/darkmode.js" defer></script>
+    <!-- auth utilities -->
+    <script type="text/javascript" src="js/auth.js" defer></script>
   </head>
   <body>
     <!-- Page loader -->
-        <div id="site-loader" aria-hidden="false">
-            <div class="loader-container">
-                <div class="logo-wrapper">
-                    <img src="assets/logo/logo_jobstart_single.png" alt="JobStart Logo" class="logo-image">
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-
-                <h1 class="brand-text">
-                    <span class="job">Job</span><span class="start">Start</span>
-                </h1>
-
-                <p class="loading-text">Chargement de vos opportunités...</p>
-            </div>
+    <div id="site-loader" aria-hidden="false">
+      <div class="loader-container">
+        <div class="logo-wrapper">
+          <img
+            src="assets/logo/logo_jobstart_single.png"
+            alt="JobStart Logo"
+            class="logo-image"
+          />
         </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <h1 class="brand-text">
+          <span class="job">Job</span><span class="start">Start</span>
+        </h1>
+
+        <p class="loading-text">Chargement de vos opportunités...</p>
+      </div>
+    </div>
 
     <!-- Header -->
     <header>
@@ -92,8 +102,7 @@
     </header>
     <!-- End Header -->
 
-    <!-- start Offers -->
-      <main>
+    <main>
       <div
         class="offers-layout container login-wrapper"
         data-aos="fade-up"
@@ -181,10 +190,28 @@
               aria-label="Toggle filters"
               title="Toggle filters"
               aria-expanded="false"
+              aria-hidden="true"
+              style="
+                background: none;
+                border: none;
+                padding: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
             >
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                style="display: block"
+              >
+                <circle cx="16" cy="8" r="2.5" fill="#1e90ff" />
+                <circle cx="16" cy="16" r="2.5" fill="#1e90ff" />
+                <circle cx="16" cy="24" r="2.5" fill="#1e90ff" />
+              </svg>
             </button>
 
             <h1 id="offers-heading">Offres disponibles</h1>
@@ -220,8 +247,6 @@
         </section>
       </div>
     </main>
-    <!-- end Offers -->
-  
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
@@ -386,12 +411,91 @@
       </div>
     </footer>
     <!-- End Footer -->
- 
-        <!--AOS library -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="js/aos.js"></script>
-        <script src="js/offers.js"></script>
-        <script src="js/loading.js" defer></script>
-        <script src="js/main.js" defer></script>
+    <!-- Embedded offers data for offline use -->
+    <script src="data/offers.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/offers.js"></script>
+    <script src="js/loading.js"></script>
+    <!--AOS library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Check if mobile and first load for AOS animations
+      const isMobile = window.innerWidth <= 992;
+      const isFirstLoad = !sessionStorage.getItem("offersPageVisited");
+
+      if (!isMobile || isFirstLoad) {
+        AOS.init();
+        if (isMobile) {
+          sessionStorage.setItem("offersPageVisited", "true");
+        }
+      } else {
+        // Remove AOS attributes on mobile after first load
+        document.querySelectorAll("[data-aos]").forEach((element) => {
+          element.removeAttribute("data-aos");
+          element.removeAttribute("data-aos-duration");
+          element.removeAttribute("data-aos-delay");
+        });
+      }
+
+      // Mobile filter toggle functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterToggle = document.querySelector(".mobile-filter-toggle");
+        const filtersSidebar = document.querySelector(".offers-sidebar");
+
+        // Create backdrop element
+        const backdrop = document.createElement("div");
+        backdrop.className = "modal-backdrop";
+        document.body.appendChild(backdrop);
+
+        if (filterToggle && filtersSidebar) {
+          function openModal() {
+            console.log("Opening modal"); // Debug
+            filterToggle.setAttribute("aria-expanded", "true");
+            filtersSidebar.classList.add("mobile-visible");
+            backdrop.classList.add("active");
+            filterToggle.classList.add("active");
+            document.body.style.overflow = "hidden";
+            console.log("Modal classes:", filtersSidebar.classList); // Debug
+          }
+
+          function closeModal() {
+            filterToggle.setAttribute("aria-expanded", "false");
+            filtersSidebar.classList.remove("mobile-visible");
+            backdrop.classList.remove("active");
+            filterToggle.classList.remove("active");
+            document.body.style.overflow = "";
+          }
+
+          // Toggle filter modal
+          filterToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const isExpanded = this.getAttribute("aria-expanded") === "true";
+            if (isExpanded) {
+              closeModal();
+            } else {
+              openModal();
+            }
+          });
+
+          // Close modal when clicking backdrop
+          backdrop.addEventListener("click", closeModal);
+
+          // Prevent modal from closing when clicking inside
+          filtersSidebar.addEventListener("click", function (e) {
+            e.stopPropagation();
+          });
+
+          // Close modal with Escape key
+          document.addEventListener("keydown", function (e) {
+            if (
+              e.key === "Escape" &&
+              filtersSidebar.classList.contains("mobile-visible")
+            ) {
+              closeModal();
+            }
+          });
+        }
+      });
+    </script>
   </body>
 </html>

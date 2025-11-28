@@ -318,38 +318,35 @@ function applyFilters() {
   displayOffers();
 }
 
-// Load job offers from JSON file
+// Load job offers from embedded JS variable or JSON file
 async function loadOffers() {
   try {
     showLoading(true);
-    
-    // Fetch offers from JSON file
-    const response = await fetch('data/offers.json');
-    if (!response.ok) {
-      throw new Error('Failed to load offers');
+    let offersData;
+    if (window.offersData && Array.isArray(window.offersData)) {
+      offersData = window.offersData;
+    } else {
+      // Fallback: fetch from JSON file if not embedded
+      const response = await fetch('data/offers.json');
+      if (!response.ok) {
+        throw new Error('Failed to load offers');
+      }
+      offersData = await response.json();
     }
-    
-    const offersData = await response.json();
-    
     // Make sure we have an array
     if (Array.isArray(offersData)) {
       allOffers = offersData;
     } else {
       allOffers = [];
     }
-    
     // Add categories to offers that don't have them
     addCategoriesToOffers();
-    
     // Initially show all offers
     filteredOffers = [...allOffers];
-    
     // Display the offers
     displayOffers();
-    
   } catch (error) {
     console.error('Error loading offers:', error);
-    
     // Show error message to user
     if (elements.list) {
       elements.list.innerHTML = `

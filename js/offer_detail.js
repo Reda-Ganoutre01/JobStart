@@ -42,8 +42,13 @@
   async function load(){
     try {
       if (loadingEl){ loadingEl.classList.remove('hidden'); loadingEl.setAttribute('aria-hidden','false'); }
-      const res = await fetch('data/offers.json',{cache:'no-store'});
-      const data = await res.json();
+      let data;
+      if (window.offersData && Array.isArray(window.offersData)) {
+        data = window.offersData;
+      } else {
+        const res = await fetch('data/offers.json',{cache:'no-store'});
+        data = await res.json();
+      }
       const offer = data.find(o=>o.id===id);
       if(!offer){
         headerEl.innerHTML = '<p>Offre introuvable.</p>';
