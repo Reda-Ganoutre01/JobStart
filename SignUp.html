@@ -12,6 +12,8 @@
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+         <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -91,9 +93,11 @@
         <!-- End Header -->
     
    <!-- Start main -->
-     <main>
+     <main
+                    >
         <div class="container-signup">
-            <div class="card">
+            <div class="card" data-aos="fade-right" data-aos-delay="2600"
+                    data-aos-duration="5000">
                 <div class="card-header">
                     <h2>Candidat</h2>
                 </div>
@@ -103,7 +107,8 @@
                 <a class="signup-btn" href="form-candidat.html">Cliquez ici</a>
             </div>
 
-            <div class="card">
+            <div class="card" data-aos="fade-left" data-aos-delay="2600"
+                    data-aos-duration="5000">
                 <div class="card-header">
                     <h2>Recruteur</h2>
                 </div>
@@ -252,8 +257,16 @@
             </div>
         </footer>
         <!-- End Footer -->
-        <script src="js/main.js"></script>
-        <script src="js/loading.js"></script>
+      
+
+          <!-- Typed.js library -->
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"defer></script>
+        <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="data/constants.global.js" defer></script>
+        <script src="js/loading.js" defer></script>
+        <script src="js/main.js" defer></script>
 
 </body>
 </html>

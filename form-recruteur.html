@@ -6,13 +6,16 @@
         <title>JobStart-contact</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/scrollbar.css">
         <link rel="stylesheet" href="css/form-recruteur.css">
-        <!-- Site logo / favicon -->
+       
+      <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+        <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
         <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,8 +23,8 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
             rel="stylesheet">
-         <!-- dark mode -->
-         <script type="text/javascript" src="js/darkmode.js" defer></script>
+        <!-- dark mode -->
+        <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <body>
        <!-- Page loader -->
@@ -91,8 +94,11 @@
         </header>
         <!-- End Header -->
     
+   <!-- Start main for Form Recruteur -->
     <main>
-            <div class="container-form">
+            <div class="container-form" data-aos="fade-up"
+        data-aos-delay="2600"
+                    data-aos-duration="5000">
         <!-- Section 1: Votre entreprise -->
         <div class="section-header">Votre entreprise</div>
         <form id="form-recruteur">
@@ -539,6 +545,7 @@
         </form>
     </div>
     </main>
+   <!-- End main for Form Recruteur -->
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
@@ -674,6 +681,9 @@
             </div>
         </footer>
         <!-- End Footer -->
+          <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="js/aos.js"></script>
         <script src="js/main.js"></script>
         <script src="js/loading.js"></script>
         <script src="js/recruteur.js"></script>

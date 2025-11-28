@@ -1,10 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wdth,wght@82.4,632&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sen:wght@400..800&display=swap');
+
 main {
     padding: 30px;
     background-color: var(--base-variant);
 }
+
 .container-form-candidat {
     display: flex;
+    flex-direction: column;
     max-width: 1200px;
     margin: 0 auto;
     background-color: var(--card-bg);
@@ -12,8 +15,9 @@ main {
     overflow: hidden;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
-.form-candidat  {
-    padding: 20px;
+
+.form-candidat {
+    padding: 30px;
 }
 
 .header {
@@ -56,6 +60,8 @@ input, select {
     border-radius: 4px;
     font-size: 14px;
     transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 input:focus, select:focus {
@@ -66,15 +72,30 @@ input:focus, select:focus {
 .phone-group {
     display: flex;
     gap: 10px;
+    width: 100%;
+}
+
+.country-code {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 12px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
 }
 
 .country-code-select {
-    min-width: 200px;
+    flex: 0 0 auto;
+    max-width: 40%;
 }
-
 .phone-input {
     flex: 1;
+    min-width: 300px;
+    text-align: left;
 }
+
 
 .password-group {
     position: relative;
@@ -106,15 +127,17 @@ input:focus, select:focus {
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
+    background-color: #fafafa;
 }
 
 .cv-upload:hover {
     border-color: var(--secondary-color);
-    background-color: (var(--secondary-color),0.9);
+    background-color: #fff;
 }
 
 .cv-upload.dragover {
     border-color: var(--secondary-color);
+    background-color: rgba(200, 16, 46, 0.05);
 }
 
 .cv-upload-icon {
@@ -127,23 +150,22 @@ input:focus, select:focus {
     margin-top: 10px;
     color: var(--text-color);
     font-size: 14px;
+    font-weight: 500;
 }
 
 .file-input {
     display: none;
 }
 
-
-
 .note {
     margin: 20px 0;
     font-size: 14px;
     color: #666;
 }
+
 .submit-btn {
     font-family: "Poppins", sans-serif;
-    font-weight: 400;
-    font-style: bold;
+    font-weight: 600;
     display: block;
     width: 100%;
     max-width: 300px;
@@ -155,13 +177,236 @@ input:focus, select:focus {
     border-radius: 50px;
     font-size: 16px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s;
 }
 
 .submit-btn:hover {
-    transform: translateY(-6%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
 }
+
 .submit-btn:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    transform: none;
+}
+
+/* Tablet Styles */
+@media (max-width: 992px) {
+    main {
+        padding: 20px;
+    }
+
+    .container-form-candidat {
+        margin: 0 10px;
+    }
+
+    .form-candidat {
+        padding: 25px;
+    }
+
+    .header {
+        padding: 18px 25px;
+        font-size: 22px;
+    }
+
+    .form-row {
+        gap: 18px;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    main {
+        padding: 15px 10px;
+    }
+
+    .container-form-candidat {
+        margin: 0;
+        border-radius: 6px;
+    }
+
+    .form-candidat {
+        padding: 20px 15px;
+    }
+
+    .header {
+        padding: 15px 20px;
+        font-size: 20px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    input, select {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .phone-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .country-code-select {
+        width: 100%;
+    }
+
+    .phone-input {
+        width: 100%;
+    }
+
+    .cv-upload {
+        padding: 25px 15px;
+        margin: 20px 0;
+    }
+
+    .cv-upload-icon {
+        font-size: 40px;
+    }
+
+    .cv-upload div {
+        font-size: 14px;
+    }
+
+    .cv-filename {
+        font-size: 13px;
+    }
+
+    .toggle-password {
+        right: 12px;
+        top: 36px;
+        font-size: 14px;
+    }
+
+    .submit-btn {
+        max-width: 100%;
+        padding: 12px 25px;
+        font-size: 15px;
+        margin: 25px auto;
+    }
+
+    .note {
+        font-size: 13px;
+        margin: 15px 0;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    main {
+        padding: 10px 5px;
+    }
+
+    .container-form-candidat {
+        border-radius: 4px;
+    }
+
+    .form-candidat {
+        padding: 15px 10px;
+    }
+
+    .header {
+        padding: 12px 15px;
+        font-size: 18px;
+    }
+
+    .form-row {
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input, select {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .cv-upload {
+        padding: 20px 10px;
+    }
+
+    .cv-upload-icon {
+        font-size: 36px;
+    }
+
+    .cv-upload div {
+        font-size: 13px;
+    }
+
+    .cv-upload div:last-of-type {
+        font-size: 11px;
+    }
+
+    .submit-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        margin: 20px auto;
+    }
+
+    .note {
+        font-size: 12px;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .header {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+
+    .form-candidat {
+        padding: 20px;
+    }
+
+    .cv-upload {
+        padding: 20px 15px;
+        margin: 15px 0;
+    }
+
+    .submit-btn {
+        margin: 20px auto;
+    }
+}
+
+/* Extra Small Screens */
+@media (max-width: 360px) {
+    .header {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    .form-candidat {
+        padding: 12px 8px;
+    }
+
+    input, select {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .cv-upload {
+        padding: 15px 8px;
+    }
+
+    .cv-upload-icon {
+        font-size: 32px;
+    }
+
+    .submit-btn {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
 }

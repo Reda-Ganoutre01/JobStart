@@ -6,13 +6,15 @@
         <title>JobStart-contact</title>
         <!-- Styling File -->
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/scrollbar.css">
         <link rel="stylesheet" href="css/form-candidat.css">
         <!-- Site logo / favicon -->
         <link rel="icon" href="assets/logo/logo_jobstart_single.png"
             type="image/png">
         <link rel="apple-touch-icon"
             href="assets/logo/logo_jobstart_single.png">
+        <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
         <!-- icons -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -20,8 +22,8 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
             rel="stylesheet">
-         <!-- dark mode -->
-         <script type="text/javascript" src="js/darkmode.js" defer></script>
+        <!-- dark mode -->
+        <script type="text/javascript" src="js/darkmode.js" defer></script>
     </head>
     <body>
       <!-- Page loader -->
@@ -90,8 +92,11 @@
         </header>
         <!-- End Header -->
     
-    <main>
-            <div class="container-form-candidat">
+    <!-- Start Form Condidats -->
+          <main>
+            <div class="container-form-candidat"  data-aos="fade-up"
+        data-aos-delay="2600"
+                    data-aos-duration="5000">
             <div class="header">
                 Vos informations
             </div>
@@ -116,11 +121,12 @@
                         <label>Nom <span class="required">*</span></label>
                         <input type="text" placeholder="Nom" required>
                     </div>
+                    <br>
                     <div class="form-group">
                         <label>Tel  <span class="required">*</span></label>
                         <div class="phone-group">
                             <select class="country-code-select" name="country_code" required>
-                                <option value="">Select Country</option>
+                                <option value="">...</option>
                                 <option value="93">Afghanistan +93</option>
                                 <option value="358">Aland Islands +358</option>
                                 <option value="355">Albania +355</option>
@@ -423,6 +429,8 @@
             </form>
         </div>
     </main>
+    <!-- end Form Condidats -->
+
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
@@ -558,8 +566,14 @@
             </div>
         </footer>
         <!-- End Footer -->
-        <script src="js/main.js"></script>
+          <!-- Typed.js library -->
+        <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"defer></script>
+        <!--AOS library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="js/aos.js"></script>
+        <script src="data/constants.global.js" defer></script>
+        <script src="js/loading.js" defer></script>
+        <script src="js/main.js" defer></script>
         <script src="js/condidat.js"></script>
-        <script src="js/loading.js"></script>
 </body>
 </html>
