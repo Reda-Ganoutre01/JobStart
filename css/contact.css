@@ -13,8 +13,8 @@ main {
     border-radius: 8px;
     border-bottom: 1px solid var(--border-color);
     overflow: hidden;
-    box-shadow: 0 20px 60px rgba(30, 144, 255, 0.12);
-    transition: all 0.3s ease;
+   box-shadow: var(--box-shadow-card);
+    transition: var(--transition-card);
 }
 
 .left-section {
@@ -113,13 +113,15 @@ main {
 
 input, select, textarea {
     padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     font-size: 14px;
     font-family: 'Poppins', sans-serif;
     transition: border-color 0.3s;
     width: 100%;
     box-sizing: border-box;
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    color: var(--text-color);
 }
 
 input:focus, select:focus, textarea:focus {

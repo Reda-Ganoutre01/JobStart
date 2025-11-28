@@ -3,8 +3,6 @@
     position: relative;
     width: 100%;
     min-height: 420px;
-    /* allow the hero to grow with its content (search, popular terms, stats)
-       so items aren't clipped on small screens */
     overflow: visible;
     padding: 80px 0;
     display: flex;
@@ -57,8 +55,9 @@
     margin: 0 auto 2rem;
     display: flex;
     gap: 1rem;
-    box-shadow: 0 4px 6px var(--shadow);
-    transition: background-color 0.3s;
+  
+    box-shadow: var(--box-shadow-card);
+    transition: var(--transition-card);
 }
 
 .search-box select,
@@ -227,8 +226,10 @@
 }
 
 .step-card:hover {
-    transform: translateY(-10px) scale(1.01);
-    box-shadow: 0 28px 50px rgba(15, 23, 42, 0.10);
+
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-card);
+    transition: var(--transition-card);
 }
 
 .step-icon {

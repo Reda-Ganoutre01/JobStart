@@ -22,13 +22,18 @@
     --card-bg: #ffffff;
     --border-color: #e0e0e0;
     --shadow: rgba(0, 0, 0, 0.1);
+    --box-shadow-card: 0 20px 60px rgba(30, 144, 255, 0.12);
+    --transition-card: all 0.3s ease;
     /* gradient colors */
     --text-gradient-primary: linear-gradient(90deg, #1e90ff, #66b3ff);
     --text-gradient-success: linear-gradient(90deg, #00e6bb, #1e90ff);
     --text-gradient-secondary: linear-gradient(90deg, #66b3ff, #1e90ff);
     --text-gradient-dark-to-blue: linear-gradient(90deg, #202124, #1e90ff);
     --text-gradient-soft: linear-gradient(90deg, #202124, #66b3ff);
-}
+    --search-box-shadow: 0 20px 60px rgba(11,20,40,0.06);
+    --transition-card: all 0.3s ease;
+
+  }
 
 /* start theme mode */
 .darkmode {
@@ -44,7 +49,8 @@
     --input-border: #444444;
     --border-color: #2b2f3a;
     --card-bg: #0b1220;
-
+    --box-shadow-card:  0 20px 60px rgba(30, 144, 255, 0.12);;
+    --transition-card: all 0.3s ease;
 
 }
 

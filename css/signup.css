@@ -15,12 +15,13 @@
     flex: 1;
     min-width: 300px;
     max-width: 600px;
-    box-shadow: 0 10px 30px var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+   
+
 }
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px var(--shadow);
+    box-shadow: var(--box-shadow-card);
+    transition: var(--transition-card);
 }
 .card-header {
     text-align: center;
