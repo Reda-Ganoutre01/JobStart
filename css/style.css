@@ -97,4 +97,23 @@ body {
 }
 /* End Global Rules */
 
+/* Hide header / kebab / three-dot controls when site enters fullscreen
+   The `.full-screen-mode` class is toggled by JS (covers F11 and Fullscreen API).
+   Use several selectors to cover FontAwesome icons, SVG dots and buttons labeled "menu". */
+.full-screen-mode .mobile-filter-toggle,
+.full-screen-mode .dropdown-menu,
+.full-screen-mode .fa-ellipsis,
+.full-screen-mode .fa-ellipsis-h,
+.full-screen-mode .fa-ellipsis-v,
+.full-screen-mode .fa-ellipsis-vertical,
+.full-screen-mode button[aria-label*="menu"],
+.full-screen-mode button[title*="menu"],
+.full-screen-mode .mobile-filter-toggle svg,
+.full-screen-mode .mobile-filter-toggle * {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+
 

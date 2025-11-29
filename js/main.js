@@ -194,4 +194,31 @@ if (document.readyState === 'loading') {
     window.addEventListener('scroll', onScroll, { passive: true });
 })();
 
+// Fullscreen detection for site-wide header/controls
+// Adds/removes `.full-screen-mode` on the root element so CSS can hide
+// header kebab/dropdown controls in both element-fullscreen and browser fullscreen (F11)
+function updateFullscreenClassSiteWide() {
+    const elementFs = !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+    );
+
+    const browserFs = (window.outerHeight === screen.height && window.outerWidth === screen.width) || window.fullScreen === true;
+
+    if (elementFs || browserFs) {
+        document.documentElement.classList.add('full-screen-mode');
+    } else {
+        document.documentElement.classList.remove('full-screen-mode');
+    }
+}
+
+document.addEventListener('fullscreenchange', updateFullscreenClassSiteWide);
+document.addEventListener('webkitfullscreenchange', updateFullscreenClassSiteWide);
+document.addEventListener('mozfullscreenchange', updateFullscreenClassSiteWide);
+document.addEventListener('MSFullscreenChange', updateFullscreenClassSiteWide);
+window.addEventListener('resize', updateFullscreenClassSiteWide);
+window.addEventListener('load', updateFullscreenClassSiteWide);
+
 

@@ -1,3 +1,60 @@
+// Close filter sidebar on single click outside (mobile) and remove blur/backdrop
+document.addEventListener("DOMContentLoaded", function () {
+  const filtersSidebar = document.querySelector(".offers-sidebar");
+  function isMobile() { return window.innerWidth <= 992; }
+  document.addEventListener("click", function (e) {
+    if (
+      isMobile() &&
+      filtersSidebar &&
+      filtersSidebar.classList.contains("mobile-visible") &&
+      !filtersSidebar.contains(e.target) &&
+      !e.target.classList.contains("mobile-filter-toggle")
+    ) {
+      // Hide sidebar
+      filtersSidebar.classList.remove("mobile-visible");
+      filtersSidebar.style.opacity = '';
+      filtersSidebar.style.visibility = '';
+      // Remove any modal-backdrop if present
+      var backdrop = document.querySelector('.modal-backdrop');
+      if (backdrop) backdrop.parentNode.removeChild(backdrop);
+    }
+  });
+  // Remove any modal-backdrop on load (cleanup)
+  var backdrop = document.querySelector('.modal-backdrop');
+  if (backdrop) backdrop.parentNode.removeChild(backdrop);
+});
+// Show mobile filter submit button and handle filtering
+document.addEventListener("DOMContentLoaded", function () {
+  const filterForm = document.querySelector('.filter-form');
+  const mobileSubmit = document.getElementById('mobile-filter-submit');
+  function isMobile() { return window.innerWidth <= 992; }
+  function showMobileSubmit() {
+    if (mobileSubmit && isMobile()) mobileSubmit.style.display = 'block';
+    else if (mobileSubmit) mobileSubmit.style.display = 'none';
+  }
+  showMobileSubmit();
+  window.addEventListener('resize', showMobileSubmit);
+  if (filterForm && mobileSubmit) {
+    filterForm.addEventListener('submit', function(e) {
+      if (isMobile()) {
+        e.preventDefault();
+        // Actually trigger the filtering logic for offers
+        if (typeof window.applyOfferFilters === 'function') {
+          window.applyOfferFilters();
+        } else if (typeof window.filterOffers === 'function') {
+          window.filterOffers();
+        }
+        // Close the sidebar after applying filters
+        const filtersSidebar = document.querySelector('.offers-sidebar');
+        if (filtersSidebar) {
+          filtersSidebar.classList.remove('mobile-visible');
+          filtersSidebar.style.opacity = '';
+          filtersSidebar.style.visibility = '';
+        }
+      }
+    });
+  }
+});
 // Simple Offers Management System for Beginners
 // This script handles displaying and filtering job offers
 
@@ -576,6 +633,7 @@ function loadFiltersFromURL() {
 }
 
 // Initialize everything when page loads
+
 function initializeOffersPage() {
   // Find all DOM elements
   findElements();
@@ -583,12 +641,131 @@ function initializeOffersPage() {
   // Set up event listeners
   setupEventListeners();
   
+  // Mobile filter toggle logic (moved from Offers.html)
+  const filterToggle = document.querySelector('.mobile-filter-toggle');
+  // Always get the current sidebar on each open/close
+  // (in case DOM changes or there are multiple sidebars)
+  let backdrop = document.querySelector('.modal-backdrop');
+  if (!backdrop) {
+    backdrop = document.createElement('div');
+    backdrop.className = 'modal-backdrop';
+    document.body.appendChild(backdrop);
+  }
+  if (filterToggle) {
+    function openModal() {
+      const filtersSidebar = document.querySelector('.offers-sidebar');
+      if (!filtersSidebar) { console.warn('No .offers-sidebar found!'); return; }
+      filterToggle.setAttribute('aria-expanded', 'true');
+      filtersSidebar.classList.add('mobile-visible');
+      backdrop.classList.add('active');
+      filterToggle.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Debug: highlight sidebar and log
+      filtersSidebar.style.outline = '3px solid red';
+      filtersSidebar.style.background = '#fff2';
+      console.log('Sidebar found and .mobile-visible added:', filtersSidebar, getComputedStyle(filtersSidebar));
+    }
+    function closeModal() {
+      const filtersSidebar = document.querySelector('.offers-sidebar');
+      if (!filtersSidebar) { return; }
+      filterToggle.setAttribute('aria-expanded', 'false');
+      filtersSidebar.classList.remove('mobile-visible');
+      backdrop.classList.remove('active');
+      filterToggle.classList.remove('active');
+      document.body.style.overflow = '';
+      filtersSidebar.style.outline = '';
+      filtersSidebar.style.background = '';
+    }
+    filterToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      const isExpanded = this.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        closeModal();
+      } else {
+        openModal();
+      }
+    });
+    backdrop.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) {
+      if (
+        e.key === 'Escape'
+      ) {
+        closeModal();
+      }
+    });
+    // Prevent modal from closing when clicking inside
+    document.addEventListener('click', function (e) {
+      const filtersSidebar = document.querySelector('.offers-sidebar');
+      if (!filtersSidebar) return;
+      if (filtersSidebar.classList.contains('mobile-visible') && filtersSidebar.contains(e.target)) {
+        e.stopPropagation();
+      }
+    }, true);
+  }
   // Load filters from URL if any
   loadFiltersFromURL();
-  
   // Load and display offers
   loadOffers();
 }
 
 // Start everything when the page is ready
 document.addEventListener('DOMContentLoaded', initializeOffersPage);
+
+// Fullscreen detection: add/remove a class on the root element so CSS can hide controls
+// This covers both element fullscreen (Fullscreen API) and browser fullscreen (F11)
+function updateFullscreenClass() {
+  const elementFs = !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  );
+
+  // Some browsers don't expose element fullscreen for F11; detect browser fullscreen
+  const browserFs = (window.outerHeight === screen.height && window.outerWidth === screen.width);
+
+  if (elementFs || browserFs) {
+    document.documentElement.classList.add('full-screen-mode');
+  } else {
+    document.documentElement.classList.remove('full-screen-mode');
+  }
+}
+
+// Listen for fullscreen and viewport changes
+
+
+function forceHideMobileToggleInFullscreen() {
+  const elementFs = !!(
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement
+  );
+  const browserFs = (window.outerHeight === screen.height && window.outerWidth === screen.width);
+  const shouldHide = elementFs || browserFs;
+  document.querySelectorAll('.mobile-filter-toggle').forEach(el => {
+    if (shouldHide) {
+      el.style.setProperty('display', 'none', 'important');
+      el.style.setProperty('visibility', 'hidden', 'important');
+      el.style.setProperty('pointer-events', 'none', 'important');
+    } else {
+      // Only restore display if mobile (<=992px)
+      if (window.innerWidth <= 992) {
+        el.style.setProperty('display', 'flex', 'important');
+        el.style.removeProperty('visibility');
+        el.style.removeProperty('pointer-events');
+      } else {
+        el.style.setProperty('display', 'none', 'important');
+        el.style.setProperty('visibility', 'hidden', 'important');
+        el.style.setProperty('pointer-events', 'none', 'important');
+      }
+    }
+  });
+}
+
+['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange','resize','load'].forEach(evt => {
+  window.addEventListener(evt, () => {
+    updateFullscreenClass();
+    forceHideMobileToggleInFullscreen();
+  });
+});

@@ -174,6 +174,15 @@
               >
                 Réinitialiser les filtres
               </button>
+              <!-- Mobile submit button for filtering -->
+              <button
+                type="submit"
+                id="mobile-filter-submit"
+                class="mobile-filter-submit"
+                style="display: none"
+              >
+                Appliquer les filtres
+              </button>
             </div>
           </form>
         </aside>
@@ -441,60 +450,74 @@
       document.addEventListener("DOMContentLoaded", function () {
         const filterToggle = document.querySelector(".mobile-filter-toggle");
         const filtersSidebar = document.querySelector(".offers-sidebar");
-
-        // Create backdrop element
-        const backdrop = document.createElement("div");
-        backdrop.className = "modal-backdrop";
-        document.body.appendChild(backdrop);
-
         if (filterToggle && filtersSidebar) {
-          function openModal() {
-            console.log("Opening modal"); // Debug
-            filterToggle.setAttribute("aria-expanded", "true");
-            filtersSidebar.classList.add("mobile-visible");
-            backdrop.classList.add("active");
-            filterToggle.classList.add("active");
-            document.body.style.overflow = "hidden";
-            console.log("Modal classes:", filtersSidebar.classList); // Debug
-          }
-
-          function closeModal() {
-            filterToggle.setAttribute("aria-expanded", "false");
-            filtersSidebar.classList.remove("mobile-visible");
-            backdrop.classList.remove("active");
-            filterToggle.classList.remove("active");
-            document.body.style.overflow = "";
-          }
-
-          // Toggle filter modal
           filterToggle.addEventListener("click", function (e) {
             e.stopPropagation();
-            const isExpanded = this.getAttribute("aria-expanded") === "true";
-            if (isExpanded) {
-              closeModal();
-            } else {
-              openModal();
+            // Always reset sidebar state before opening
+            filtersSidebar.classList.remove("mobile-visible");
+            filtersSidebar.style.opacity = "";
+            filtersSidebar.style.visibility = "";
+            var form = filtersSidebar.querySelector(".filter-form");
+            if (form) {
+              form.style.opacity = "";
+              form.style.visibility = "";
+            }
+            // Now open
+            filterToggle.setAttribute("aria-expanded", "true");
+            filtersSidebar.classList.add("mobile-visible");
+            filterToggle.classList.add("active");
+            document.body.style.overflow = "hidden";
+            filtersSidebar.style.opacity = "1";
+            filtersSidebar.style.visibility = "visible";
+            if (form) {
+              form.style.opacity = "1";
+              form.style.visibility = "visible";
             }
           });
-
-          // Close modal when clicking backdrop
-          backdrop.addEventListener("click", closeModal);
-
-          // Prevent modal from closing when clicking inside
-          filtersSidebar.addEventListener("click", function (e) {
-            e.stopPropagation();
-          });
-
-          // Close modal with Escape key
-          document.addEventListener("keydown", function (e) {
-            if (
-              e.key === "Escape" &&
-              filtersSidebar.classList.contains("mobile-visible")
-            ) {
-              closeModal();
-            }
-          });
+          // Close sidebar on click outside (already handled in offers.js)
         }
+      });
+    </script>
+    <!-- DEBUG: Log sidebar and form presence/visibility -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterToggle = document.querySelector(".mobile-filter-toggle");
+        filterToggle &&
+          filterToggle.addEventListener("click", function () {
+            setTimeout(() => {
+              const sidebar = document.querySelector(".offers-sidebar");
+              const form = sidebar
+                ? sidebar.querySelector(".filter-form")
+                : null;
+              console.log("[DEBUG] Sidebar present:", !!sidebar);
+              if (sidebar) {
+                console.log("[DEBUG] Sidebar classes:", sidebar.className);
+                const style = window.getComputedStyle(sidebar);
+                console.log(
+                  "[DEBUG] Sidebar display:",
+                  style.display,
+                  "opacity:",
+                  style.opacity,
+                  "visibility:",
+                  style.visibility,
+                  "z-index:",
+                  style.zIndex
+                );
+              }
+              console.log("[DEBUG] Form present:", !!form);
+              if (form) {
+                const style = window.getComputedStyle(form);
+                console.log(
+                  "[DEBUG] Form display:",
+                  style.display,
+                  "opacity:",
+                  style.opacity,
+                  "visibility:",
+                  style.visibility
+                );
+              }
+            }, 300);
+          });
       });
     </script>
   </body>

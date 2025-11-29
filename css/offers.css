@@ -1,3 +1,91 @@
+/* Mobile filter submit button styles */
+@media (max-width: 992px) {
+  .filter-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .reset-btn, .mobile-filter-submit {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 5px 0;
+    font-size: 0.78rem;
+    border-radius: 3px;
+    font-weight: 500;
+    box-shadow: none;
+    margin: 0;
+  }
+  .mobile-filter-submit {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    transition: background 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .mobile-filter-submit:hover {
+    background: var(--secondary-color);
+  }
+}
+/* Bulletproof: force all children of sidebar to be visible when sidebar is mobile-visible */
+.offers-sidebar.mobile-visible, .offers-sidebar.mobile-visible * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+}
+/* FINAL FIX: Absolutely force sidebar to show when mobile-visible is present */
+@media (max-width: 992px) {
+  html body .offers-sidebar.mobile-visible {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10000 !important;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    background: var(--card-bg) !important;
+    max-width: 400px !important;
+    width: 90% !important;
+    max-height: 80vh !important;
+    overflow-y: auto !important;
+    border-radius: 20px !important;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3) !important;
+    padding: 20px !important;
+    outline: 3px solid #1e90ff !important;
+  }
+}
+/* DEBUG: Force sidebar to show if mobile-visible is present (for troubleshooting) */
+@media (max-width: 992px) {
+  .offers-sidebar.mobile-visible {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 10000 !important;
+    background: #fff2 !important;
+    outline: 3px solid red !important;
+  }
+}
+/* Ensure sidebar is always visible when mobile-visible is present (override all display:none) */
+@media (max-width: 992px) {
+  body .offers-sidebar.mobile-visible {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    z-index: 1000 !important;
+  }
+}
+/* Always hide mobile filter toggle in fullscreen, even above 992px */
+html.full-screen-mode .mobile-filter-toggle,
+body.full-screen-mode .mobile-filter-toggle,
+:fullscreen .mobile-filter-toggle,
+:-webkit-full-screen .mobile-filter-toggle,
+:-moz-full-screen .mobile-filter-toggle,
+:-ms-fullscreen .mobile-filter-toggle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
 /* Override main padding and login-wrapper spacing for offers page */
 body main {
   padding: 0 !important;
@@ -11,7 +99,7 @@ body main {
   gap: 20px !important;
   padding: 0 15px 32px 15px !important;
   max-width: 1400px !important;
-  margin: 0 auto !important;
+  margin: 2% auto !important;
   min-height: auto !important;
 }
 
@@ -86,26 +174,6 @@ body main {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Modal backdrop */
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-.modal-backdrop.active {
-  opacity: 1;
-  visibility: visible;
-}
 
 /* Mobile filter sidebar behavior */
 @media (max-width: 992px) {
@@ -138,6 +206,7 @@ body main {
     opacity: 1 !important;
     visibility: visible !important;
     transform: translate(-50%, -50%) scale(1) !important;
+    display: block !important;
   }
 }
 .filter-form { 
@@ -340,4 +409,28 @@ fieldset.filter-group input[type="radio"] { accent-color: var(--primary-color); 
 .darkmode .error-message { 
   background: rgba(255, 68, 68, 0.2); 
   color: #ff6666;
+}
+
+/* Hide mobile three-dot filter toggle when the page/element is fullscreen */
+/* Covers standard and vendor-prefixed fullscreen pseudo-classes */
+:fullscreen .mobile-filter-toggle,
+:-webkit-full-screen .mobile-filter-toggle,
+:-moz-full-screen .mobile-filter-toggle,
+:-ms-fullscreen .mobile-filter-toggle {
+  display: none !important;
+}
+
+/* Also hide when JS detects a fullscreen/browser-fullscreen state
+   (useful for F11 browser fullscreen which doesn't trigger :fullscreen) */
+.full-screen-mode .mobile-filter-toggle,
+.full-screen-mode .dropdown-menu {
+  display: none !important;
+}
+
+/* Force hide mobile filter toggle in fullscreen on all viewport sizes */
+html.full-screen-mode .mobile-filter-toggle,
+body.full-screen-mode .mobile-filter-toggle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
