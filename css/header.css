@@ -41,6 +41,7 @@ header nav {
     gap: 40px;
     width: 100%;
     justify-content: flex-end;
+    position: relative;
 }
 
 header nav ul {
@@ -129,35 +130,51 @@ header ul li a:hover {
 
 /* Dropdown Menu Button Styles (renamed from .hamburger) */
 .dropdown-menu {
-    display: none;
+    display: flex !important;
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 8px;
     width: 48px;
     height: 48px;
+    min-width: 48px;
+    min-height: 48px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 4px;
+    position: relative;
+    z-index: 1001;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 .dropdown-menu .bar {
     width: 28px;
     height: 3px;
+    min-width: 28px;
+    min-height: 3px;
     background: var(--text-color);
+    background-color: var(--text-color);
     border-radius: 2px;
     transition: all 0.3s ease;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-/* Dropdown animation when opened */
+/* Dropdown animation when opened - transforms into X */
 .dropdown-menu[aria-expanded="true"] .bar:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
-    transition: all 0.4s;
 }
 
 .dropdown-menu[aria-expanded="true"] .bar:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .dropdown-menu[aria-expanded="true"] .bar:nth-child(3) {
@@ -169,8 +186,54 @@ header ul li a:hover {
     display: none;
 }
 
+/* Always show hamburger menu on mobile/tablet screens */
+@media screen and (max-width: 1024px) {
+    .dropdown-menu,
+    nav .dropdown-menu,
+    header nav .dropdown-menu,
+    header .container nav .dropdown-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        -webkit-appearance: none !important;
+    }
+    
+    .dropdown-menu .bar,
+    nav .dropdown-menu .bar,
+    header nav .dropdown-menu .bar {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: var(--text-color) !important;
+        background-color: var(--text-color) !important;
+    }
+}
+
+/* Extra specific rule for phones */
+@media screen and (max-width: 480px) {
+    nav .dropdown-menu,
+    header nav .dropdown-menu,
+    .container nav .dropdown-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+    
+    nav .dropdown-menu .bar,
+    header nav .dropdown-menu .bar {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: var(--text-color) !important;
+        background-color: var(--text-color) !important;
+    }
+}
+
 /* Mobile Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     header {
         height: 90px;
         background-color: var(--base-color);
@@ -181,9 +244,34 @@ header ul li a:hover {
         transition: background-color 0.3s ease;
     }
 
-    /* Show dropdown button */
-    .dropdown-menu {
-        display: flex;
+    /* Show dropdown button - ensure it's always visible on mobile */
+    .dropdown-menu,
+    nav .dropdown-menu,
+    header nav .dropdown-menu,
+    header .container nav .dropdown-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        z-index: 1001 !important;
+        pointer-events: auto !important;
+        min-width: 48px !important;
+        min-height: 48px !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    .dropdown-menu .bar,
+    nav .dropdown-menu .bar,
+    header nav .dropdown-menu .bar {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: var(--text-color) !important;
+        background-color: var(--text-color) !important;
+        min-width: 28px !important;
+        min-height: 3px !important;
     }
 
     /* Hide desktop header buttons on small screens */
@@ -191,7 +279,7 @@ header ul li a:hover {
         display: none;
     }
 
-    /* Mobile navigation menu */
+    /* Mobile navigation menu - hidden by default */
     #nav-links {
         position: absolute;
         top: 100%;
@@ -208,17 +296,20 @@ header ul li a:hover {
         border-radius: 12px;
         z-index: 1000;
 
-        /* Transition properties */
+        /* Transition properties - hidden by default */
         max-height: 0;
         overflow: hidden;
         opacity: 0;
         transform: translateY(-10px);
         transition: all 0.4s ease-in-out;
-        display: flex;
+        display: none !important; /* Hidden by default on mobile */
+        visibility: hidden;
     }
 
     /* Show mobile navigation when open */
     nav.open #nav-links {
+        display: flex !important; /* Show when hamburger is clicked */
+        visibility: visible !important;
         max-height: 500px;
         opacity: 1;
         transform: translateY(0);
@@ -299,7 +390,7 @@ header ul li a:hover {
 }
 
 /* Mobile: swap theme switch and hamburger order (theme before dropdown) */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     nav {
         display: flex;
         align-items: center;
@@ -342,6 +433,53 @@ header ul li a:hover {
 @media (min-width: 1200px) {
     .container {
         max-width: 1170px;
+    }
+}
+
+/* Hide hamburger menu on large desktop screens ONLY */
+@media screen and (min-width: 1025px) {
+    .dropdown-menu {
+        display: none !important;
+    }
+    
+    /* Show desktop navigation links */
+    #nav-links {
+        display: flex !important;
+        position: static !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        transform: none !important;
+        width: auto !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+    }
+    
+    /* Show desktop header buttons */
+    .header-btns {
+        display: flex !important;
+    }
+}
+
+/* Chrome-specific fix - ensure hamburger menu is visible on mobile */
+@media screen and (max-width: 1024px) {
+    /* Force visibility for Chrome */
+    button.dropdown-menu,
+    button[class*="dropdown-menu"],
+    nav button.dropdown-menu {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    button.dropdown-menu .bar,
+    button[class*="dropdown-menu"] .bar,
+    nav button.dropdown-menu .bar {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: var(--text-color) !important;
     }
 }
 
