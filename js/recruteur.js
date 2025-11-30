@@ -1,5 +1,42 @@
 const logoUpload = document.getElementById('logoUpload');
 const logoFile = document.getElementById('logoFile');
+const profilePhotoUpload = document.getElementById('profilePhotoUpload');
+const profilePhoto = document.getElementById('profilePhoto');
+const profilePhotoPreview = document.getElementById('profilePhotoPreview');
+const profilePhotoImg = document.getElementById('profilePhotoImg');
+
+// Profile photo upload
+if (profilePhotoUpload) {
+    profilePhotoUpload.addEventListener('click', function() {
+        profilePhoto.click();
+    });
+}
+
+function handleProfilePhotoSelect(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const maxSize = 2 * 1024 * 1024; // 2MB
+        const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+        
+        if (file.size > maxSize) {
+            alert('Le fichier est trop volumineux. Taille maximale: 2MB');
+            return;
+        }
+        
+        if (!allowedTypes.includes(file.type)) {
+            alert('Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF');
+            return;
+        }
+        
+        // Show preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profilePhotoImg.src = e.target.result;
+            profilePhotoPreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
 
 logoUpload.addEventListener('click', () => {
     logoFile.click();
@@ -41,21 +78,90 @@ document.getElementById('toggleConfirmPassword').addEventListener('click', funct
     this.classList.toggle('fa-eye-slash');
 });
 
+// Function to collect recruiter form data
+function collectRecruteurData(form) {
+    var sections = form.querySelectorAll('.form-section');
+    var companySection = sections[0];
+    var contactSection = sections[1];
+    var credentialsSection = sections[2];
+    var companyRows = companySection.querySelectorAll('.form-row');
+    
+    var data = {
+        type: 'recruteur',
+        companyName: companyRows[0].querySelector('input[placeholder="Nom de l\'entreprise"]').value || '',
+        address: companyRows[0].querySelectorAll('input[type="text"]')[1].value || '',
+        sector: companyRows[0].querySelector('select').value || '',
+        description: companySection.querySelector('textarea').value || '',
+        postalCode: companyRows[2].querySelector('input[placeholder="Code postal"]').value || '',
+        city: companyRows[2].querySelectorAll('input[type="text"]')[1].value || '',
+        country: companyRows[2].querySelector('select').value || '',
+        employees: companyRows[3].querySelector('select').value || '',
+        website: companyRows[3].querySelector('input[type="url"]').value || '',
+        logoFileName: companySection.querySelector('#logoFile').files[0] ? companySection.querySelector('#logoFile').files[0].name : '',
+        civilite: contactSection.querySelector('.form-row select').value || '',
+        prenom: contactSection.querySelectorAll('input[type="text"]')[0].value || '',
+        nom: contactSection.querySelectorAll('input[type="text"]')[1].value || '',
+        fonction: contactSection.querySelectorAll('.form-row')[1].querySelector('select').value || '',
+        linkedin: contactSection.querySelectorAll('.form-row')[1].querySelector('input[type="url"]').value || '',
+        countryCode: contactSection.querySelector('.country-code-select').value || '',
+        telephone: contactSection.querySelector('.phone-input').value || '',
+        email: credentialsSection.querySelectorAll('input[type="email"]')[0].value || '',
+        emailConfirm: credentialsSection.querySelectorAll('input[type="email"]')[1].value || '',
+        password: credentialsSection.querySelector('#password').value || '',
+        passwordConfirm: credentialsSection.querySelector('#confirmPassword').value || '',
+        profilePhoto: profilePhotoImg ? profilePhotoImg.src : ''
+    };
+    
+    return data;
+}
+
+// Function to add signup to array
+function addSignup(signupData) {
+    signupData.id = Date.now();
+    signupData.timestamp = new Date().toISOString();
+    window.allSignups.push(signupData);
+    console.log('New signup added! Total signups:', window.allSignups.length);
+}
+
 // Form submission
-document.getElementById('companyRegistrationForm').addEventListener('submit', (e) => {
+document.getElementById('form-recruteur').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    // Get form values
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    var form = e.target;
     
-    // Validate passwords match
+    // Check if passwords match
+    var password = document.getElementById('password').value;
+    var confirmPassword = document.getElementById('confirmPassword').value;
     if (password !== confirmPassword) {
         alert('Les mots de passe ne correspondent pas!');
         return;
     }
     
-    alert('Formulaire soumis avec succès!');
+    // Check if emails match
+    var emailInputs = form.querySelectorAll('input[type="email"]');
+    if (emailInputs.length >= 2) {
+        var email = emailInputs[0].value;
+        var emailConfirm = emailInputs[1].value;
+        if (email !== emailConfirm) {
+            alert('Les emails ne correspondent pas!');
+            return;
+        }
+    }
+    
+    // Collect form data
+    var formData = collectRecruteurData(form);
+    
+    // Add to array
+    addSignup(formData);
+    
+    // Create session
+    if (typeof createSession === 'function') {
+        createSession(formData);
+    }
+    
+    // Show success message and redirect
+    alert('Inscription réussie! Vous êtes maintenant connecté.');
+    window.location.href = 'index.html';
 });
 
 // Character counter for company name

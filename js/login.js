@@ -52,18 +52,35 @@
             loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connexion...';
             loginBtn.disabled = true;
 
-            // Simulate login
-            setTimeout(() => {
+            // Check if user exists in signups array
+            var userFound = null;
+            if (window.allSignups && window.allSignups.length > 0) {
+                for (var i = 0; i < window.allSignups.length; i++) {
+                    var user = window.allSignups[i];
+                    if (user.email === email && user.password === password && user.type === userType) {
+                        userFound = user;
+                        break;
+                    }
+                }
+            }
+            
+            if (userFound) {
+                // Create session
+                if (typeof createSession === 'function') {
+                    createSession(userFound);
+                }
+                
                 successAlert.style.display = 'flex';
                 
                 setTimeout(() => {
-                    if (userType === 'candidat') {
-                        window.location.href = 'dashboard-candidat.html';
-                    } else {
-                        window.location.href = 'dashboard-entreprise.html';
-                    }
+                    window.location.href = 'index.html';
                 }, 1500);
-            }, 1000);
+            } else {
+                // Show error
+                showError('Email ou mot de passe incorrect');
+                loginBtn.innerHTML = originalContent;
+                loginBtn.disabled = false;
+            }
         });
 
         function validateEmail(email) {

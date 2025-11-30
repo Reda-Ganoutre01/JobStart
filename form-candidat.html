@@ -410,6 +410,23 @@
                     </div>
                 </div>
 
+                <div class="form-group full-width" style="margin-bottom: 20px;">
+                    <label>Photo de profil</label>
+                    <div class="profile-photo-upload" id="profilePhotoUpload" style="border: 2px dashed var(--border-color); border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; background: var(--bg-light);">
+                        <input type="file" id="profilePhoto" class="file-input" accept=".png,.jpg,.jpeg,.gif" style="display: none;" onchange="handleProfilePhotoSelect(event)">
+                        <div class="profile-photo-icon" style="font-size: 48px; margin-bottom: 10px;">📷</div>
+                        <div>
+                            <strong>Cliquez pour ajouter une photo de profil</strong>
+                        </div>
+                        <div style="font-size: 12px; color: #999; margin-top: 5px;">
+                            Formats acceptés: PNG, JPG, JPEG, GIF (Max: 2MB)
+                        </div>
+                        <div class="profile-photo-preview" id="profilePhotoPreview" style="display: none; margin-top: 15px;">
+                            <img id="profilePhotoImg" src="" alt="Photo de profil" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color);">
+                        </div>
+                    </div>
+                </div>
+
                 <div class="cv-upload" id="cvUpload">
                     <input type="file" id="cvFile" class="file-input" accept=".pdf,.doc,.docx" onchange="handleFileSelect(event)">
                     <div class="cv-upload-icon">📄</div>
@@ -572,8 +589,10 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="js/aos.js"></script>
         <script src="data/constants.global.js" defer></script>
+        <script src="data/forms.data.js" defer></script>
         <script src="js/loading.js" defer></script>
         <script src="js/main.js" defer></script>
+        <script src="js/session.js" defer></script>
         <script src="js/condidat.js"></script>
 </body>
 </html>
