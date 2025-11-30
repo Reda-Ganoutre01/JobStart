@@ -11,6 +11,7 @@ function showSuccessPopup(title, message, redirectUrl) {
     overlay.id = 'popup-overlay';
     overlay.className = 'popup-overlay';
     overlay.style.zIndex = '20002'; // Higher than loader
+<<<<<<< HEAD
     // Ensure overlay fills viewport and centers children even if CSS isn't loaded
     overlay.style.position = 'fixed';
     overlay.style.top = '0';
@@ -21,6 +22,8 @@ function showSuccessPopup(title, message, redirectUrl) {
     overlay.style.justifyContent = 'center';
     overlay.style.alignItems = 'center';
     overlay.style.background = 'rgba(0,0,0,0.5)';
+=======
+>>>>>>> 9d2477bd144e79776d291eb20114dc5990dcad72
     document.body.appendChild(overlay);
 
     // Create popup container
@@ -36,6 +39,7 @@ function showSuccessPopup(title, message, redirectUrl) {
         <p class="popup-message">${message}</p>
         <button class="popup-button" id="popup-continue-btn">Continuer</button>
     `;
+<<<<<<< HEAD
     // Append popup inside the overlay so the overlay's flex centering positions it
     // Also set explicit inline styles on the popup to avoid layout overrides
     popup.style.maxWidth = '400px';
@@ -44,6 +48,9 @@ function showSuccessPopup(title, message, redirectUrl) {
     popup.style.margin = '0 auto';
     popup.style.position = 'relative';
     overlay.appendChild(popup);
+=======
+    document.body.appendChild(popup);
+>>>>>>> 9d2477bd144e79776d291eb20114dc5990dcad72
 
     // Show popup with animation
     setTimeout(function() {
