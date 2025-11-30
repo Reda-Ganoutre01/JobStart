@@ -1,3 +1,8 @@
+@media (max-width: 600px) {
+    .header-btns {
+        display: none !important;
+    }
+}
 /* Start Header */
 header {
     background-color: var(--base-variant);
@@ -519,5 +524,33 @@ header ul li a:hover {
         opacity: 1 !important;
         background: var(--text-color) !important;
     }
+}
+
+header ul li.btn-link {
+    padding: 0;
+}
+header ul li.btn-link a {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 6px;
+    border: 2px solid var(--primary-color);
+    font-weight: 500;
+    transition: background 0.3s, color 0.3s;
+    background: transparent;
+    color: var(--primary-color);
+    margin-left: 8px;
+}
+header ul li.btn-link a:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+header ul li.btn-link.signup a {
+    background: var(--primary-color);
+    color: var(--white);
+    border: 2px solid var(--primary-color);
+}
+header ul li.btn-link.signup a:hover {
+    background: var(--secondary-color);
+    border-color: var(--secondary-color);
 }
 
