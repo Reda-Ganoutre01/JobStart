@@ -179,19 +179,4 @@ document.addEventListener('MSFullscreenChange', updateFullscreenClassSiteWide);
 window.addEventListener('resize', updateFullscreenClassSiteWide);
 window.addEventListener('load', updateFullscreenClassSiteWide);
 
-// Ensure popup helper is available site-wide: inject `js/popup.js` if not already loaded.
-(function ensurePopupLoaded(){
-    try {
-        if (typeof window.showAlertPopup === 'function' && typeof window.showSuccessPopup === 'function') return;
-    } catch(e) {}
-    const existing = document.querySelector('script[src$="/js/popup.js"], script[src$="js/popup.js"]');
-    if (existing) return;
-    const s = document.createElement('script');
-    s.src = 'js/popup.js';
-    s.defer = true;
-    s.onload = function(){ console.log('popup.js loaded'); };
-    s.onerror = function(){ console.warn('Failed to load popup.js'); };
-    document.head.appendChild(s);
-})();
-
 

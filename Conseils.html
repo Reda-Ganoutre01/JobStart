@@ -6,7 +6,7 @@
     <title>JobStart-Conseils</title>
     <!-- Styling File -->
     <link rel="stylesheet" href="css/style.css" />
-   
+
     <!-- Site logo / favicon -->
     <link
       rel="icon"
@@ -31,23 +31,27 @@
   </head>
   <body>
     <!-- Page loader -->
-        <div id="site-loader" aria-hidden="false">
-            <div class="loader-container">
-                <div class="logo-wrapper">
-                    <img src="assets/logo/logo_jobstart_single.png" alt="JobStart Logo" class="logo-image">
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-
-                <h1 class="brand-text">
-                    <span class="job">Job</span><span class="start">Start</span>
-                </h1>
-
-                <p class="loading-text">Chargement de vos opportunités...</p>
-            </div>
+    <div id="site-loader" aria-hidden="false">
+      <div class="loader-container">
+        <div class="logo-wrapper">
+          <img
+            src="assets/logo/logo_jobstart_single.png"
+            alt="JobStart Logo"
+            class="logo-image"
+          />
         </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <h1 class="brand-text">
+          <span class="job">Job</span><span class="start">Start</span>
+        </h1>
+
+        <p class="loading-text">Chargement de vos opportunités...</p>
+      </div>
+    </div>
     <!-- Header -->
     <header>
       <div class="container">
@@ -71,23 +75,14 @@
 
           <ul id="nav-links">
             <li><a href="index.html">Accueil</a></li>
-            <li><a href="Offers.html">Offers</a></li>
+            <li><a href="Offers.html">Offres</a></li>
             <li><a href="Conseils.html">Conseils</a></li>
             <li><a href="Apropos.html">A propos</a></li>
             <li><a href="contact.html">Contact</a></li>
-
+            <li class="mobile-action"><a href="login.html">Se Connecter</a></li>
+            <li class="mobile-action"><a href="SignUp.html">S'inscrire</a></li>
           </ul>
-          <!--Start  theme -->
-          <button id="theme-switch">🌙</button>
-
-          <div class="header-btns">
-            <button type="button">
-              <a href="login.html">Se Connecter</a>
-            </button>
-            <button type="button">
-              <a href="SignUp.html">S'inscrire</a>
-            </button>
-          </div>
+          <button id="theme-switch" title="Basculer thème">🌙</button>
         </nav>
       </div>
     </header>
@@ -349,7 +344,7 @@
         </div>
       </section>
     </main>
-    
+
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
@@ -492,10 +487,7 @@
         </div>
 
         <div class="footer-bottom">
-          <p class="copyright">
-            © 2025 JobStar . All rights
-            reserved.
-          </p>
+          <p class="copyright">© 2025 JobStar . All rights reserved.</p>
           <div class="social-links">
             <a href="#" class="social-link" aria-label="Facebook">
               <i class="fab fa-facebook-f"></i>
@@ -514,9 +506,9 @@
       </div>
     </footer>
     <!-- End Footer -->
-      <!--AOS library -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="js/aos.js"></script>
+    <!--AOS library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/aos.js"></script>
     <script src="data/forms.data.js"></script>
     <script src="js/main.js"></script>
     <script src="js/session.js"></script>

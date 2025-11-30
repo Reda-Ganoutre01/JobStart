@@ -16,11 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (!user) {
-            if (typeof showAlertPopup === 'function') {
-                showAlertPopup('Connexion requise', 'Aucune session active. Veuillez vous connecter.', 'error');
-            } else {
-                alert('Aucune session active. Veuillez vous connecter.');
-            }
+            alert('Aucune session active. Veuillez vous connecter.');
             window.location.href = 'login.html';
             return;
         }

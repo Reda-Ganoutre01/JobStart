@@ -6,22 +6,26 @@
     <title>Détail de l'offre</title>
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/offer_detail.css" />
-    <link rel="stylesheet" href="css/popup.css" />
     <!-- Site logo / favicon -->
-    <link rel="icon" href="assets/logo/logo_jobstart_single.png"
-      type="image/png">
-    <link rel="apple-touch-icon"
-      href="assets/logo/logo_jobstart_single.png">
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
     <!-- AOS library -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <!-- icons -->
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet">
+      rel="stylesheet"
+    />
     <!-- dark mode -->
     <script type="text/javascript" src="js/darkmode.js" defer></script>
     <script type="text/javascript" src="data/offers.js" defer></script>
@@ -34,8 +38,11 @@
     <div id="site-loader" aria-hidden="false">
       <div class="loader-container">
         <div class="logo-wrapper">
-          <img src="assets/logo/logo_jobstart_single.png" alt="JobStart Logo"
-            class="logo-image">
+          <img
+            src="assets/logo/logo_jobstart_single.png"
+            alt="JobStart Logo"
+            class="logo-image"
+          />
         </div>
 
         <div class="progress-bar">
@@ -53,12 +60,13 @@
     <!-- Start header -->
     <header>
       <div class="container">
-        <a href="index.html"><img src="assets/logo/logo-lightmode.png"
-            alt="JobStar" id="logo" /></a>
+        <a href="index.html"
+          ><img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo"
+        /></a>
         <nav>
           <button class="dropdown-menu" aria-label="Menu" aria-expanded="false">
-            <span class="bar"></span><span class="bar"></span><span
-              class="bar"></span>
+            <span class="bar"></span><span class="bar"></span
+            ><span class="bar"></span>
           </button>
           <ul id="nav-links">
             <li><a href="index.html">Accueil</a></li>
@@ -66,12 +74,10 @@
             <li><a href="Conseils.html">Conseils</a></li>
             <li><a href="Apropos.html">A propos</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li class="mobile-action"><a href="login.html">Se Connecter</a></li>
+            <li class="mobile-action"><a href="SignUp.html">S'inscrire</a></li>
           </ul>
           <button id="theme-switch" title="Basculer thème">🌙</button>
-          <div class="header-btns">
-            <button type="button"><a href="login.html">Se Connecter</a></button>
-            <button type="button"><a href="SignUp.html">S'inscrire</a></button>
-          </div>
         </nav>
       </div>
     </header>
@@ -83,7 +89,8 @@
         <div
           class="spinner"
           role="status"
-          aria-label="Chargement de l'offre"></div>
+          aria-label="Chargement de l'offre"
+        ></div>
       </div>
       <div class="detail-header" id="detail-header" data-aos="fade-down">
         <!-- Filled by JS -->
@@ -93,7 +100,8 @@
           class="detail-section"
           id="detail-description"
           data-aos="fade-up"
-          data-aos-delay="100">
+          data-aos-delay="100"
+        >
           <h2>Description du poste</h2>
           <p id="desc-text"></p>
         </div>
@@ -101,7 +109,8 @@
           class="detail-section"
           id="detail-resp"
           data-aos="fade-up"
-          data-aos-delay="200">
+          data-aos-delay="200"
+        >
           <h2>Responsabilités clés</h2>
           <ul class="bullet-list" id="resp-list"></ul>
         </div>
@@ -110,7 +119,8 @@
         class="detail-section"
         id="detail-skills"
         data-aos="fade-up"
-        data-aos-delay="300">
+        data-aos-delay="300"
+      >
         <h2>Compétences & Expérience</h2>
         <ul class="bullet-list" id="skills-list"></ul>
       </div>
@@ -118,7 +128,8 @@
         class="detail-section"
         id="detail-overview"
         data-aos="fade-up"
-        data-aos-delay="400">
+        data-aos-delay="400"
+      >
         <h2>Aperçu</h2>
         <div class="overview-grid" id="overview-grid"></div>
         <div class="map-box" id="map-box"></div>
@@ -135,7 +146,8 @@
               <img
                 src="assets/logo/logo-lightmode.png"
                 alt="JobStar"
-                id="logo" />
+                id="logo"
+              />
             </a>
             <div class="contact-info">
               <div class="contact-item"><strong>Contactez-nous</strong></div>
@@ -159,23 +171,27 @@
             <h3>Pour les Candidats</h3>
             <ul class="footer-links">
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Chercher un
-                  Stage</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Chercher un
-                  Emploi</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Emploi</a
+                >
               </li>
               <li>
                 <a href="#"><i class="fas fa-chevron-right"></i>Mon Profil</a>
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Mes
-                  Candidatures</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mes Candidatures</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Alertes
-                  Emploi</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Alertes Emploi</a
+                >
               </li>
             </ul>
           </div>
@@ -183,16 +199,19 @@
             <h3>Pour les Entreprises</h3>
             <ul class="footer-links">
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Publier une
-                  Offre</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Publier une Offre</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Espace
-                  Entreprise</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Espace Entreprise</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Trouver des
-                  Candidats</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Trouver des Candidats</a
+                >
               </li>
               <li>
                 <a href="#"><i class="fas fa-chevron-right"></i>Nos Services</a>
@@ -203,12 +222,14 @@
             <h3>À Propos</h3>
             <ul class="footer-links">
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Qui
-                  sommes-nous</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Qui sommes-nous</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Notre
-                  Mission</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Notre Mission</a
+                >
               </li>
               <li>
                 <a href="#"><i class="fas fa-chevron-right"></i>L'Équipe</a>
@@ -228,20 +249,24 @@
                 <a href="#"><i class="fas fa-chevron-right"></i>Conseils CV</a>
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Conseils
-                  Entretien</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Conseils Entretien</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Guide de
-                  Carrière</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Guide de Carrière</a
+                >
               </li>
               <li>
-                <a href="#"><i class="fas fa-chevron-right"></i>Mentions
-                  Légales</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mentions Légales</a
+                >
               </li>
               <li>
-                <a href="#"><i
-                    class="fas fa-chevron-right"></i>Confidentialité</a>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Confidentialité</a
+                >
               </li>
             </ul>
           </div>
@@ -249,14 +274,18 @@
         <div class="footer-bottom">
           <p class="copyright">© 2025 JobStar. Tous droits réservés.</p>
           <div class="social-links">
-            <a href="#" class="social-link" aria-label="Facebook"><i
-                class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-link" aria-label="Twitter"><i
-                class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link" aria-label="Instagram"><i
-                class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link" aria-label="LinkedIn"><i
-                class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="social-link" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" class="social-link" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="social-link" aria-label="LinkedIn"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
           </div>
         </div>
       </div>

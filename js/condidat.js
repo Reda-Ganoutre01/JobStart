@@ -20,14 +20,12 @@ function handleProfilePhotoSelect(event) {
         const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
         
         if (file.size > maxSize) {
-            if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Le fichier est trop volumineux. Taille maximale: 2MB', 'error');
-            else alert('Le fichier est trop volumineux. Taille maximale: 2MB');
+            alert('Le fichier est trop volumineux. Taille maximale: 2MB');
             return;
         }
         
         if (!allowedTypes.includes(file.type)) {
-            if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF', 'error');
-            else alert('Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF');
+            alert('Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF');
             return;
         }
         
@@ -74,14 +72,12 @@ function handleFile(file) {
         const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
         
         if (file.size > maxSize) {
-            if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Le fichier est trop volumineux. Taille maximale: 5MB', 'error');
-            else alert('Le fichier est trop volumineux. Taille maximale: 5MB');
+            alert('Le fichier est trop volumineux. Taille maximale: 5MB');
             return;
         }
         
         if (!allowedTypes.includes(file.type)) {
-            if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Format de fichier non supporté. Utilisez PDF, DOC ou DOCX', 'error');
-            else alert('Format de fichier non supporté. Utilisez PDF, DOC ou DOCX');
+            alert('Format de fichier non supporté. Utilisez PDF, DOC ou DOCX');
             return;
         }
         
@@ -188,8 +184,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     var email = form.querySelectorAll('input[type="email"]')[0].value;
     var emailConfirm = form.querySelectorAll('input[type="email"]')[1].value;
     if (email !== emailConfirm) {
-        if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Les emails ne correspondent pas!', 'error');
-        else alert('Les emails ne correspondent pas!');
+        alert('Les emails ne correspondent pas!');
         return;
     }
     
@@ -197,8 +192,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
     var password = form.querySelector('#password').value;
     var passwordConfirm = form.querySelector('#confirmPassword').value;
     if (password !== passwordConfirm) {
-        if (typeof showAlertPopup === 'function') showAlertPopup('Erreur', 'Les mots de passe ne correspondent pas!', 'error');
-        else alert('Les mots de passe ne correspondent pas!');
+        alert('Les mots de passe ne correspondent pas!');
         return;
     }
     
@@ -222,18 +216,7 @@ document.getElementById('registrationForm').addEventListener('submit', function(
             'index.html'
         );
     } else {
-        if (typeof showSuccessPopup === 'function') {
-            showSuccessPopup(
-                'Inscription réussie!',
-                'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
-                'index.html'
-            );
-        } else if (typeof showAlertPopup === 'function') {
-            showAlertPopup('Succès', 'Inscription réussie! Vous êtes maintenant connecté.', 'success');
-            window.location.href = 'index.html';
-        } else {
-            alert('Inscription réussie! Vous êtes maintenant connecté.');
-            window.location.href = 'index.html';
-        }
+        alert('Inscription réussie! Vous êtes maintenant connecté.');
+        window.location.href = 'index.html';
     }
 });
