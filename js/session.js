@@ -34,6 +34,39 @@ function logout() {
     window.location.href = 'index.html';
 }
 
+// Persist signups to localStorage (used by condidat.js)
+function saveSignupsToStorage() {
+    try {
+        var arr = Array.isArray(window.allSignups) ? window.allSignups : [];
+        localStorage.setItem('allSignups', JSON.stringify(arr));
+        return true;
+    } catch (e) {
+        console.error('Failed to save signups to storage', e);
+        return false;
+    }
+}
+
+// Load signups that were previously saved in localStorage into window.allSignups
+function loadSignupsFromStorage() {
+    try {
+        var raw = localStorage.getItem('allSignups');
+        if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) {
+                window.allSignups = parsed;
+                return;
+            }
+        }
+    } catch (e) {
+        console.warn('Could not load signups from storage', e);
+    }
+    // ensure the global exists
+    if (!Array.isArray(window.allSignups)) window.allSignups = [];
+}
+
+// Load signups immediately so login and other pages can use them
+loadSignupsFromStorage();
+
 // Flag to prevent multiple simultaneous updates
 var isUpdatingHeader = false;
 

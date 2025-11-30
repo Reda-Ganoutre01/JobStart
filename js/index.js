@@ -64,6 +64,52 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+// Hero search box: redirect to Offers page with query params
+document.addEventListener('DOMContentLoaded', function () {
+    const searchBtn = document.getElementById('hero-search-btn');
+    const jobTypeSelect = document.getElementById('job-type');
+    const keywordsInput = document.getElementById('hero-keywords');
+    const locationInput = document.getElementById('hero-location');
+
+    function buildAndGo() {
+        const params = new URLSearchParams();
+        const q = keywordsInput ? keywordsInput.value.trim() : '';
+        const loc = locationInput ? locationInput.value.trim() : '';
+        let typeVal = jobTypeSelect ? jobTypeSelect.value : '';
+
+        // Map select values to the Offers page expected values
+        if (typeVal) {
+            const t = String(typeVal).toLowerCase();
+            if (t === 'stage') typeVal = 'Stage';
+            else if (t === 'emploi') typeVal = 'Emploi';
+            else typeVal = '';
+        }
+
+        if (q) params.set('q', q);
+        if (loc) params.set('location', loc);
+        if (typeVal) params.set('type', typeVal);
+
+        const query = params.toString();
+        const url = 'Offers.html' + (query ? ('?' + query) : '');
+        window.location.href = url;
+    }
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', buildAndGo);
+    }
+
+    // submit on Enter in inputs
+    [keywordsInput, locationInput].forEach(input => {
+        if (!input) return;
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                buildAndGo();
+            }
+        });
+    });
+});
         // Variables
         let savedJobs = [];
         let currentSlide = 0;
