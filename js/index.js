@@ -24,7 +24,10 @@
             if (!jobsGrid) return;
 
             jobsGrid.innerHTML = jobsToShow.map(job => `
-                <div class="job-card">
+                <div class="job-card"
+                data-aos="fade-up"
+        data-aos-duration="800"
+                >
                     <div class="job-header">
                         <div class="company-logo" style="background-color: ${getRandomColor()}">
                             ${getInitials(job.company)}
