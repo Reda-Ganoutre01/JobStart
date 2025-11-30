@@ -69,11 +69,6 @@
                         <li><a href="Conseils.html">Conseils</a></li>
                         <li><a href="Apropos.html">A propos</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <!-- Mobile-only action links -->
-                        <li class="mobile-action"><a href="login.html">Se
-                                Connecter</a></li>
-                        <li class="mobile-action"><a
-                                href="SignUp.html">S'inscrire</a></li>
                     </ul>
                     <!--Start  theme -->
                     <button id="theme-switch">🌙</button>
@@ -183,7 +178,52 @@
         </section>
 
         <!-- End How It Works -->
+          <!-- start Section Offres d'Emploi -->
+    <section class="jobs-section">
+        <div class="container"
+         data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-easing="ease-out-cubic"
+        data-aos-offset="120"
+        >
+            <div class="section-header">
+                <h1 class="section-title">Offres d'Emploi en Vedette</h1>
+                <p class="section-subtitle">Découvrez votre valeur et trouvez l'emploi qui correspond à votre vie</p>
+            </div>
 
+            <div class="jobs-grid" id="jobsGrid"></div>
+            
+            <a href="Offers.html" id="AloadMore"
+             data-aos="fade-up"
+        data-aos-duration="800"
+            >
+                        <button class="load-more-btn" id="loadMoreBtn">Charger Plus d'Offres</button></a>
+        </div>
+    </section>
+    <!-- end Section Offres d'Emploi -->
+    <!-- Section Témoignages -->
+    <section class="testimonials-section"
+   
+    >
+        <div class="container"
+         data-aos="fade-up"
+        data-aos-duration="800"
+        data-aos-easing="ease-out-cubic"
+        data-aos-offset="120"
+        >
+            <div class="section-header">
+                <h2 class="section-title">Témoignages de nos clients</h2>
+                <p class="section-subtitle">Découvrez ce que nos utilisateurs pensent de JobStart et comment notre plateforme les a aidés dans leur recherche d’emploi.</p>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonials-track" id="testimonialsTrack"></div>
+            </div>
+
+            <div class="slider-dots" id="sliderDots"></div>
+        </div>
+    </section>
+    <!-- End Section Témoignages -->
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-container">
@@ -326,9 +366,12 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="js/aos.js"></script>
         <script src="data/constants.global.js" defer></script>
-        <script src="data/forms.data.js" defer></script>
+        <script src="data/cutomers.js" defer></script>
+        <script src="data/offers.js" defer></script>
         <script src="js/loading.js" defer></script>
         <script src="js/main.js" defer></script>
+        <script src="js/index.js" defer></script>
         <script src="js/session.js" defer></script>
+        
     </body>
 </html>

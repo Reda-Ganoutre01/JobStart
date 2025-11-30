@@ -237,36 +237,128 @@ function createPaginationButtons() {
   paginationElement.innerHTML = html;
 }
 
-// Create HTML for a single job offer
+// Colors for company logos (same as index.js)
+const logoColors = ['#3b82f6', '#10b981', '#8b5cf6', '#ef4444', '#f59e0b', '#06b6d4'];
+
+function getRandomColor(company) {
+  if (!company) return logoColors[0];
+  let hash = 0;
+  for (let i = 0; i < company.length; i++) {
+    hash = company.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return logoColors[Math.abs(hash) % logoColors.length];
+}
+
+function getInitials(company) {
+  if (!company) return '??';
+  return company.split(' ').map(word => word[0]).join('').substring(0, 2).toUpperCase();
+}
+
+// Calculate and format time since posting
+function getTimeAgo(postedDate) {
+  if (!postedDate) return '';
+  
+  const posted = new Date(postedDate);
+  const now = new Date();
+  const diffTime = Math.abs(now - posted);
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) {
+    return 'Aujourd\'hui';
+  } else if (diffDays === 1) {
+    return 'Il y a 1 jour';
+  } else if (diffDays < 7) {
+    return `Il y a ${diffDays} jours`;
+  } else if (diffDays < 14) {
+    return 'Il y a 1 semaine';
+  } else if (diffDays < 30) {
+    const weeks = Math.floor(diffDays / 7);
+    return `Il y a ${weeks} semaine${weeks > 1 ? 's' : ''}`;
+  } else if (diffDays < 60) {
+    return 'Il y a 1 mois';
+  } else {
+    const months = Math.floor(diffDays / 30);
+    return `Il y a ${months} mois`;
+  }
+}
+
+// Create HTML for a single job offer (matching index page style)
 function createOfferHTML(offer) {
   const offerId = offer.id;
-  const logoSrc = offer.logo || getDefaultLogo(offer.company);
-  const category = offer.categories && offer.categories.length > 0 ? offer.categories[0] : offer.type;
-  const salary = offer.salary ? `<span class="salary">${offer.salary}</span>` : '';
-  const defaultLogo = getDefaultLogo(offer.company);
+  const category = offer.categories && offer.categories.length > 0 ? offer.categories[0] : (offer.type || '');
+  const jobType = offer.jobType || offer.type || '';
+  let jobTypeClass = '';
+  let jobTypeText = '';
+  
+  // Handle different job type formats
+  if (jobType === 'Full Time' || jobType === 'fulltime' || jobType === 'full-time') {
+    jobTypeClass = 'fulltime';
+    jobTypeText = 'Temps Plein';
+  } else if (jobType === 'Part Time' || jobType === 'parttime' || jobType === 'part-time') {
+    jobTypeClass = 'parttime';
+    jobTypeText = 'Temps Partiel';
+  } else if (jobType === 'Stage' || jobType === 'Internship' || jobType === 'internship') {
+    jobTypeClass = 'stage';
+    jobTypeText = 'Stage';
+  } else if (jobType) {
+    jobTypeClass = jobType.toLowerCase().replace(/\s+/g, '').replace('-', '');
+    jobTypeText = jobType;
+  }
   
   return `
-    <a class="offer-row-link" href="OfferDetail.html?id=${offerId}" aria-label="Voir détails ${offer.title}"></a>
-    <div class="logo-wrap">
-      <img src="${logoSrc}" alt="${offer.company || 'Entreprise'}" onerror="this.onerror=null;this.src='${defaultLogo}'" />
-    </div>
-    <div class="offer-row-main">
-      <h3 class="offer-title">${offer.title || ''}</h3>
-      <div class="offer-row-meta">
-        ${offer.company ? `<span class="company">${offer.company}</span>` : ''}
-        ${offer.location ? `<span class="location">${offer.location}</span>` : ''}
-        ${category ? `<span class="cats">${category}</span>` : ''}
-        <span class="posted">${calculateDaysAgo(offer.postedDate)}</span>
-        ${salary}
+    <div class="job-card">
+      <div class="job-header">
+        <div class="company-logo" style="background-color: ${getRandomColor(offer.company)}">
+          ${getInitials(offer.company)}
+        </div>
+        <div class="job-info">
+          <div class="job-title-row">
+            <h3 class="job-title">${offer.title || ''}</h3>
+            ${offer.featured ? '<span class="featured-badge">En Vedette</span>' : ''}
+          </div>
+          <div class="job-meta">
+            ${category ? `
+              <span class="meta-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                </svg>
+                ${category}
+              </span>
+            ` : ''}
+            ${offer.location ? `
+              <span class="meta-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                  <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                ${offer.location}
+              </span>
+            ` : ''}
+            ${offer.salary ? `
+              <span class="meta-item">
+                ${offer.salary}
+              </span>
+            ` : ''}
+            ${offer.postedDate ? `
+              <span class="meta-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                ${getTimeAgo(offer.postedDate)}
+              </span>
+            ` : ''}
+          </div>
+          <div class="job-badges">
+            ${jobTypeClass ? `<span class="badge badge-${jobTypeClass}">${jobTypeText}</span>` : ''}
+            ${(offer.urgent || offer.id === 1 || offer.id === 2) ? '<span class="badge badge-urgent">Urgent</span>' : ''}
+          </div>
+        </div>
       </div>
-      <div class="offer-row-badges">
-        ${offer.type ? `<span class="badge badge-type">${offer.type}</span>` : ''}
-        ${offer.featured ? `<span class="badge badge-featured">Featured</span>` : ''}
-        ${offer.urgent ? `<span class="badge badge-urgent">Urgent</span>` : ''}
+      <div class="offer-row-actions">
+        <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${offerId}'">Détails</button>
       </div>
-    </div>
-    <div class="offer-row-actions">
-      <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${offerId}'">Détails</button>
     </div>
   `;
 }
@@ -284,6 +376,8 @@ function displayOffers() {
   
   // Update offers list
   if (elements.list) {
+    // Change container to use grid layout like index page
+    elements.list.className = 'jobs-grid';
     elements.list.innerHTML = '';
     
     if (offersToShow.length === 0) {
@@ -293,13 +387,12 @@ function displayOffers() {
       noResultsDiv.textContent = 'Aucune offre trouvée.';
       elements.list.appendChild(noResultsDiv);
     } else {
-      // Show offers
+      // Show offers - create job cards directly
       offersToShow.forEach(offer => {
-        const offerElement = document.createElement('article');
-        offerElement.className = 'offer-row';
-        offerElement.setAttribute('data-offer-id', offer.id);
-        offerElement.innerHTML = createOfferHTML(offer);
-        elements.list.appendChild(offerElement);
+        const cardElement = document.createElement('div');
+        cardElement.setAttribute('data-offer-id', offer.id);
+        cardElement.innerHTML = createOfferHTML(offer);
+        elements.list.appendChild(cardElement);
       });
     }
   }

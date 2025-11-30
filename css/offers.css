@@ -301,6 +301,154 @@ fieldset.filter-group input[type="radio"] { accent-color: var(--primary-color); 
   flex: 1;
   margin-bottom: 24px;
 }
+
+/* Jobs grid style (same as index page) - for offers page */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+/* Job card styles (same as index page) */
+.job-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.job-card:hover {
+  box-shadow: var(--box-shadow-card);
+  transform: translateY(-2px);
+}
+
+.job-header {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.company-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.job-info {
+  flex: 1;
+}
+
+.job-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.job-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.featured-badge {
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.job-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.job-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+/* Badge styles for job cards (matching index page) */
+.job-card .badge {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.job-card .badge-fulltime, 
+.job-card .badge-full-time {
+  background: #dbeafe;
+  color: #66b3ff;
+}
+
+.job-card .badge-parttime, 
+.job-card .badge-part-time {
+  background: #dbeafe;
+  color: #66b3ff;
+}
+
+.job-card .badge-stage, 
+.job-card .badge-internship {
+  background: #dbeafe;
+  color: #66b3ff;
+}
+
+.job-card .badge-urgent {
+  background: #fed7aa;
+  color: #9a3412;
+}
+
+.offer-row-actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 12px;
+  gap: 8px;
+}
+
+.detail-btn {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.08s ease;
+}
+
+.detail-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
 .offer-row { position:relative; display:grid; grid-template-columns: 64px 1fr auto; grid-template-rows:auto auto auto; gap:16px; align-items:start; background: var(--card-bg); border:1px solid var(--border-color); padding:18px 20px; border-radius:18px; box-shadow:0 4px 12px var(--shadow); transition: box-shadow .2s ease, transform .2s ease, border-color .2s ease; }
 .offer-row:hover { transform:translateY(-2px); box-shadow:0 8px 20px var(--shadow); }
 .offer-row-link { position:absolute; inset:0; border-radius:inherit; z-index:1; }

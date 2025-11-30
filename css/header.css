@@ -25,25 +25,27 @@ header .container {
     justify-content: space-between;
     align-items: center;
     margin-top: -13px;
-
+    position: relative;
 }
 
 header #logo {
     width: 140px;
     height: auto;
     margin-top: 8px;
-
+    flex-shrink: 0;
+    z-index: 2;
 }
 
 header nav {
     display: flex;
     align-items: center;
-    gap: 40px;
-    width: 100%;
+    flex: 1;
+    position: static;
+    gap: 20px;
     justify-content: flex-end;
-    position: relative;
 }
 
+/* Center: navigation links - absolutely centered relative to container */
 header nav ul {
     display: flex;
     list-style: none;
@@ -51,6 +53,29 @@ header nav ul {
     align-items: center;
     margin: 0;
     padding: 0;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: auto;
+}
+
+/* Right section: theme switch, profile, buttons */
+header nav #theme-switch,
+header nav .user-profile-picture,
+header nav .header-btns {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* Hide dropdown on desktop */
+@media screen and (min-width: 1025px) {
+    header nav .dropdown-menu {
+        display: none !important;
+    }
 }
 
 header ul li {

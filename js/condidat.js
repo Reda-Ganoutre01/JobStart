@@ -155,10 +155,24 @@ function collectCandidatData(form) {
 
 // Function to add signup to array
 function addSignup(signupData) {
+    // Initialize array if it doesn't exist
+    if (!window.allSignups) {
+        window.allSignups = [];
+    }
+    
     signupData.id = Date.now();
     signupData.timestamp = new Date().toISOString();
     window.allSignups.push(signupData);
+    
+    // Save to localStorage
+    if (typeof saveSignupsToStorage === 'function') {
+        saveSignupsToStorage();
+    } else {
+        localStorage.setItem('allSignups', JSON.stringify(window.allSignups));
+    }
+    
     console.log('New signup added! Total signups:', window.allSignups.length);
+    console.log('All signups:', window.allSignups);
 }
 
 document.getElementById('registrationForm').addEventListener('submit', function(e) {
@@ -194,7 +208,15 @@ document.getElementById('registrationForm').addEventListener('submit', function(
         createSession(formData);
     }
     
-    // Show success message and redirect
-    alert('Inscription réussie! Vous êtes maintenant connecté.');
-    window.location.href = 'index.html';
+    // Show success popup and redirect
+    if (typeof showSuccessPopup === 'function') {
+        showSuccessPopup(
+            'Inscription réussie!',
+            'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
+            'index.html'
+        );
+    } else {
+        alert('Inscription réussie! Vous êtes maintenant connecté.');
+        window.location.href = 'index.html';
+    }
 });
