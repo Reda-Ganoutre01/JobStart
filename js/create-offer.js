@@ -66,7 +66,11 @@ function loadOfferForEdit(offerId) {
     });
 
     if (!offer) {
-        alert('Offre introuvable.');
+        if (typeof showAlertPopup === 'function') {
+            showAlertPopup('Erreur', 'Offre introuvable.', 'error');
+        } else {
+            alert('Offre introuvable.');
+        }
         window.location.href = 'Offers.html';
         return;
     }
@@ -164,7 +168,11 @@ function saveOffer(user, offerId) {
             offerData.id = offerId;
             recruiterOffers[index] = offerData;
         } else {
-            alert('Erreur: Offre introuvable.');
+                if (typeof showAlertPopup === 'function') {
+                    showAlertPopup('Erreur', 'Offre introuvable.', 'error');
+                } else {
+                    alert('Erreur: Offre introuvable.');
+                }
             return;
         }
     } else {
@@ -189,8 +197,24 @@ function saveOffer(user, offerId) {
             'Offers.html'
         );
     } else {
-        alert(offerId ? 'Offre modifiée avec succès!' : 'Offre créée avec succès!');
-        window.location.href = 'Offers.html';
+        // success path: use success popup when available, otherwise fallback
+        if (typeof showSuccessPopup === 'function') {
+            showSuccessPopup(
+                offerId ? 'Offre modifiée!' : 'Offre créée!',
+                offerId ? 'Votre offre a été modifiée avec succès.' : 'Votre offre a été publiée avec succès.',
+                'Offers.html'
+            );
+        } else if (typeof showAlertPopup === 'function') {
+            showAlertPopup(
+                offerId ? 'Offre modifiée' : 'Offre créée',
+                offerId ? 'Votre offre a été modifiée avec succès.' : 'Votre offre a été publiée avec succès.',
+                'success'
+            );
+            window.location.href = 'Offers.html';
+        } else {
+            alert(offerId ? 'Offre modifiée avec succès!' : 'Offre créée avec succès!');
+            window.location.href = 'Offers.html';
+        }
     }
 }
 
@@ -227,8 +251,15 @@ function deleteOffer(offerId) {
             'Offers.html'
         );
     } else {
-        alert('Offre supprimée avec succès!');
-        window.location.href = 'Offers.html';
+        if (typeof showSuccessPopup === 'function') {
+            showSuccessPopup('Offre supprimée!', 'L\'offre a été supprimée avec succès.', 'Offers.html');
+        } else if (typeof showAlertPopup === 'function') {
+            showAlertPopup('Offre supprimée', 'L\'offre a été supprimée avec succès.', 'success');
+            window.location.href = 'Offers.html';
+        } else {
+            alert('Offre supprimée avec succès!');
+            window.location.href = 'Offers.html';
+        }
     }
 }
 
@@ -250,8 +281,15 @@ document.addEventListener('DOMContentLoaded', function () {
             var offerId = new URLSearchParams(window.location.search).get('id');
             saveOffer(user, offerId);
 
-            alert('Offre publiée avec succès !');
-            window.location.href = 'Offers.html';
+            if (typeof showSuccessPopup === 'function') {
+                showSuccessPopup('Offre publiée!', 'Offre publiée avec succès !', 'Offers.html');
+            } else if (typeof showAlertPopup === 'function') {
+                showAlertPopup('Succès', 'Offre publiée avec succès !', 'success');
+                window.location.href = 'Offers.html';
+            } else {
+                alert('Offre publiée avec succès !');
+                window.location.href = 'Offers.html';
+            }
         });
     }
 

@@ -10,11 +10,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const profile = document.querySelector('input[name="profile"]:checked');
             
             if (!profile) {
-                alert('Veuillez choisir votre profil');
+                if (typeof showAlertPopup === 'function') {
+                    showAlertPopup('Erreur', 'Veuillez choisir votre profil', 'error');
+                } else {
+                    alert('Veuillez choisir votre profil');
+                }
                 return;
             }
 
-            alert('Message envoyé avec succès!');
+            if (typeof showSuccessPopup === 'function') {
+                showSuccessPopup('Succès', 'Message envoyé avec succès!');
+            } else if (typeof showAlertPopup === 'function') {
+                showAlertPopup('Succès', 'Message envoyé avec succès!', 'success');
+            } else {
+                alert('Message envoyé avec succès!');
+            }
             // Reset form if needed
             // contactForm.reset();
         });
