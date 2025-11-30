@@ -574,10 +574,8 @@ async function loadOffers() {
     
     // Add categories to offers that don't have them
     addCategoriesToOffers();
-    // Initially show all offers
-    filteredOffers = [...allOffers];
-    // Display the offers
-    displayOffers();
+    // Apply any filters (including those loaded from the URL) and display
+    applyFilters();
   } catch (error) {
     console.error('Error loading offers:', error);
     // Show error message to user
