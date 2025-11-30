@@ -1,15 +1,23 @@
 // Simple Popup Function
 function showSuccessPopup(title, message, redirectUrl) {
+    // Remove any existing popups first
+    var existingOverlay = document.getElementById('popup-overlay');
+    var existingPopup = document.getElementById('success-popup');
+    if (existingOverlay) document.body.removeChild(existingOverlay);
+    if (existingPopup) document.body.removeChild(existingPopup);
+
     // Create overlay
     var overlay = document.createElement('div');
     overlay.id = 'popup-overlay';
     overlay.className = 'popup-overlay';
+    overlay.style.zIndex = '20002'; // Higher than loader
     document.body.appendChild(overlay);
 
     // Create popup container
     var popup = document.createElement('div');
     popup.id = 'success-popup';
     popup.className = 'success-popup';
+    popup.style.zIndex = '20003'; // Even higher
     popup.innerHTML = `
         <div class="popup-icon">
             <i class="fas fa-check-circle"></i>
@@ -24,7 +32,8 @@ function showSuccessPopup(title, message, redirectUrl) {
     setTimeout(function() {
         overlay.classList.add('show');
         popup.classList.add('show');
-    }, 10);
+        console.log('Popup should now be visible');
+    }, 100);
 
     // Handle continue button click
     var continueBtn = document.getElementById('popup-continue-btn');

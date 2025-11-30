@@ -86,29 +86,34 @@ function collectRecruteurData(form) {
     var credentialsSection = sections[2];
     var companyRows = companySection.querySelectorAll('.form-row');
     
+    // Helper function to safely get value
+    function getValue(element, defaultValue) {
+        return element && element.value ? element.value : (defaultValue || '');
+    }
+    
     var data = {
         type: 'recruteur',
-        companyName: companyRows[0].querySelector('input[placeholder="Nom de l\'entreprise"]').value || '',
-        address: companyRows[0].querySelectorAll('input[type="text"]')[1].value || '',
-        sector: companyRows[0].querySelector('select').value || '',
-        description: companySection.querySelector('textarea').value || '',
-        postalCode: companyRows[2].querySelector('input[placeholder="Code postal"]').value || '',
-        city: companyRows[2].querySelectorAll('input[type="text"]')[1].value || '',
-        country: companyRows[2].querySelector('select').value || '',
-        employees: companyRows[3].querySelector('select').value || '',
-        website: companyRows[3].querySelector('input[type="url"]').value || '',
-        logoFileName: companySection.querySelector('#logoFile').files[0] ? companySection.querySelector('#logoFile').files[0].name : '',
-        civilite: contactSection.querySelector('.form-row select').value || '',
-        prenom: contactSection.querySelectorAll('input[type="text"]')[0].value || '',
-        nom: contactSection.querySelectorAll('input[type="text"]')[1].value || '',
-        fonction: contactSection.querySelectorAll('.form-row')[1].querySelector('select').value || '',
-        linkedin: contactSection.querySelectorAll('.form-row')[1].querySelector('input[type="url"]').value || '',
-        countryCode: contactSection.querySelector('.country-code-select').value || '',
-        telephone: contactSection.querySelector('.phone-input').value || '',
-        email: credentialsSection.querySelectorAll('input[type="email"]')[0].value || '',
-        emailConfirm: credentialsSection.querySelectorAll('input[type="email"]')[1].value || '',
-        password: credentialsSection.querySelector('#password').value || '',
-        passwordConfirm: credentialsSection.querySelector('#confirmPassword').value || '',
+        companyName: getValue(companyRows[0]?.querySelector('input[placeholder="Nom de l\'entreprise"]')),
+        address: getValue(companyRows[0]?.querySelectorAll('input[type="text"]')[1]),
+        sector: getValue(companyRows[0]?.querySelector('select')),
+        description: getValue(companySection?.querySelector('textarea')),
+        postalCode: getValue(companyRows[1]?.querySelector('input[placeholder="Code postal"]')),
+        city: getValue(companyRows[1]?.querySelectorAll('input[type="text"]')[1]),
+        country: getValue(companyRows[1]?.querySelector('select')),
+        employees: getValue(companyRows[2]?.querySelector('select')),
+        website: getValue(companyRows[2]?.querySelector('input[type="url"]')),
+        logoFileName: companySection?.querySelector('#logoFile')?.files[0] ? companySection.querySelector('#logoFile').files[0].name : '',
+        civilite: getValue(contactSection?.querySelector('.form-row select')),
+        prenom: getValue(contactSection?.querySelectorAll('input[type="text"]')[0]),
+        nom: getValue(contactSection?.querySelectorAll('input[type="text"]')[1]),
+        fonction: getValue(contactSection?.querySelectorAll('.form-row')[1]?.querySelector('select')),
+        linkedin: getValue(contactSection?.querySelectorAll('.form-row')[1]?.querySelector('input[type="url"]')),
+        countryCode: getValue(contactSection?.querySelector('.country-code-select')),
+        telephone: getValue(contactSection?.querySelector('.phone-input')),
+        email: getValue(credentialsSection?.querySelectorAll('input[type="email"]')[0]),
+        emailConfirm: getValue(credentialsSection?.querySelectorAll('input[type="email"]')[1]),
+        password: getValue(credentialsSection?.querySelector('#password')),
+        passwordConfirm: getValue(credentialsSection?.querySelector('#confirmPassword')),
         profilePhoto: profilePhotoImg ? profilePhotoImg.src : ''
     };
     
@@ -175,23 +180,17 @@ document.addEventListener('DOMContentLoaded', function() {
             createSession(formData);
         }
         
-        // Wait a bit to ensure popup.js is loaded, then show success popup
-        setTimeout(function() {
-            if (typeof showSuccessPopup === 'function') {
-                showSuccessPopup(
-                    'Inscription réussie!',
-                    'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
-                    'index.html'
-                );
-            } else {
-                // Fallback: try the popup from popup.js with different function name
-                console.log('showSuccessPopup not found, trying alternative...');
-                alert('Inscription réussie! Vous êtes maintenant connecté.');
-                setTimeout(function() {
-                    window.location.href = 'index.html';
-                }, 500);
-            }
-        }, 100);
+        // Show success popup and redirect
+        if (typeof showSuccessPopup === 'function') {
+            showSuccessPopup(
+                'Inscription réussie!',
+                'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
+                'index.html'
+            );
+        } else {
+            alert('Inscription réussie! Vous êtes maintenant connecté.');
+            window.location.href = 'index.html';
+        }
     });
 });
 
