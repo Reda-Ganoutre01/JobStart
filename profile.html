@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Mon Profil - JobStart</title>
+        <!-- Styling File -->
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/profile.css">
+        <!-- Site logo / favicon -->
+        <link rel="icon" href="assets/logo/logo_jobstart_single.png" type="image/png">
+        <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png">
+        <!-- AOS library -->
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <!-- icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+        <!-- dark mode -->
+        <script type="text/javascript" src="js/darkmode.js" defer></script>
+    </head>
+    <body>
+        <!-- Page loader -->
+        <div id="site-loader" aria-hidden="false">
+            <div class="loader-container">
+                <div class="logo-wrapper">
+                    <img src="assets/logo/logo_jobstart_single.png" alt="JobStart Logo" class="logo-image">
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <h1 class="brand-text">
+                    <span class="job">Job</span><span class="start">Start</span>
+                </h1>
+                <p class="loading-text">Chargement de vos opportunités...</p>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <a href="index.html">
+                    <img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo">
+                </a>
+                <nav>
+                    <button class="dropdown-menu" aria-label="Drop down menu" title="Drop down menu" aria-expanded="false">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+                    <ul id="nav-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="Offers.html">Offers</a></li>
+                        <li><a href="Conseils.html">Conseils</a></li>
+                        <li><a href="Apropos.html">A propos</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <button id="theme-switch">🌙</button>
+                    <div class="header-btns">
+                        <button type="button">
+                            <a href="login.html">Se Connecter</a>
+                        </button>
+                        <button type="button">
+                            <a href="SignUp.html">S'inscrire</a>
+                        </button>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- End Header -->
+
+        <!-- Main Content -->
+        <main class="profile-main">
+            <div class="profile-wrapper">
+                <!-- Cover Photo Section -->
+                <div class="profile-cover">
+                    <div class="cover-photo" id="coverPhoto">
+                        <button class="cover-edit-btn" id="coverEditBtn" style="display: none;">
+                            <i class="fas fa-camera"></i> Changer la photo de couverture
+                        </button>
+                        <input type="file" id="coverPhotoInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Profile Info Card -->
+                <div class="container">
+                    <div class="profile-info-card">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar">
+                                <img id="profilePhotoPreview" src="" alt="Photo de profil">
+                                <label for="profilePhoto" class="avatar-edit-btn" id="avatarEditBtn">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" style="display: none;">
+                            </div>
+                            <div class="profile-name-section">
+                                <h1 id="profileName">Nom Utilisateur</h1>
+                                <p id="profileEmail">email@example.com</p>
+                                <button class="edit-profile-btn" id="editProfileBtn">
+                                    <i class="fas fa-edit"></i> Modifier le profil
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Content -->
+                    <div class="profile-content">
+                        <!-- Left Column: Info Display/Edit -->
+                        <div class="profile-left">
+                            <!-- Info Card (Display Mode) -->
+                            <div class="info-card" id="infoDisplayCard">
+                                <div class="card-header">
+                                    <h2>À propos</h2>
+                                </div>
+                                <div class="card-body" id="infoDisplayContent">
+                                    <!-- Content will be populated by JS -->
+                                </div>
+                            </div>
+
+                            <!-- Edit Form (Hidden by default) -->
+                            <form id="profileForm" class="info-card edit-form" style="display: none;">
+                                <div class="card-header">
+                                    <h2>Modifier les informations</h2>
+                                    <button type="button" class="cancel-edit-btn" id="cancelEditBtn">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                        <!-- Profile Photo Section -->
+                        <div class="profile-section">
+                            <h2 class="section-title">Photo de profil</h2>
+                            <div class="profile-photo-section">
+                                <div class="photo-preview">
+                                    <img id="profilePhotoPreviewForm" src="" alt="Photo de profil">
+                                    <label for="profilePhoto" class="photo-upload-btn">
+                                        <i class="fas fa-camera"></i>
+                                        Changer la photo
+                                    </label>
+                                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" style="display: none;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personal Information Section (for candidates) -->
+                        <div id="candidatSection" class="profile-section" style="display: none;">
+                            <h2 class="section-title">Informations personnelles</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Civilité <span class="required">*</span></label>
+                                    <select id="civilite" name="civilite" required>
+                                        <option value="">Sélectionner</option>
+                                        <option value="M">M.</option>
+                                        <option value="Mme">Mme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Prénom <span class="required">*</span></label>
+                                    <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom <span class="required">*</span></label>
+                                    <input type="text" id="nom" name="nom" placeholder="Nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone <span class="required">*</span></label>
+                                    <div class="phone-group">
+                                        <select class="country-code-select" id="countryCode" name="countryCode" required>
+                                            <option value="212">Maroc +212</option>
+                                            <option value="213">Algérie +213</option>
+                                            <option value="216">Tunisie +216</option>
+                                            <option value="33">France +33</option>
+                                            <option value="1">États-Unis +1</option>
+                                        </select>
+                                        <input type="tel" class="phone-input" id="telephone" name="telephone" placeholder="Numéro de téléphone" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Information Section (for recruiters) -->
+                        <div id="recruteurSection" class="profile-section" style="display: none;">
+                            <h2 class="section-title">Informations de l'entreprise</h2>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label>Nom de l'entreprise <span class="required">*</span></label>
+                                    <input type="text" id="companyName" name="companyName" placeholder="Nom de l'entreprise" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Secteur d'activité <span class="required">*</span></label>
+                                    <select id="sector" name="sector" required>
+                                        <option value="">Sélectionner</option>
+                                        <option value="IT">IT / Technologies</option>
+                                        <option value="Finance">Finance</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="RH">Ressources Humaines</option>
+                                        <option value="Commerce">Commerce</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nombre d'employés</label>
+                                    <select id="employees" name="employees">
+                                        <option value="">Sélectionner</option>
+                                        <option value="1-10">1-10</option>
+                                        <option value="11-50">11-50</option>
+                                        <option value="51-200">51-200</option>
+                                        <option value="201-500">201-500</option>
+                                        <option value="500+">500+</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Adresse</label>
+                                    <input type="text" id="address" name="address" placeholder="Adresse">
+                                </div>
+                                <div class="form-group">
+                                    <label>Code postal</label>
+                                    <input type="text" id="postalCode" name="postalCode" placeholder="Code postal">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ville</label>
+                                    <input type="text" id="city" name="city" placeholder="Ville">
+                                </div>
+                                <div class="form-group">
+                                    <label>Pays</label>
+                                    <select id="country" name="country">
+                                        <option value="Maroc">Maroc</option>
+                                        <option value="Algérie">Algérie</option>
+                                        <option value="Tunisie">Tunisie</option>
+                                        <option value="France">France</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Site web</label>
+                                    <input type="url" id="website" name="website" placeholder="https://example.com">
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>Description</label>
+                                    <textarea id="description" name="description" rows="4" placeholder="Description de l'entreprise"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Person Section (for recruiters) -->
+                        <div id="recruteurContactSection" class="profile-section" style="display: none;">
+                            <h2 class="section-title">Personne de contact</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Civilité <span class="required">*</span></label>
+                                    <select id="recruteurCivilite" name="recruteurCivilite" required>
+                                        <option value="">Sélectionner</option>
+                                        <option value="M">M.</option>
+                                        <option value="Mme">Mme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Prénom <span class="required">*</span></label>
+                                    <input type="text" id="recruteurPrenom" name="recruteurPrenom" placeholder="Prénom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Nom <span class="required">*</span></label>
+                                    <input type="text" id="recruteurNom" name="recruteurNom" placeholder="Nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Fonction</label>
+                                    <select id="fonction" name="fonction">
+                                        <option value="">Sélectionner</option>
+                                        <option value="RH">RH</option>
+                                        <option value="Recruteur">Recruteur</option>
+                                        <option value="Manager">Manager</option>
+                                        <option value="Directeur">Directeur</option>
+                                        <option value="Autre">Autre</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Téléphone <span class="required">*</span></label>
+                                    <div class="phone-group">
+                                        <select class="country-code-select" id="recruteurCountryCode" name="recruteurCountryCode" required>
+                                            <option value="212">Maroc +212</option>
+                                            <option value="213">Algérie +213</option>
+                                            <option value="216">Tunisie +216</option>
+                                            <option value="33">France +33</option>
+                                            <option value="1">États-Unis +1</option>
+                                        </select>
+                                        <input type="tel" class="phone-input" id="recruteurTelephone" name="recruteurTelephone" placeholder="Numéro de téléphone" required>
+                                    </div>
+                                </div>
+                                <div class="form-group full-width">
+                                    <label>LinkedIn</label>
+                                    <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Account Information Section -->
+                        <div class="profile-section">
+                            <h2 class="section-title">Informations de compte</h2>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label>Email</label>
+                                    <input type="email" id="email" name="email" readonly>
+                                    <small class="form-help">L'email ne peut pas être modifié</small>
+                                </div>
+                            </div>
+                        </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="form-actions">
+                                        <button type="button" class="btn-secondary" id="cancelFormBtn">Annuler</button>
+                                        <button type="submit" class="btn-primary">Enregistrer</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Right Column: Jobs Section -->
+                        <div class="profile-right">
+                            <!-- Applied Jobs (for candidates) -->
+                            <div class="info-card" id="appliedJobsCard" style="display: none;">
+                                <div class="card-header">
+                                    <h2>Mes candidatures</h2>
+                                    <span class="badge-count" id="appliedJobsCount">0</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="appliedJobsList" class="jobs-list">
+                                        <p class="empty-state">Aucune candidature pour le moment</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Posted Jobs (for recruiters) -->
+                            <div class="info-card" id="postedJobsCard" style="display: none;">
+                                <div class="card-header">
+                                    <h2>Mes offres publiées</h2>
+                                    <span class="badge-count" id="postedJobsCount">0</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="postedJobsList" class="jobs-list">
+                                        <p class="empty-state">Aucune offre publiée pour le moment</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Applicants Section (for recruiters) -->
+                            <div class="info-card" id="applicantsCard" style="display: none;">
+                                <div class="card-header">
+                                    <h2>Candidats</h2>
+                                    <span class="badge-count" id="applicantsCount">0</span>
+                                </div>
+                                <div class="card-body">
+                                    <div id="applicantsList" class="applicants-list">
+                                        <p class="empty-state">Aucun candidat pour le moment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-content">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img src="assets/logo/logo-lightmode.png"
+                                alt="JobStar" id="logo">
+                        </a>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <strong>Contactez-nous</strong>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <div class="contact-text">
+                                    <div class="phone">+212 5 22 00 00 00</div>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div class="contact-text">
+                                    Agadir, Maroc<br>
+                                </div>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div class="contact-text">
+                                    contact@jobstart.ma
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Pour les Candidats</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Chercher
+                                    un Stage</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Chercher
+                                    un Emploi</a></li>
+                            <li><a href="profile.html"><i
+                                        class="fas fa-chevron-right"></i>Mon
+                                    Profil</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Mes
+                                    Candidatures</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Alertes
+                                    Emploi</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Pour les Entreprises</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Publier
+                                    une Offre</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Espace
+                                    Entreprise</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Trouver
+                                    des Candidats</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Nos
+                                    Services</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>À Propos</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Qui
+                                    sommes-nous</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Notre
+                                    Mission</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>L'Équipe</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Témoignages</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h3>Ressources Utiles</h3>
+                        <ul class="footer-links">
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Conseils
+                                    CV</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Conseils
+                                    Entretien</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Guide
+                                    de Carrière</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Mentions
+                                    Légales</a></li>
+                            <li><a href="#"><i
+                                        class="fas fa-chevron-right"></i>Confidentialité</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="footer-bottom">
+                    <p class="copyright">© 2025 JobStar by Reda Ganoutre-Youssef
+                        el Menlani . All
+                        rights reserved.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+        <!-- Scripts -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="data/offers.js" defer></script>
+        <script src="js/loading.js" defer></script>
+        <script src="js/session.js" defer></script>
+        <script src="js/profile.js" defer></script>
+        <script src="js/main.js" defer></script>
+    </body>
+</html>
+
