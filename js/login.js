@@ -69,6 +69,17 @@
                 if (typeof createSession === 'function') {
                     createSession(userFound);
                 }
+                // Remember email if requested
+                try {
+                    const remember = document.getElementById('remember');
+                    if (remember && remember.checked) {
+                        localStorage.setItem('rememberedEmail', email);
+                    } else {
+                        localStorage.removeItem('rememberedEmail');
+                    }
+                } catch (e) {
+                    console.warn('Remember me handling failed', e);
+                }
                 
                 successAlert.style.display = 'flex';
                 
