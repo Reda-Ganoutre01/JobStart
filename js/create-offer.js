@@ -1,4 +1,35 @@
+// Fallback: force show the form if it's still hidden after loader
+window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        var container = document.querySelector('.container-form');
+        if (container) {
+            var cs = window.getComputedStyle(container);
+            if (cs.visibility === 'hidden' || cs.opacity === '0') {
+                container.style.visibility = 'visible';
+                container.style.opacity = '1';
+                container.style.transition = 'opacity 0.3s';
+                console.log('create-offer.js: forced container-form visible');
+            }
+        }
+    }, 2500); // after loader should be gone
+});
 // Create/Edit Offer Management
+
+
+// Debug logs to help diagnose form visibility issues
+console.log('create-offer.js: loaded');
+try {
+    var _debugOfferForm = document.getElementById('offerForm');
+    console.log('create-offer.js: offerForm element found=', !!_debugOfferForm);
+    var _debugContainer = document.querySelector('.container-form');
+    console.log('create-offer.js: container-form found=', !!_debugContainer);
+    if (_debugContainer) {
+        var cs = window.getComputedStyle(_debugContainer);
+        console.log('create-offer.js: container-form computed display=', cs.display, 'visibility=', cs.visibility, 'opacity=', cs.opacity);
+    }
+} catch (e) {
+    console.error('create-offer.js: debug error', e);
+}
 
 
 
@@ -203,4 +234,80 @@ function deleteOffer(offerId) {
 
 // Make deleteOffer available globally
 window.deleteOffer = deleteOffer;
+
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('offerForm');
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            var user = JSON.parse(localStorage.getItem('currentUser'));
+            if (!user) {
+                showCustomPopup('Vous devez être connecté pour publier une offre.', 'Se connecter', 'login.html');
+                return;
+            }
+
+            var offerId = new URLSearchParams(window.location.search).get('id');
+            saveOffer(user, offerId);
+
+            alert('Offre publiée avec succès !');
+            window.location.href = 'Offers.html';
+        });
+    }
+
+    function showCustomPopup(message, buttonText, redirectUrl) {
+        // Create popup elements
+        var popup = document.createElement('div');
+        popup.className = 'custom-popup';
+
+        var popupContent = document.createElement('div');
+        popupContent.className = 'custom-popup-content';
+
+        var popupMessage = document.createElement('p');
+        popupMessage.textContent = message;
+
+        var popupButton = document.createElement('button');
+        popupButton.textContent = buttonText;
+        popupButton.className = 'custom-popup-button';
+        popupButton.addEventListener('click', function () {
+            window.location.href = redirectUrl;
+        });
+
+        // Append elements
+        popupContent.appendChild(popupMessage);
+        popupContent.appendChild(popupButton);
+        popup.appendChild(popupContent);
+        document.body.appendChild(popup);
+
+        // Add styles
+        popup.style.position = 'fixed';
+        popup.style.top = '0';
+        popup.style.left = '0';
+        popup.style.width = '100%';
+        popup.style.height = '100%';
+        popup.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        popup.style.display = 'flex';
+        popup.style.justifyContent = 'center';
+        popup.style.alignItems = 'center';
+        popup.style.zIndex = '1000';
+
+        popupContent.style.backgroundColor = '#fff';
+        popupContent.style.padding = '20px';
+        popupContent.style.borderRadius = '8px';
+        popupContent.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
+        popupContent.style.textAlign = 'center';
+
+        popupMessage.style.marginBottom = '20px';
+        popupMessage.style.fontSize = '16px';
+        popupMessage.style.color = '#333';
+
+        popupButton.style.backgroundColor = '#007bff';
+        popupButton.style.color = '#fff';
+        popupButton.style.border = 'none';
+        popupButton.style.padding = '10px 20px';
+        popupButton.style.borderRadius = '4px';
+        popupButton.style.cursor = 'pointer';
+        popupButton.style.fontSize = '14px';
+    }
+});
 
