@@ -27,3 +27,22 @@ window.allSignups = [
 		timestamp: new Date().toISOString()
 	}
 ];
+
+// Ensure signups persist to localStorage and prefer stored data when available.
+// This makes seeded users available on static hosts (Netlify) where script
+// load order can cause race conditions.
+try {
+	var __stored = localStorage.getItem('allSignups');
+	if (__stored) {
+		try {
+			window.allSignups = JSON.parse(__stored);
+		} catch (e) {
+			// If parse fails, re-seed storage with current default
+			localStorage.setItem('allSignups', JSON.stringify(window.allSignups));
+		}
+	} else {
+		localStorage.setItem('allSignups', JSON.stringify(window.allSignups));
+	}
+} catch (e) {
+	console.warn('Could not access localStorage for allSignups:', e);
+}
