@@ -124,7 +124,7 @@
                   <option value="Full Time">Temps Plein</option>
                   <option value="Part Time">Temps Partiel</option>
                   <option value="Stage">Stage</option>
-                  <option value="Internship">Internship</option>
+                  <option value="Freelance">Freelance</option>
                 </select>
               </div>
             </div>
@@ -466,5 +466,40 @@
     <script src="js/session.js" defer></script>
     <script src="js/create-offer.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const jobTypeSelect = document.getElementById("jobType");
+        const categorySelect = document.getElementById("category");
+
+        // Populate job type options dynamically
+        const jobTypes = ["Full Time", "Part Time", "Stage", "Freelance"];
+        jobTypeSelect.innerHTML =
+          '<option value="">Sélectionner</option>' +
+          jobTypes
+            .map((type) => `<option value="${type}">${type}</option>`)
+            .join("");
+
+        // Populate category options dynamically
+        const categories = [
+          "Development",
+          "IT",
+          "Data",
+          "Design",
+          "Marketing",
+          "RH",
+          "Finance",
+          "Management",
+          "Communication",
+          "Commercial",
+        ];
+        categorySelect.innerHTML =
+          '<option value="">Sélectionner</option>' +
+          categories
+            .map(
+              (category) => `<option value="${category}">${category}</option>`
+            )
+            .join("");
+      });
+    </script>
   </body>
 </html>
