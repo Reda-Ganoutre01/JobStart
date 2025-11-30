@@ -435,3 +435,292 @@
     }
 }
 
+
+/* test */
+/* Section Offres d'Emploi */
+        .jobs-section {
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: var(--secondary-text);
+            font-size: 1rem;
+        }
+
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+
+        .job-header {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .company-logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-title-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .job-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .featured-badge {
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .job-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .badge-fulltime {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-parttime {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge-urgent {
+            background: #fed7aa;
+            color: #9a3412;
+        }
+
+        .badge-internship {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .bookmark-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            transition: color 0.2s;
+        }
+
+        .bookmark-btn:hover {
+            color: #3b82f6;
+        }
+
+        .bookmark-btn.saved {
+            color: #3b82f6;
+        }
+
+        .load-more-btn {
+            display: block;
+            margin: 0 auto;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .load-more-btn:hover {
+            background: #2563eb;
+        }
+
+        /* Section Témoignages */
+        .testimonials-section {
+            background: var(--base-variant);
+            padding: 60px 20px;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            min-width: calc(33.333% - 20px);
+            margin: 0 10px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 4rem;
+            color: #e5e7eb;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-content {
+            color: var(--secondary-text);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+
+        .author-info p {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            width: 30px;
+            border-radius: 5px;
+            background: #1a1a1a;
+        }
+
+        @media (max-width: 1024px) {
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonial-card {
+                min-width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .testimonial-card {
+                min-width: calc(100% - 20px);
+            }
+        }
