@@ -195,3 +195,168 @@
     white-space: nowrap;
     border: 0;
 }
+
+/* Applicants Section Styles */
+.applicants-section {
+    margin-top: 30px;
+}
+
+.applicants-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.applicants-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.applicants-table thead {
+    background: var(--primary-color);
+    color: white;
+}
+
+.applicants-table th {
+    padding: 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.applicants-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.9rem;
+}
+
+.applicants-table tbody tr {
+    transition: background 0.2s;
+}
+
+.applicants-table tbody tr:hover {
+    background: var(--base-variant);
+}
+
+.applicants-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.applicant-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.applicant-table-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-color);
+}
+
+.applicant-table-initials {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.cv-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.cv-link:hover {
+    color: var(--secondary-color);
+}
+
+.cv-link i {
+    font-size: 1rem;
+}
+
+.no-cv {
+    color: var(--text-color);
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.applicant-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-accept,
+.btn-reject {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-accept {
+    background: #10b981;
+    color: white;
+}
+
+.btn-accept:hover {
+    background: #059669;
+    transform: translateY(-1px);
+}
+
+.btn-reject {
+    background: #ef4444;
+    color: white;
+}
+
+.btn-reject:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-color);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .applicants-table {
+        font-size: 0.8rem;
+    }
+    
+    .applicants-table th,
+    .applicants-table td {
+        padding: 10px 8px;
+    }
+    
+    .applicant-name-cell {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}

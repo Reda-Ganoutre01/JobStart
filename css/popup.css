@@ -17,7 +17,8 @@
     display: flex;
 }
 
-.popup-container {
+.popup-container,
+.success-popup {
     background: var(--card-bg, #ffffff);
     border-radius: 12px;
     padding: 30px;
@@ -27,6 +28,14 @@
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     animation: slideUp 0.3s ease;
     position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.success-popup.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .popup-icon {
@@ -38,6 +47,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 40px;
+    color: white;
+}
+
+.popup-icon i {
     font-size: 40px;
     color: white;
 }

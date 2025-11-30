@@ -173,7 +173,153 @@
     // Simple map placeholder (New York coords fallback)
     const coords = /new york/i.test(o.location||'') ? '40.7128,-74.0060' : '31.7923,-7.0800';
     mapBox.innerHTML = `<iframe title="Carte" width="100%" height="300" src="https://maps.google.com/maps?q=${coords}&output=embed" loading="lazy"></iframe>`;
+    
+    // Show applicants table if user is recruiter and owns this offer
+    setTimeout(function() {
+      checkAndShowApplicants(o.id, o);
+    }, 500);
   }
+  
+  // Check if user is recruiter and show applicants
+  function checkAndShowApplicants(jobId, jobData) {
+    var user = null;
+    if (typeof getSession === 'function') {
+      user = getSession();
+    }
+    
+    if (!user || user.type !== 'recruteur') return;
+    
+    // Check if this offer belongs to the recruiter
+    var isOwner = jobData.postedBy === user.email || jobData.company === user.companyName;
+    if (!isOwner) return;
+    
+    // Get applicants for this job
+    var applicants = [];
+    if (typeof getJobApplicants === 'function') {
+      applicants = getJobApplicants(jobId);
+    } else {
+      var allApplicants = JSON.parse(localStorage.getItem('applicants') || '[]');
+      applicants = allApplicants.filter(function(app) {
+        return app.jobId === jobId;
+      });
+    }
+    
+    // Add applicants section after the map
+    var mapBox = $('#map-box');
+    if (mapBox && applicants.length > 0) {
+      var applicantsHTML = `
+        <div class="detail-section applicants-section" id="applicants-section">
+          <h2>Candidats (${applicants.length})</h2>
+          <div class="applicants-table-container">
+            <table class="applicants-table">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Email</th>
+                  <th>Téléphone</th>
+                  <th>CV</th>
+                  <th>Date de candidature</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${applicants.map(function(applicant) {
+                  var appliedDate = new Date(applicant.appliedDate || applicant.timestamp);
+                  var dateStr = appliedDate.toLocaleDateString('fr-FR', { 
+                    year: 'numeric', 
+                    month: 'short', 
+                    day: 'numeric' 
+                  });
+                  
+                  return `
+                    <tr>
+                      <td>
+                        <div class="applicant-name-cell">
+                          ${applicant.candidateProfile && !applicant.candidateProfile.includes('logo') ? 
+                            '<img src="' + applicant.candidateProfile + '" alt="' + applicant.candidateName + '" class="applicant-table-avatar">' :
+                            '<div class="applicant-table-initials">' + (applicant.candidateName.substring(0, 2).toUpperCase() || 'U') + '</div>'}
+                          <span>${applicant.candidateName || 'N/A'}</span>
+                        </div>
+                      </td>
+                      <td>${applicant.candidateEmail || 'N/A'}</td>
+                      <td>${applicant.candidatePhone || 'N/A'}</td>
+                      <td>
+                        ${applicant.candidateCV ? 
+                          '<a href="#" class="cv-link" onclick="viewCV(\'' + applicant.candidateCV + '\'); return false;"><i class="fas fa-file-pdf"></i> Voir CV</a>' :
+                          '<span class="no-cv">Aucun CV</span>'}
+                      </td>
+                      <td>${dateStr}</td>
+                      <td>
+                        <span class="job-status ${applicant.status || 'pending'}">
+                          ${applicant.status === 'accepted' ? 'Accepté' : 
+                            applicant.status === 'rejected' ? 'Refusé' : 'En attente'}
+                        </span>
+                      </td>
+                      <td>
+                        <div class="applicant-actions">
+                          <button class="btn-accept" onclick="updateApplicantStatus(${applicant.id}, 'accepted')" title="Accepter">
+                            <i class="fas fa-check"></i>
+                          </button>
+                          <button class="btn-reject" onclick="updateApplicantStatus(${applicant.id}, 'rejected')" title="Refuser">
+                            <i class="fas fa-times"></i>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  `;
+                }).join('')}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      
+      mapBox.insertAdjacentHTML('afterend', applicantsHTML);
+    } else if (mapBox) {
+      // Show empty state
+      var emptyHTML = `
+        <div class="detail-section applicants-section" id="applicants-section">
+          <h2>Candidats</h2>
+          <p class="empty-state">Aucun candidat pour le moment</p>
+        </div>
+      `;
+      mapBox.insertAdjacentHTML('afterend', emptyHTML);
+    }
+  }
+  
+  // Update applicant status
+  window.updateApplicantStatus = function(applicantId, status) {
+    if (typeof updateApplicationStatus === 'function') {
+      updateApplicationStatus(applicantId, status);
+    } else {
+      var applicants = JSON.parse(localStorage.getItem('applicants') || '[]');
+      var applicant = applicants.find(function(app) {
+        return app.id === applicantId;
+      });
+      if (applicant) {
+        applicant.status = status;
+        localStorage.setItem('applicants', JSON.stringify(applicants));
+      }
+      
+      var applications = JSON.parse(localStorage.getItem('applications') || '[]');
+      var application = applications.find(function(app) {
+        return app.id === applicantId;
+      });
+      if (application) {
+        application.status = status;
+        localStorage.setItem('applications', JSON.stringify(applications));
+      }
+    }
+    
+    // Reload page to show updated status
+    window.location.reload();
+  };
+  
+  // View CV (placeholder)
+  window.viewCV = function(cvFileName) {
+    alert('CV: ' + cvFileName + '\n\nFonctionnalité de visualisation CV à implémenter.');
+  };
 
   // Handle job application
   window.handleJobApplication = function(jobId) {

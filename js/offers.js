@@ -358,10 +358,65 @@ function createOfferHTML(offer) {
       </div>
       <div class="offer-row-actions">
         <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${offerId}'">Détails</button>
+        ${getRecruiterActions(offer)}
       </div>
     </div>
   `;
 }
+
+// Get recruiter action buttons (modify/delete) - only for recruiters
+function getRecruiterActions(offer) {
+  var user = null;
+  if (typeof getSession === 'function') {
+    user = getSession();
+  }
+  
+  if (!user || user.type !== 'recruteur') {
+    return '';
+  }
+  
+  // Check if this offer belongs to the recruiter
+  var isOwner = offer.postedBy === user.email || offer.company === user.companyName;
+  
+  if (!isOwner) {
+    return '';
+  }
+  
+  return `
+    <button class="modify-btn" onclick="window.location.href='create-offer.html?edit=${offer.id}'" title="Modifier">
+      <i class="fas fa-edit"></i>
+    </button>
+    <button class="delete-btn" onclick="deleteOfferFromList(${offer.id})" title="Supprimer">
+      <i class="fas fa-trash"></i>
+    </button>
+  `;
+}
+
+// Delete offer from offers list
+window.deleteOfferFromList = function(offerId) {
+  if (typeof deleteOffer === 'function') {
+    deleteOffer(offerId);
+  } else {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer cette offre?')) {
+      return;
+    }
+    
+    var recruiterOffers = [];
+    var stored = localStorage.getItem('recruiterOffers');
+    if (stored) {
+      recruiterOffers = JSON.parse(stored);
+    }
+    
+    recruiterOffers = recruiterOffers.filter(function(o) {
+      return o.id !== offerId;
+    });
+    
+    localStorage.setItem('recruiterOffers', JSON.stringify(recruiterOffers));
+    
+    // Reload offers
+    loadOffers();
+  }
+};
 
 // Display offers on the page
 function displayOffers() {
@@ -483,12 +538,40 @@ async function loadOffers() {
       }
       offersData = await response.json();
     }
-    // Make sure we have an array
-    if (Array.isArray(offersData)) {
-      allOffers = offersData;
-    } else {
-      allOffers = [];
+    
+    // Load recruiter offers from localStorage
+    var recruiterOffers = [];
+    var stored = localStorage.getItem('recruiterOffers');
+    if (stored) {
+      recruiterOffers = JSON.parse(stored);
     }
+    
+    // Merge recruiter offers with main offers
+    if (Array.isArray(offersData)) {
+      allOffers = [...offersData, ...recruiterOffers];
+    } else {
+      allOffers = recruiterOffers;
+    }
+    
+    // Check if user is recruiter and filter offers
+    var user = null;
+    if (typeof getSession === 'function') {
+      user = getSession();
+    }
+    
+    if (user && user.type === 'recruteur') {
+      // Show only offers created by this recruiter
+      allOffers = allOffers.filter(function(offer) {
+        return offer.postedBy === user.email || offer.company === user.companyName;
+      });
+      
+      // Show recruiter actions
+      var recruiterActions = document.getElementById('recruiterActions');
+      if (recruiterActions) {
+        recruiterActions.style.display = 'block';
+      }
+    }
+    
     // Add categories to offers that don't have them
     addCategoriesToOffers();
     // Initially show all offers

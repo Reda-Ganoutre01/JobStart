@@ -137,53 +137,62 @@ function addSignup(signupData) {
     console.log('All signups:', window.allSignups);
 }
 
-// Form submission
-document.getElementById('form-recruteur').addEventListener('submit', function(e) {
-    e.preventDefault();
+// Form submission - wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('form-recruteur');
+    if (!form) return;
     
-    var form = e.target;
-    
-    // Check if passwords match
-    var password = document.getElementById('password').value;
-    var confirmPassword = document.getElementById('confirmPassword').value;
-    if (password !== confirmPassword) {
-        alert('Les mots de passe ne correspondent pas!');
-        return;
-    }
-    
-    // Check if emails match
-    var emailInputs = form.querySelectorAll('input[type="email"]');
-    if (emailInputs.length >= 2) {
-        var email = emailInputs[0].value;
-        var emailConfirm = emailInputs[1].value;
-        if (email !== emailConfirm) {
-            alert('Les emails ne correspondent pas!');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Check if passwords match
+        var password = document.getElementById('password').value;
+        var confirmPassword = document.getElementById('confirmPassword').value;
+        if (password !== confirmPassword) {
+            alert('Les mots de passe ne correspondent pas!');
             return;
         }
-    }
-    
-    // Collect form data
-    var formData = collectRecruteurData(form);
-    
-    // Add to array
-    addSignup(formData);
-    
-    // Create session
-    if (typeof createSession === 'function') {
-        createSession(formData);
-    }
-    
-    // Show success popup and redirect
-    if (typeof showSuccessPopup === 'function') {
-        showSuccessPopup(
-            'Inscription réussie!',
-            'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
-            'index.html'
-        );
-    } else {
-        alert('Inscription réussie! Vous êtes maintenant connecté.');
-        window.location.href = 'index.html';
-    }
+        
+        // Check if emails match
+        var emailInputs = form.querySelectorAll('input[type="email"]');
+        if (emailInputs.length >= 2) {
+            var email = emailInputs[0].value;
+            var emailConfirm = emailInputs[1].value;
+            if (email !== emailConfirm) {
+                alert('Les emails ne correspondent pas!');
+                return;
+            }
+        }
+        
+        // Collect form data
+        var formData = collectRecruteurData(form);
+        
+        // Add to array
+        addSignup(formData);
+        
+        // Create session
+        if (typeof createSession === 'function') {
+            createSession(formData);
+        }
+        
+        // Wait a bit to ensure popup.js is loaded, then show success popup
+        setTimeout(function() {
+            if (typeof showSuccessPopup === 'function') {
+                showSuccessPopup(
+                    'Inscription réussie!',
+                    'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
+                    'index.html'
+                );
+            } else {
+                // Fallback: try the popup from popup.js with different function name
+                console.log('showSuccessPopup not found, trying alternative...');
+                alert('Inscription réussie! Vous êtes maintenant connecté.');
+                setTimeout(function() {
+                    window.location.href = 'index.html';
+                }, 500);
+            }
+        }, 100);
+    });
 });
 
 // Character counter for company name

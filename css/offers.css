@@ -394,6 +394,73 @@ fieldset.filter-group input[type="radio"] { accent-color: var(--primary-color); 
   margin-bottom: 15px;
 }
 
+/* Recruiter Actions */
+#recruiterActions {
+  margin-bottom: 20px;
+}
+
+.create-offer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+}
+
+.create-offer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+}
+
+.create-offer-btn i {
+  font-size: 1rem;
+}
+
+/* Modify and Delete buttons */
+.modify-btn,
+.delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-left: 8px;
+}
+
+.modify-btn {
+  background: var(--primary-color);
+  color: white;
+}
+
+.modify-btn:hover {
+  background: var(--secondary-color);
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.offer-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Badge styles for job cards (matching index page) */
 .job-card .badge {
   padding: 6px 14px;
