@@ -97,7 +97,12 @@
         document.querySelectorAll('.social-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 const provider = this.classList.contains('google') ? 'Google' : 'LinkedIn';
-                alert(`Connexion avec ${provider} en développement...`);
+                const msg = `Connexion avec ${provider} en développement...`;
+                if (typeof showAlertPopup === 'function') {
+                    showAlertPopup('Information', msg, 'info');
+                } else {
+                    alert(msg);
+                }
             });
         });
 

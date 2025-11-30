@@ -92,57 +92,50 @@
     const applicant = allApplicants.find(app => app.id === applicantId);
 
     if (applicant) {
-      applicant.status = 'approved';
-      localStorage.setItem('applicants', JSON.stringify(allApplicants));
-      alert(`Candidat ${applicant.name} approuvé avec succès !`);
-      location.reload();
+        applicant.status = 'approved';
+        localStorage.setItem('applicants', JSON.stringify(allApplicants));
+        showAlertPopup('Succès', `Candidat ${applicant.name} approuvé avec succès !`, 'info');
+        location.reload();
     }
   };
 
   window.handleJobApplication = function(jobId) {
-    // Check if user is logged in
     const user = typeof getSession === 'function' ? getSession() : null;
 
     if (!user) {
-      if (confirm('Vous devez être connecté pour postuler. Voulez-vous vous connecter?')) {
-        window.location.href = 'login.html';
-      }
-      return;
+        showAlertPopup('Connexion requise', 'Vous devez être connecté pour postuler.', 'error');
+        return;
     }
 
     if (user.type !== 'candidat') {
-      alert('Seuls les candidats peuvent postuler aux offres.');
-      return;
+        showAlertPopup('Erreur', 'Seuls les candidats peuvent postuler aux offres.', 'error');
+        return;
     }
 
-    // Get existing applications
     const applications = JSON.parse(localStorage.getItem('applications') || '[]');
-
-    // Check if the user has already applied
     const hasApplied = applications.some(app => app.jobId === jobId && app.userEmail === user.email);
+
     if (hasApplied) {
-      alert('Vous avez déjà postulé à cette offre.');
-      return;
+        showAlertPopup('Information', 'Vous avez déjà postulé à cette offre.', 'info');
+        return;
     }
 
-    // Save the application
     applications.push({
-      jobId: jobId,
-      userEmail: user.email,
-      timestamp: new Date().toISOString()
+        jobId: jobId,
+        userEmail: user.email,
+        timestamp: new Date().toISOString()
     });
     localStorage.setItem('applications', JSON.stringify(applications));
 
-    // Provide feedback to the user
     const applyBtn = document.getElementById('applyBtn');
     if (applyBtn) {
-      applyBtn.textContent = 'Candidature envoyée';
-      applyBtn.disabled = true;
-      applyBtn.style.background = '#10b981';
-      applyBtn.style.cursor = 'not-allowed';
+        applyBtn.textContent = 'Candidature envoyée';
+        applyBtn.disabled = true;
+        applyBtn.style.background = '#10b981';
+        applyBtn.style.cursor = 'not-allowed';
     }
 
-    alert('Votre candidature a été envoyée avec succès !');
+    showAlertPopup('Succès', 'Votre candidature a été envoyée avec succès !', 'info');
   };
 
   async function load(){
