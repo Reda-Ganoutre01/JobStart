@@ -25,9 +25,6 @@
 
             jobsGrid.innerHTML = jobsToShow.map(job => `
                 <div class="job-card">
-                    <button class="bookmark-btn ${savedJobs.includes(job.id) ? 'saved' : ''}" onclick="toggleSave(${job.id})">
-                        ${savedJobs.includes(job.id) ? '&#9733;' : '&#9734;'}
-                    </button>
                     <div class="job-header">
                         <div class="company-logo" style="background-color: ${getRandomColor()}">
                             ${getInitials(job.company)}
@@ -53,10 +50,7 @@
                                     ${job.location}
                                 </span>
                                 <span class="meta-item">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                    </svg>
+                                  
                                     ${job.salary}
                                 </span>
                             </div>
@@ -65,15 +59,14 @@
                                 ${job.id === 1 || job.id === 2 ? '<span class="badge badge-urgent">Urgent</span>' : ''}
                             </div>
                         </div>
-                    </div>
-                </div>
+                                        </div>
+                                        <div class="offer-row-actions">
+                                            <button class="detail-btn" onclick="location.href='OfferDetail.html?id=${job.id}'">Détails</button>
+                                        </div>
+                                </div>
             `).join('');
 
             // Cacher le bouton si toutes les offres sont affichées
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
-            if (loadMoreBtn) {
-                loadMoreBtn.style.display = displayedJobs >= offers.length ? 'none' : 'block';
-            }
         }
 
         // Toggle sauvegarde
@@ -86,14 +79,7 @@
             renderJobs();
         }
 
-        // Charger plus d'offres
-        const loadMoreBtnEl = document.getElementById('loadMoreBtn');
-        if (loadMoreBtnEl) {
-            loadMoreBtnEl.addEventListener('click', () => {
-                displayedJobs += 6;
-                renderJobs();
-            });
-        }
+
 
         // Afficher les témoignages
         let testimonialsInterval = null;
