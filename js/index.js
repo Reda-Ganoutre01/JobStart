@@ -1,4 +1,69 @@
 
+// for the auto-typing effect in the hero section
+const datatype = window.typingWords || [];
+if (typeof Typed !== 'undefined') {
+    try {
+        /* global Typed */
+        var typed = new Typed('.auto-type-highlight', {
+            strings: datatype,
+            typeSpeed: 150,
+            backSpeed: 100,
+            backDelay: 700,
+            smartBackspace: true,
+            loop: true
+        });
+    } catch (e) {
+        console.warn('Typed initialization failed:', e);
+    }
+} else {
+    // typed.js may be deferred or not available; fail gracefully
+    console.warn('Typed.js not available; skipping auto-type effect.');
+}
+
+// (stats rendering moved below with animated counter)
+// for keywords popular searches (uses global `popularSearches`)
+document.addEventListener('DOMContentLoaded', function () {
+    const hero_searches = document.querySelector('.hero-searches');
+    const popularSearches = Array.isArray(window.popularSearches) ? window.popularSearches : [];
+    if (!hero_searches) {
+        console.warn('No .hero-searches container found in the DOM.');
+        return;
+    }
+
+    if (popularSearches.length === 0) return;
+
+    let span = document.createElement('span');
+    span.textContent = "Recherches populaires: ";
+    hero_searches.appendChild(span);
+
+    // Map common search labels to the category names used by the Offers page
+    function mapSearchToCategory(term) {
+        if (!term) return '';
+        const t = String(term).toLowerCase();
+        if (t.includes('design') || t.includes('designer') || t.includes('ux') || t.includes('ui') || t.includes('figma')) return 'Design';
+        if (t.includes('dev') || t.includes('développeur') || t.includes('developer') || t.includes('javascript') || t.includes('python') || t.includes('java') || t.includes('php') || t.includes('node')) return 'Development';
+        if (t.includes('marketing') || t.includes('seo') || t.includes('communication') || t.includes('social')) return 'Marketing';
+        if (t.includes('data') || t.includes('analyst') || t.includes('analytics') || t.includes('sql') || t.includes('bi')) return 'Data';
+        return '';
+    }
+
+    for (const el of popularSearches) {
+        if (!el || String(el).trim() === '') continue;
+        let a = document.createElement('a');
+        const mapped = mapSearchToCategory(el);
+        if (mapped) {
+            a.href = `Offers.html?category=${encodeURIComponent(mapped)}`;
+        } else {
+            // fallback to search query if we don't have a category mapping
+            a.href = `Offers.html?q=${encodeURIComponent(el)}`;
+        }
+        a.textContent = el;
+        hero_searches.appendChild(a);
+        if (el !== popularSearches[popularSearches.length - 1]) {
+            hero_searches.appendChild(document.createTextNode(","));
+        }
+    }
+});
         // Variables
         let savedJobs = [];
         let currentSlide = 0;

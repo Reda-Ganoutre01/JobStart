@@ -63,48 +63,6 @@ initNavigation();
 
 
 
-// for the auto-typing effect in the hero section
-const datatype = window.typingWords || [];
-if (typeof Typed !== 'undefined') {
-    try {
-        /* global Typed */
-        var typed = new Typed('.auto-type-highlight', {
-            strings: datatype,
-            typeSpeed: 150,
-            backSpeed: 100,
-            backDelay: 700,
-            smartBackspace: true,
-            loop: true
-        });
-    } catch (e) {
-        console.warn('Typed initialization failed:', e);
-    }
-} else {
-    // typed.js may be deferred or not available; fail gracefully
-    console.warn('Typed.js not available; skipping auto-type effect.');
-}
-
-// (stats rendering moved below with animated counter)
-// for keywords popular searches (uses global `popularSearches`)
-const hero_searches = document.querySelector('.hero-searches');
-const popularSearches=window.popularSearches || [""];
-
-if (hero_searches) {
-    let span=document.createElement('span');
-    span.textContent="Recherches populaires: ";
-    hero_searches.appendChild(span);
-    for (const el of popularSearches) {
-        let a=document.createElement('a');
-        a.href=el|| "#";
-        a.textContent=el;
-        hero_searches.appendChild(a);
-        if (el !== popularSearches[popularSearches.length - 1]) {
-            hero_searches.appendChild(document.createTextNode(","));
-        }
-    }
-} else {
-    console.warn('No .hero-searches container found in the DOM.');
-}
 // Render stats on hero index page (simple version)
 function renderStatsSimple() {
     const statsContainer = document.querySelector('.stats');

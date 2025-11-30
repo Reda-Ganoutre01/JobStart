@@ -6,7 +6,8 @@ window.popularSearches = [
     "PHP",
     "Full Stack",
     "Senior",
-    "Engineer"
+    "Engineer",
+    "Data",
 ];
 
 function computePopularFromOffers() {
