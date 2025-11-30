@@ -12,6 +12,17 @@ if (profilePhotoUpload) {
     });
 }
 
+// Popup wrapper: prefer the site's custom popup when available
+function showPopupMessage(title, message, redirectUrl) {
+    if (typeof window.showSuccessPopup === 'function') {
+        window.showSuccessPopup(title, message, redirectUrl);
+    } else {
+        // Fallback to native alert if the popup script isn't available yet
+        alert((title ? title + "\n\n" : "") + message);
+        if (redirectUrl) window.location.href = redirectUrl;
+    }
+}
+
 function handleProfilePhotoSelect(event) {
     const file = event.target.files[0];
     if (file) {
@@ -19,12 +30,12 @@ function handleProfilePhotoSelect(event) {
         const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
         
         if (file.size > maxSize) {
-            alert('Le fichier est trop volumineux. Taille maximale: 2MB');
+            showPopupMessage('Erreur', 'Le fichier est trop volumineux. Taille maximale: 2MB');
             return;
         }
         
         if (!allowedTypes.includes(file.type)) {
-            alert('Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF');
+            showPopupMessage('Erreur', 'Format de fichier non supporté. Utilisez PNG, JPG, JPEG ou GIF');
             return;
         }
         
@@ -47,7 +58,7 @@ logoFile.addEventListener('change', (e) => {
     if (file) {
         const allowedTypes = ['image/png', 'image/gif', 'image/jpeg', 'image/jpg'];
         if (!allowedTypes.includes(file.type)) {
-            alert('Format de fichier non supporté. Utilisez PNG, GIF, JPG ou JPEG');
+            showPopupMessage('Erreur', 'Format de fichier non supporté. Utilisez PNG, GIF, JPG ou JPEG');
             return;
         }
         logoUpload.innerHTML = `
@@ -154,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var password = document.getElementById('password').value;
         var confirmPassword = document.getElementById('confirmPassword').value;
         if (password !== confirmPassword) {
-            alert('Les mots de passe ne correspondent pas!');
+            showPopupMessage('Erreur', 'Les mots de passe ne correspondent pas!');
             return;
         }
         
@@ -164,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var email = emailInputs[0].value;
             var emailConfirm = emailInputs[1].value;
             if (email !== emailConfirm) {
-                alert('Les emails ne correspondent pas!');
+                showPopupMessage('Erreur', 'Les emails ne correspondent pas!');
                 return;
             }
         }
@@ -180,17 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
             createSession(formData);
         }
         
-        // Show success popup and redirect
-        if (typeof showSuccessPopup === 'function') {
-            showSuccessPopup(
-                'Inscription réussie!',
-                'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
-                'index.html'
-            );
-        } else {
-            alert('Inscription réussie! Vous êtes maintenant connecté.');
-            window.location.href = 'index.html';
-        }
+        // Show success popup and redirect (uses wrapper to prefer custom popup)
+        showPopupMessage(
+            'Inscription réussie!',
+            'Votre compte a été créé avec succès. Vous êtes maintenant connecté.',
+            'index.html'
+        );
     });
 });
 
