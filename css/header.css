@@ -216,6 +216,17 @@ header ul li a:hover {
     display: none;
 }
 
+/* Desktop: hide login/signup list items in the nav and keep header buttons visible */
+@media (min-width: 1025px) {
+    #nav-links li.mobile-action,
+    #nav-links li.btn-link {
+        display: none !important;
+    }
+    .header-btns {
+        display: flex !important;
+    }
+}
+
 /* Always show hamburger menu on mobile/tablet screens */
 @media screen and (max-width: 1024px) {
     .dropdown-menu,
