@@ -559,12 +559,12 @@ async function loadOffers() {
       user = getSession();
     }
     
-    if (user && user.type === 'recruteur') {
+    // Check both user.type and user.role for 'recruteur' (for compatibility with login logic)
+    if (user && (user.type === 'recruteur' || user.role === 'recruteur')) {
       // Show only offers created by this recruiter
       allOffers = allOffers.filter(function(offer) {
         return offer.postedBy === user.email || offer.company === user.companyName;
       });
-      
       // Show recruiter actions
       var recruiterActions = document.getElementById('recruiterActions');
       if (recruiterActions) {
