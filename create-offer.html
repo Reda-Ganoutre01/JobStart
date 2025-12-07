@@ -1,0 +1,173 @@
+
+ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Emploi</a
+                >
+              </li>
+              <li>
+                <a href="profile.html"
+                  ><i class="fas fa-chevron-right"></i>Mon Profil</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mes Candidatures</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Alertes Emploi</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Pour les Entreprises</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Publier une Offre</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Espace Entreprise</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Trouver des Candidats</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Nos Services</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>À Propos</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Qui sommes-nous</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Notre Mission</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>L'Équipe</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Témoignages</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>FAQ</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Ressources Utiles</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Conseils CV</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Conseils Entretien</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Guide de Carrière</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mentions Légales</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Confidentialité</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 JobStar by Reda Ganoutre-Youssef el Menlani . All rights
+            reserved.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="data/offers.js" defer></script>
+    <script src="js/loading.js" defer></script>
+    <script src="js/session.js" defer></script>
+    <script src="js/create-offer.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const jobTypeSelect = document.getElementById("jobType");
+        const categorySelect = document.getElementById("category");
+
+        // Populate job type options dynamically
+        const jobTypes = ["Full Time", "Part Time", "Stage", "Freelance"];
+        jobTypeSelect.innerHTML =
+          '<option value="">Sélectionner</option>' +
+          jobTypes
+            .map((type) => `<option value="${type}">${type}</option>`)
+            .join("");
+
+        // Populate category options dynamically
+        const categories = [
+          "Development",
+          "IT",
+          "Data",
+          "Design",
+          "Marketing",
+          "RH",
+          "Finance",
+          "Management",
+          "Communication",
+          "Commercial",
+        ];
+        categorySelect.innerHTML =
+          '<option value="">Sélectionner</option>' +
+          categories
+            .map(
+              (category) => `<option value="${category}">${category}</option>`
+            )
+            .join("");
+      });
+    </script>
+  </body>
+</html>

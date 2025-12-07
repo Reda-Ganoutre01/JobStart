@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobStart-inscription</title>
+    <!-- Styling File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/signup.css" />
+    <!-- Site logo / favicon -->
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- dark mode -->
+    <script type="text/javascript" src="js/darkmode.js" defer></script>
+  </head>
+  <body>
+    <!-- Page loader -->
+    <div id="site-loader" aria-hidden="false">
+      <div class="loader-container">
+        <div class="logo-wrapper">
+          <img
+            src="assets/logo/logo_jobstart_single.png"
+            alt="JobStart Logo"
+            class="logo-image"
+          />
+        </div>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+
+        <h1 class="brand-text">
+          <span class="job">Job</span><span class="start">Start</span>
+        </h1>
+
+        <p class="loading-text">Chargement de vos opportunités...</p>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <!-- theme -->
+        <a href="index.html">
+          <img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo" />
+        </a>
+
+        <nav>
+          <!-- Dropdown menu button -->
+          <button
+            class="dropdown-menu"
+            aria-label="Drop down menu"
+            title="Drop down menu"
+            aria-expanded="false"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+
+          <ul id="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Offers.html">Offres</a></li>
+            <li><a href="Conseils.html">Conseils</a></li>
+            <li><a href="Apropos.html">A propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li class="mobile-action"><a href="login.html">Se Connecter</a></li>
+            <li class="mobile-action"><a href="SignUp.html">S'inscrire</a></li>
+          </ul>
+          <div class="header-btns">
+            <button type="button"><a href="login.html">Se Connecter</a></button>
+            <button type="button"><a href="SignUp.html">S'inscrire</a></button>
+          </div>
+          <button id="theme-switch" title="Basculer thème">🌙</button>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Start main -->
+    <main>
+      <div class="container-signup">
+        <div
+          class="card"
+          data-aos="fade-right"
+          data-aos-delay="2600"
+          data-aos-duration="4000"
+        >
+          <div class="card-header">
+            <h2>Candidat</h2>
+          </div>
+          <div class="illustration candidat-illustration">
+            <img src="assets/images/candidat.png" class="candidat" />
+          </div>
+          <a class="signup-btn" href="form-candidat.html">Cliquez ici</a>
+        </div>
+
+        <div
+          class="card"
+          data-aos="fade-left"
+          data-aos-delay="2600"
+          data-aos-duration="4000"
+        >
+          <div class="card-header">
+            <h2>Recruteur</h2>
+          </div>
+          <div class="illustration recruteur-illustration">
+            <img src="assets/images/recruteur.png" class="recruteur" />
+          </div>
+          <a class="signup-btn" href="form-recruteur.html">Cliquez ici</a>
+        </div>
+      </div>
+    </main>
+    <!-- end main -->
+    <!-- Footer -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/logo/logo-lightmode.png"
+                alt="JobStar"
+                id="logo"
+              />
+            </a>
+            <div class="contact-info">
+              <div class="contact-item">
+                <strong>Contactez-nous</strong>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                  <div class="phone">+212 5 22 00 00 00</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-text">Agadir, Maroc<br /></div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-text">contact@jobstart.ma</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Candidats</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Chercher un Emploi</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Mon Profil</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mes Candidatures</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Alertes Emploi</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Pour les Entreprises</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Publier une Offre</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Espace Entreprise</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Trouver des Candidats</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Nos Services</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>À Propos</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Qui sommes-nous</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Notre Mission</a
+                >
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>L'Équipe</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Témoignages</a>
+              </li>
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>FAQ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Ressources Utiles</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="#"><i class="fas fa-chevron-right"></i>Conseils CV</a>
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Conseils Entretien</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Guide de Carrière</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Mentions Légales</a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  ><i class="fas fa-chevron-right"></i>Confidentialité</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="copyright">
+            © 2025 JobStar by Reda Ganoutre-Youssef el Menlani . All rights
+            reserved.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- End Footer -->
+
+    <!-- Typed.js library -->
+    <script
+      src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"
+      defer
+    ></script>
+    <!--AOS library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/aos.js"></script>
+    <script src="data/constants.global.js" defer></script>
+    <script src="js/loading.js" defer></script>
+    <script src="data/forms.data.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/session.js" defer></script>
+  </body>
+</html>
