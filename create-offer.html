@@ -1,5 +1,337 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Créer une offre - JobStart</title>
+    <!-- Styling File -->
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/form-recruteur.css" />
+    <link rel="stylesheet" href="css/popup.css" />
+    <!-- Site logo / favicon -->
+    <link
+      rel="icon"
+      href="assets/logo/logo_jobstart_single.png"
+      type="image/png"
+    />
+    <link rel="apple-touch-icon" href="assets/logo/logo_jobstart_single.png" />
+    <!-- AOS library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- dark mode -->
+    <script type="text/javascript" src="js/darkmode.js" defer></script>
+  </head>
+  <body>
+    <!-- Page loader -->
+    <div id="site-loader" aria-hidden="false">
+      <div class="loader-container">
+        <div class="logo-wrapper">
+          <img
+            src="assets/logo/logo_jobstart_single.png"
+            alt="JobStart Logo"
+            class="logo-image"
+          />
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+        <h1 class="brand-text">
+          <span class="job">Job</span><span class="start">Start</span>
+        </h1>
+        <p class="loading-text">Chargement de vos opportunités...</p>
+      </div>
+    </div>
 
-ul class="footer-links">
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <a href="index.html">
+          <img src="assets/logo/logo-lightmode.png" alt="JobStar" id="logo" />
+        </a>
+        <nav>
+          <button
+            class="dropdown-menu"
+            aria-label="Drop down menu"
+            title="Drop down menu"
+            aria-expanded="false"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+          <ul id="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Offers.html">Offers</a></li>
+            <li><a href="Conseils.html">Conseils</a></li>
+            <li><a href="Apropos.html">A propos</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+          <button id="theme-switch">🌙</button>
+          <div class="header-btns">
+            <button type="button">
+              <a href="login.html">Se Connecter</a>
+            </button>
+            <button type="button">
+              <a href="SignUp.html">S'inscrire</a>
+            </button>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Main Content -->
+    <main>
+      <div class="container-form" data-aos="fade-up">
+        <div class="header">
+          <h1 id="formTitle">Créer une nouvelle offre</h1>
+          <p id="formSubtitle">
+            Remplissez les informations ci-dessous pour publier votre offre
+            d'emploi
+          </p>
+        </div>
+
+        <form id="offerForm" class="form-recruteur">
+          <!-- Job Title Section -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>Informations du poste</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Titre du poste <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="jobTitle"
+                  name="jobTitle"
+                  placeholder="Ex: Développeur Full-Stack"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Type de poste <span class="required">*</span></label>
+                <select id="jobType" name="jobType" required>
+                  <option value="">Sélectionner</option>
+                  <option value="Full Time">Temps Plein</option>
+                  <option value="Part Time">Temps Partiel</option>
+                  <option value="Stage">Stage</option>
+                  <option value="Freelance">Freelance</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Catégorie <span class="required">*</span></label>
+                <select id="category" name="category" required>
+                  <option value="">Sélectionner</option>
+                  <option value="Development">Développement</option>
+                  <option value="IT">IT</option>
+                  <option value="Data">Data</option>
+                  <option value="Design">Design</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="RH">Ressources Humaines</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Management">Management</option>
+                  <option value="Communication">Communication</option>
+                  <option value="Commercial">Commercial</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Urgent</label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="urgent" name="urgent" />
+                  <span>Marquer comme urgent</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location & Salary Section -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>Localisation et rémunération</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Localisation <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Ex: Casablanca, Maroc"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label>Salaire <span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="salary"
+                  name="salary"
+                  placeholder="Ex: 15 000 - 20 000 MAD"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Job Details Section -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>Détails du poste</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Description <span class="required">*</span></label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  placeholder="Décrivez le poste, les missions principales..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Années d'expérience</label>
+                <input
+                  type="number"
+                  id="experienceYears"
+                  name="experienceYears"
+                  min="0"
+                  placeholder="Ex: 2"
+                />
+              </div>
+              <div class="form-group">
+                <label>Niveau de carrière</label>
+                <select id="careerLevel" name="careerLevel">
+                  <option value="">Sélectionner</option>
+                  <option value="Junior">Junior</option>
+                  <option value="Confirmé">Confirmé</option>
+                  <option value="Senior">Senior</option>
+                  <option value="Stagiaire">Stagiaire</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Qualification</label>
+                <input
+                  type="text"
+                  id="qualification"
+                  name="qualification"
+                  placeholder="Ex: Bac+5 (Master ou Ingénieur)"
+                />
+              </div>
+              <div class="form-group">
+                <label>Genre</label>
+                <select id="gender" name="gender">
+                  <option value="Indifférent">Indifférent</option>
+                  <option value="Homme">Homme</option>
+                  <option value="Femme">Femme</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Responsibilities Section -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>Responsabilités</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label>Liste des responsabilités (une par ligne)</label>
+                <textarea
+                  id="responsibilities"
+                  name="responsibilities"
+                  rows="6"
+                  placeholder="Exemple:&#10;Développer des applications web&#10;Participer aux revues de code&#10;Collaborer avec l'équipe"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills Section -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>Compétences requises</h2>
+            </div>
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label>Compétences (séparées par des virgules)</label>
+                <input
+                  type="text"
+                  id="skills"
+                  name="skills"
+                  placeholder="Ex: React, Node.js, MongoDB, Docker"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Buttons -->
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn-cancel"
+              onclick="window.location.href='Offers.html'"
+            >
+              Annuler
+            </button>
+            <button type="submit" class="submit-btn" id="submitBtn">
+              Publier l'offre
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-brand">
+            <a href="index.html" class="logo">
+              <img
+                src="assets/logo/logo-lightmode.png"
+                alt="JobStar"
+                id="logo"
+              />
+            </a>
+            <div class="contact-info">
+              <div class="contact-item">
+                <strong>Contactez-nous</strong>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <div class="contact-text">
+                  <div class="phone">+212 5 22 00 00 00</div>
+                </div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="contact-text">Agadir, Maroc<br /></div>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <div class="contact-text">contact@jobstart.ma</div>
+              </div>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Pour les Candidats</h3>
+            <ul class="footer-links">
               <li>
                 <a href="#"
                   ><i class="fas fa-chevron-right"></i>Chercher un Stage</a
