@@ -13,7 +13,7 @@ window.users = [
         password: "123456",
         role: "entreprise",
         type: "entreprise",
-        companyName: "AcmeCorp",
+        name: "AcmeCorp",
         prenom: "HR",
         nom: "Acme",
         name: "AcmeCorp",
